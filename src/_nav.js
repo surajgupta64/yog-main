@@ -109,33 +109,38 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Leads',
-    to: '/base',
+    to: '/leads',
     icon: <CIcon icon={cilFolderOpen} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'All Enquires',
-        to: '/base/accordion',
+        to: '/leads/all-enquires',
+      },
+      {
+        component: CNavItem,
+        name: 'Enquiry Appointment',
+        to: '/leads/enquires-appointment',
       },
       {
         component: CNavItem,
         name: 'Trial Updated',
-        to: '/base/cards',
+        to: '/leads/trial-updated',
       },
       {
         component: CNavItem,
         name: 'Follow ups Scheduling',
-        to: '/base/cards',
+        to: '/leads/followups-scheduling',
       },
       {
         component: CNavItem,
         name: 'Follow ups Call Report',
-        to: '/base/cards',
+        to: '/leads/followups-call-report',
       },
       {
         component: CNavItem,
         name: 'Cold Enquires',
-        to: '/base/breadcrumbs',
+        to: '/leads/cold-enquires',
       },
     ],
   },

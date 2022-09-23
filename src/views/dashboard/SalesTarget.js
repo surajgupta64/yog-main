@@ -31,50 +31,6 @@ import {
 import React, { useState } from 'react'
 const SalesTarget = () => {
     const [activeKey, setActiveKey] = useState(1)
-    const columns = [
-        {
-            key: 'id',
-            label: '#',
-            _props: { scope: 'col' },
-        },
-        {
-            key: 'class',
-            _props: { scope: 'col' },
-        },
-        {
-            key: 'heading_1',
-            label: 'Heading',
-            _props: { scope: 'col' },
-        },
-        {
-            key: 'heading_2',
-            label: 'Heading',
-            _props: { scope: 'col' },
-        },
-    ]
-    const items = [
-        {
-            id: 1,
-            class: 'Mark',
-            heading_1: 'Otto',
-            heading_2: '@mdo',
-            _props: { active: true },
-            _cellProps: { id: { scope: 'row' } },
-        },
-        {
-            id: 2,
-            class: 'Jacob',
-            heading_1: 'Thornton',
-            heading_2: '@fat',
-            _cellProps: { id: { scope: 'row' } },
-        },
-        {
-            id: 3,
-            class: 'Larry the Bird',
-            heading_2: '@twitter',
-            _cellProps: { id: { scope: 'row' }, class: { active: true, colSpan: 2 } },
-        },
-    ]
 
     return (
         <CRow>
@@ -210,8 +166,8 @@ const SalesTarget = () => {
                                         </CButtonGroup>
                                     </CCol>
                                 </CRow>
-                                <CTable bordered borderColor="primary" responsive>
-                                    <CTableHead style={{ backgroundColor: "darkblue", color: "white" }} >
+                                <CTable bordered borderColor="success" responsive>
+                                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                         <CTableRow>
                                             <CTableHeaderCell scope="col">S.No</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>

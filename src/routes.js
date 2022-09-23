@@ -9,6 +9,13 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const PTTarget = React.lazy(() => import('./views/dashboard/PTTarget'))
 const SalesTarget = React.lazy(() => import('./views/dashboard/SalesTarget'))
 const CorporateTarget = React.lazy(() => import('./views/dashboard/CorporateTarget'))
+//Leads
+const AllEnquires = React.lazy(() => import('./views/leads/AllEnquires'))
+const EnquireAppoitment = React.lazy(() => import('./views/leads/EnquireAppointment'))
+const TrialUpdated = React.lazy(() => import('./views/leads/TrialEnquires'))
+const FollowupScheduling = React.lazy(() => import('./views/leads/FollowupScheduling'))
+const FollowupCallReport = React.lazy(() => import('./views/leads/FollowupsCallReport'))
+const ColdEnquires = React.lazy(() => import('./views/leads/ColdEnquires'))
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -104,6 +111,15 @@ const routes = [
     name: 'Corporate Target',
     element: CorporateTarget,
   },
+
+  //Leads
+  { path: '/leads', name: 'Leads', element: AllEnquires, exact: true },
+  { path: '/leads/all-enquires', name: 'All Enquires', element: AllEnquires },
+  { path: '/leads/enquires-appointment', name: 'Enquiry Appointment', element: EnquireAppoitment },
+  { path: '/leads/trial-updated', name: 'Trial Updated', element: TrialUpdated },
+  { path: '/leads/followups-scheduling', name: 'Follow ups Scheduling', element: FollowupScheduling },
+  { path: '/leads/followups-call-report', name: 'Follow ups Call Report', element: FollowupCallReport },
+  { path: '/leads/cold-enquires', name: 'Cold Enquires', element: ColdEnquires },
 
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
