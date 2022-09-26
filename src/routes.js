@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
+const Login = React.lazy(() => import('./views/pages/login/Login'))
 const EmployeeDashboard = React.lazy(() => import('./views/dashboard/EmployeeDashboard'))
 const TrainerDashboard = React.lazy(() => import('./views/dashboard/TrainerDashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
@@ -16,6 +17,12 @@ const TrialUpdated = React.lazy(() => import('./views/leads/TrialEnquires'))
 const FollowupScheduling = React.lazy(() => import('./views/leads/FollowupScheduling'))
 const FollowupCallReport = React.lazy(() => import('./views/leads/FollowupsCallReport'))
 const ColdEnquires = React.lazy(() => import('./views/leads/ColdEnquires'))
+
+//Clients
+const AllClients = React.lazy(() => import('./views/clients/AllClients'))
+const ActiveClients = React.lazy(() => import('./views/clients/ActiveClients'))
+const ServiceCall = React.lazy(() => import('./views/clients/serviceCall/ServiceCall'))
+const AllService = React.lazy(() => import('./views/clients/allService/AllService'))
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -85,7 +92,8 @@ const Toasts = React.lazy(() => import('./views/notifications/toasts/Toasts'))
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Login Page' },
+  { path: '/login', name: 'Login', element: Login },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   {
     path: '/emp-dashboard',
@@ -120,6 +128,14 @@ const routes = [
   { path: '/leads/followups-scheduling', name: 'Follow ups Scheduling', element: FollowupScheduling },
   { path: '/leads/followups-call-report', name: 'Follow ups Call Report', element: FollowupCallReport },
   { path: '/leads/cold-enquires', name: 'Cold Enquires', element: ColdEnquires },
+
+  //Clients
+  { path: '/clients', name: 'Clients', element: ServiceCall, exact: true },
+  { path: '/clients/client-management', name: 'Client Management', element: AllClients, exact: true },
+  { path: '/clients/client-management/active-clients', name: 'Active Clients', element: ActiveClients },
+  { path: '/clients/client-management/all-clients', name: 'All Clients', element: AllClients },
+  { path: '/clients/service-call', name: 'Service Calls', element: ServiceCall },
+  { path: '/clients/all-service', name: 'All Service', element: AllService },
 
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },

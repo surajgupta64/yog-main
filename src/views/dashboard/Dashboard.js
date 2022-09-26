@@ -13,6 +13,7 @@ import {
   CNavItem,
   CNavLink,
   CProgress,
+  CProgressBar,
   CRow,
   CTabContent,
   CTable,
@@ -23,7 +24,7 @@ import {
   CTableRow,
   CTabPane,
 } from '@coreui/react'
-import { CChartLine, CChartPie } from '@coreui/react-chartjs'
+import { CChartBar, CChartLine, CChartPie } from '@coreui/react-chartjs'
 import { getStyle, hexToRgba } from '@coreui/utils'
 import CIcon from '@coreui/icons-react'
 import {
@@ -44,9 +45,9 @@ import {
   cifUs,
   cibTwitter,
   cilCloudDownload,
-  cilPeople,
   cilUser,
   cilUserFemale,
+  cilPeople,
 } from '@coreui/icons'
 
 import avatar1 from 'src/assets/images/avatars/1.jpg'
@@ -205,15 +206,16 @@ const Dashboard = () => {
                 <CCardBody>
                   <CChartPie
                     data={{
-                      labels: ['TOTAL ENQ', 'TRIALS', 'CONVERTED ', 'COLD '],
+                      labels: ['ENQUIRE', 'TRIALS', 'CONVERTED ', 'PROSPECT', 'COLD '],
                       datasets: [
                         {
-                          data: [300, 50, 100, 60],
-                          backgroundColor: ['red', 'yellow', '#229954', 'blue'],
+                          data: [30, 50, 100, 60, 80],
+                          backgroundColor: ['red', 'yellow', 'green', 'orange', 'blue'],
                           hoverBackgroundColor: [
                             '#E74C3C',
                             '#F4D03F',
                             '#2ECC71',
+                            '#F8C471',
                             'skyblue',
                           ],
                         },
@@ -225,7 +227,7 @@ const Dashboard = () => {
             </CCol>
             <CCol lg={3} sm={6}>
               <CCard className="mb-4">
-                <CCardHeader>Sales</CCardHeader>
+                <CCardHeader>Total Sales</CCardHeader>
                 <CCardBody>
                   <CChartPie
                     data={{
@@ -241,7 +243,7 @@ const Dashboard = () => {
                           hoverBackgroundColor: [
                             'blue',
                             'lightgreen',
-                            '#FA2832',
+                            '#F1948A',
                           ],
                         },
                       ],
@@ -252,25 +254,27 @@ const Dashboard = () => {
             </CCol>
             <CCol lg={3} sm={6}>
               <CCard className="mb-4">
-                <CCardHeader>Clients</CCardHeader>
+                <CCardHeader>Total Clients</CCardHeader>
                 <CCardBody>
                   <CChartPie
                     data={{
                       labels: [
-                        'TOTAL CLIENTS',
-                        'ACTIVE',
+                        'ALL CLIENT',
                         'NEW',
+                        'RENEWAL',
                         'RENEWED',
                         'LEFT',
                       ],
                       datasets: [
                         {
-                          data: [300, 50, 100, 80],
-                          backgroundColor: ['red', 'green', 'yellow', 'blue'],
+                          data: [30, 50, 100, 80, 50],
+                          backgroundColor: ['red', 'green', 'yellow', 'orange', 'blue',],
                           hoverBackgroundColor: [
                             '#FF6384',
-                            '#36A2EB',
-                            '#FFCE56',
+                            '#52BE80',
+                            '#F7DC6F',
+                            '#F8C471',
+                            '#5499C7',
                           ],
                         },
                       ],
@@ -280,20 +284,23 @@ const Dashboard = () => {
               </CCard>
             </CCol>
             <CCol lg={3} sm={6}>
+
               <CCard className="mb-4">
-                <CCardHeader>Attendance</CCardHeader>
+                <CCardHeader>Total Services</CCardHeader>
                 <CCardBody>
                   <CChartPie
                     data={{
-                      labels: ['ACTIVE CLIENTS', 'PT', 'YOGA', 'TTC', 'JUMBA'],
+                      labels: ['YOGA', 'ZOOMBA', 'PT', 'TTC', 'DIET'],
                       datasets: [
                         {
-                          data: [300, 50, 100, 80],
-                          backgroundColor: ['red', 'green', 'yellow', 'blue'],
+                          data: [30, 50, 100, 80, 50],
+                          backgroundColor: ['orange', 'red', 'yellow', 'blue', 'green',],
                           hoverBackgroundColor: [
-                            '#FF6384',
-                            '#36A2EB',
-                            '#FFCE56',
+                            '#F5B041',
+                            '#EC7063',
+                            '#F7DC6F',
+                            '#5499C7',
+                            '#52BE80',
                           ],
                         },
                       ],
@@ -312,7 +319,7 @@ const Dashboard = () => {
           <CCard className="mb-4">
             <CCardBody>
               <CRow>
-                <CCol sm={5}>
+                <CCol sm={5} className='mb-2'>
                   <h4 id="traffic" className="card-title mb-0">
                     Income
                   </h4>
@@ -338,8 +345,7 @@ const Dashboard = () => {
                   </CButtonGroup>
                 </CCol>
               </CRow>
-              <CChartLine
-                style={{ height: '300px', marginTop: '40px' }}
+              <CChartBar
                 data={{
                   labels: [
                     'January',
@@ -349,148 +355,119 @@ const Dashboard = () => {
                     'May',
                     'June',
                     'July',
+                    'August',
+                    'Sep',
+                  ],
+                  value: [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'Sep',
                   ],
                   datasets: [
                     {
-                      label: 'My First dataset',
-                      backgroundColor: hexToRgba(getStyle('--cui-success'), 50),
-                      borderColor: getStyle('--cui-info'),
-                      pointHoverBackgroundColor: getStyle('--cui-info'),
-                      borderWidth: 2,
-                      data: [
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                      ],
-                      fill: true,
-                    },
-                    {
-                      label: 'My Second dataset',
-                      backgroundColor: 'transparent',
-                      borderColor: getStyle('--cui-red'),
-                      pointHoverBackgroundColor: getStyle('--cui-success'),
-                      borderWidth: 2,
-                      data: [
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                        random(50, 200),
-                      ],
-                    },
-                    {
-                      label: 'My Third dataset',
-                      backgroundColor: 'success',
-                      borderColor: getStyle('--cui-danger'),
-                      pointHoverBackgroundColor: getStyle('--cui-danger'),
-                      borderWidth: 1,
-                      borderDash: [8, 5],
-                      data: [65, 65, 65, 65, 65, 65, 65],
+                      label: 'Monthly Sales',
+                      backgroundColor: 'darkgreen',
+                      data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 100],
                     },
                   ],
                 }}
-                options={{
-                  maintainAspectRatio: false,
-                  plugins: {
-                    legend: {
-                      display: false,
-                    },
-                  },
-                  scales: {
-                    x: {
-                      grid: {
-                        drawOnChartArea: false,
-                      },
-                    },
-                    y: {
-                      ticks: {
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                        stepSize: Math.ceil(250 / 5),
-                        max: 250,
-                      },
-                    },
-                  },
-                  elements: {
-                    line: {
-                      tension: 0.4,
-                    },
-                    point: {
-                      radius: 0,
-                      hitRadius: 10,
-                      hoverRadius: 4,
-                      hoverBorderWidth: 3,
-                    },
-                  },
-                }}
+                labels="months"
+                value="value"
               />
+              <CCard style={{ marginRight: '10px', marginLeft: '40px', backgroundColor: 'darkgreen', color: 'white', paddingLeft: '10px', paddingRight: '10px' }}>
+                <div className='d-flex justify-content-between'>
+                  <label>40</label>
+                  <label>20</label>
+                  <label>12</label>
+                  <label>39</label>
+                  <label>10</label>
+                  <label>40</label>
+                  <label>39</label>
+                  <label>80</label>
+                  <label>40</label>
+                </div>
+              </CCard>
             </CCardBody>
           </CCard>
         </CCol>
         <CCol lg={6} sm={12}>
-          <CCard>
+          <CCard className="mb-4">
+
             <CCardBody>
-              <CNav variant="pills" role="tablist">
-                <CNavItem>
-                  <CNavLink
-                    href="javascript:void(0);"
-                    active={activeKey === 1}
-                    onClick={() => setActiveKey(1)}
-                  >
-                    Total Income
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink
-                    href="javascript:void(0);"
-                    active={activeKey === 2}
-                    onClick={() => setActiveKey(2)}
-                  >
-                    Expense
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink
-                    href="javascript:void(0);"
-                    active={activeKey === 3}
-                    onClick={() => setActiveKey(3)}
-                  >
-                    Profit
-                  </CNavLink>
-                </CNavItem>
-              </CNav>
-              <CTabContent>
-                <CTabPane
-                  role="tabpanel"
-                  aria-labelledby="home-tab"
-                  visible={activeKey === 1}
-                >
-                  hello1
-                </CTabPane>
-                <CTabPane
-                  role="tabpanel"
-                  aria-labelledby="profile-tab"
-                  visible={activeKey === 2}
-                >
-                  hello2
-                </CTabPane>
-                <CTabPane
-                  role="tabpanel"
-                  aria-labelledby="contact-tab"
-                  visible={activeKey === 3}
-                >
-                  hello3
-                </CTabPane>
-              </CTabContent>
+
+              <CRow className='mb-1'>
+                <CCol sm={4}>
+                  <h4 id="traffic" className="card-title mb-0">
+                    Attendance
+                  </h4>
+                  <div className="small text-medium-emphasis mb-3">
+                    Weekly
+                  </div>
+                </CCol>
+                <CCol sm={4}>
+                  <div className="border-start border-start-4 border-start-info py-1 px-3">
+                    <div className="text-medium-emphasis small">
+                      Attented Clients
+                    </div>
+                    <div className="fs-5 fw-semibold">9,123</div>
+                  </div>
+                </CCol>
+                <CCol sm={4}>
+                  <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                    <div className="text-medium-emphasis small">
+                      Total Active Clients
+                    </div>
+                    <div className="fs-5 fw-semibold">22,643</div>
+                  </div>
+                </CCol>
+              </CRow>
+
+              <CRow>
+                <CCol xs={12} md={12} xl={12}>
+
+
+                  <hr className="mt-0" />
+                  {progressGroupExample1.map((item, index) => (
+                    <div className="progress-group mb-3" key={index}>
+                      <div className="progress-group-prepend">
+                        <span className="text-medium-emphasis small">
+                          {item.title}
+                        </span>
+                      </div>
+                      <div className="progress-group-bars">
+                        <CProgress >
+                          <CProgressBar color="success" value={item.value1} />
+                          <CProgressBar color="info" value={item.value2} />
+                        </CProgress>
+                      </div>
+                      <div className="progress-group-prepend">
+                        <span className="ms-auto fw-semibold">
+                          {item.value1}
+                          <span className="text-medium-emphasis small">
+                            ({item.percent}%)
+                          </span>
+                        </span>/
+                        <span className="ms-auto fw-semibold">
+                          {item.value2}
+                          <span className="text-medium-emphasis small">
+                            ({item.percent}%)
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </CCol>
+              </CRow>
             </CCardBody>
           </CCard>
         </CCol>
+
         <CCol lg={6} sm={12}>
           <CCard className="mb-4">
             <CCardBody>
@@ -634,127 +611,156 @@ const Dashboard = () => {
             </CCardFooter>
           </CCard>
         </CCol>
+        <CCol lg={6} sm={12}>
+          <CCard className="mb-4">
+
+            <CCardBody>
+              <h4 id="traffic" className="card-title mb-0">
+                Social Media
+              </h4>
+              <div className="small text-medium-emphasis mb-3">
+                Traffic
+              </div>
+              <CRow>
+                <CCol sm={6}>
+                  <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
+                    <div className="text-medium-emphasis small">
+                      Pageviews
+                    </div>
+                    <div className="fs-5 fw-semibold">78,623</div>
+                  </div>
+                </CCol>
+                <CCol sm={6}>
+                  <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
+                    <div className="text-medium-emphasis small">
+                      Organic
+                    </div>
+                    <div className="fs-5 fw-semibold">49,123</div>
+                  </div>
+                </CCol>
+              </CRow>
+
+              <hr className="mt-0" />
+
+              {progressGroupExample2.map((item, index) => (
+                <div className="progress-group mb-4" key={index}>
+                  <div className="progress-group-header">
+                    <CIcon className="me-2" icon={item.icon} size="lg" />
+                    <span>{item.title}</span>
+                    <span className="ms-auto fw-semibold">
+                      {item.value}%
+                    </span>
+                  </div>
+                  <div className="progress-group-bars">
+                    <CProgress thin color="warning" value={item.value} />
+                  </div>
+                </div>
+              ))}
+
+              <div className="mb-5"></div>
+
+              {progressGroupExample3.map((item, index) => (
+                <div className="progress-group" key={index}>
+                  <div className="progress-group-header">
+                    <CIcon className="me-2" icon={item.icon} size="lg" />
+                    <span>{item.title}</span>
+                    <span className="ms-auto fw-semibold">
+                      {item.value}{' '}
+                      <span className="text-medium-emphasis small">
+                        ({item.percent}%)
+                      </span>
+                    </span>
+                  </div>
+                  <div className="progress-group-bars">
+                    <CProgress thin color="success" value={item.percent} />
+                  </div>
+                </div>
+              ))}
+            </CCardBody>
+          </CCard>
+        </CCol>
+        <CCol lg={6} sm={12}>
+          <CCard>
+            <CCardBody>
+              <CNav variant="pills" role="tablist">
+                <CNavItem>
+                  <CNavLink
+                    href="javascript:void(0);"
+                    active={activeKey === 1}
+                    onClick={() => setActiveKey(1)}
+                  >
+                    Total Income
+                  </CNavLink>
+                </CNavItem>
+                <CNavItem>
+                  <CNavLink
+                    href="javascript:void(0);"
+                    active={activeKey === 2}
+                    onClick={() => setActiveKey(2)}
+                  >
+                    Expense
+                  </CNavLink>
+                </CNavItem>
+                <CNavItem>
+                  <CNavLink
+                    href="javascript:void(0);"
+                    active={activeKey === 3}
+                    onClick={() => setActiveKey(3)}
+                  >
+                    Profit
+                  </CNavLink>
+                </CNavItem>
+              </CNav>
+              <CTabContent>
+                <CTabPane
+                  role="tabpanel"
+                  aria-labelledby="home-tab"
+                  visible={activeKey === 1}
+                >
+                  hello1
+                </CTabPane>
+                <CTabPane
+                  role="tabpanel"
+                  aria-labelledby="profile-tab"
+                  visible={activeKey === 2}
+                >
+                  hello2
+                </CTabPane>
+                <CTabPane
+                  role="tabpanel"
+                  aria-labelledby="contact-tab"
+                  visible={activeKey === 3}
+                >
+                  hello3
+                </CTabPane>
+              </CTabContent>
+            </CCardBody>
+          </CCard>
+        </CCol>
+
       </CRow>
       <WidgetsBrand withCharts />
 
       <CRow>
-        <CCol xs>
+        <CCol >
           <CCard className="mb-4">
-            <CCardHeader>Traffic {' & '} Sales</CCardHeader>
+            <CCardHeader>Yog Power Branch</CCardHeader>
             <CCardBody>
-              <CRow>
-                <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol sm={6}>
-                      <div className="border-start border-start-4 border-start-info py-1 px-3">
-                        <div className="text-medium-emphasis small">
-                          New Clients
-                        </div>
-                        <div className="fs-5 fw-semibold">9,123</div>
-                      </div>
-                    </CCol>
-                    <CCol sm={6}>
-                      <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">
-                          Recurring Clients
-                        </div>
-                        <div className="fs-5 fw-semibold">22,643</div>
-                      </div>
-                    </CCol>
-                  </CRow>
-
-                  <hr className="mt-0" />
-                  {progressGroupExample1.map((item, index) => (
-                    <div className="progress-group mb-4" key={index}>
-                      <div className="progress-group-prepend">
-                        <span className="text-medium-emphasis small">
-                          {item.title}
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="info" value={item.value1} />
-                        <CProgress thin color="danger" value={item.value2} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol>
-
-                <CCol xs={12} md={6} xl={6}>
-                  <CRow>
-                    <CCol sm={6}>
-                      <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">
-                          Pageviews
-                        </div>
-                        <div className="fs-5 fw-semibold">78,623</div>
-                      </div>
-                    </CCol>
-                    <CCol sm={6}>
-                      <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                        <div className="text-medium-emphasis small">
-                          Organic
-                        </div>
-                        <div className="fs-5 fw-semibold">49,123</div>
-                      </div>
-                    </CCol>
-                  </CRow>
-
-                  <hr className="mt-0" />
-
-                  {progressGroupExample2.map((item, index) => (
-                    <div className="progress-group mb-4" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">
-                          {item.value}%
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="warning" value={item.value} />
-                      </div>
-                    </div>
-                  ))}
-
-                  <div className="mb-5"></div>
-
-                  {progressGroupExample3.map((item, index) => (
-                    <div className="progress-group" key={index}>
-                      <div className="progress-group-header">
-                        <CIcon className="me-2" icon={item.icon} size="lg" />
-                        <span>{item.title}</span>
-                        <span className="ms-auto fw-semibold">
-                          {item.value}{' '}
-                          <span className="text-medium-emphasis small">
-                            ({item.percent}%)
-                          </span>
-                        </span>
-                      </div>
-                      <div className="progress-group-bars">
-                        <CProgress thin color="success" value={item.percent} />
-                      </div>
-                    </div>
-                  ))}
-                </CCol>
-              </CRow>
-
-              <br />
-
-              <CTable align="middle" className="mb-0 border" hover responsive>
-                <CTableHead color="light">
+              <CTable align="middle" bordered style={{ borderColor: "#106103" }} hover responsive>
+                <CTableHead style={{ backgroundColor: "#106103", color: "white" }} >
                   <CTableRow>
                     <CTableHeaderCell className="text-center">
                       <CIcon icon={cilPeople} />
                     </CTableHeaderCell>
-                    <CTableHeaderCell>User</CTableHeaderCell>
+                    <CTableHeaderCell>Center Name</CTableHeaderCell>
                     <CTableHeaderCell className="text-center">
-                      Country
+                      Location
                     </CTableHeaderCell>
-                    <CTableHeaderCell>Usage</CTableHeaderCell>
+                    <CTableHeaderCell>Proformance</CTableHeaderCell>
                     <CTableHeaderCell className="text-center">
-                      Payment Method
+                      Royalty Percent
                     </CTableHeaderCell>
-                    <CTableHeaderCell>Activity</CTableHeaderCell>
+                    <CTableHeaderCell>Details</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -782,6 +788,18 @@ const Dashboard = () => {
                         />
                       </CTableDataCell>
                       <CTableDataCell>
+
+                        <div className="clearfix">
+                          <div className="float-start">
+                            <strong>Total Target :100000</strong>
+                          </div>
+                          <div className="float-end">
+                            <small className="text-medium-emphasis">
+                              Complated : 60000
+                            </small>
+                          </div>
+                        </div>
+
                         <div className="clearfix">
                           <div className="float-start">
                             <strong>{item.usage.value}%</strong>
@@ -799,13 +817,17 @@ const Dashboard = () => {
                         />
                       </CTableDataCell>
                       <CTableDataCell className="text-center">
-                        <CIcon size="xl" icon={item.payment.icon} />
+                        <div>
+                          <strong>12%</strong>
+                        </div>
+                        <div>
+                          <small className="text-medium-emphasis">
+                            72000 Received
+                          </small>
+                        </div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div className="small text-medium-emphasis">
-                          Last login
-                        </div>
-                        <strong>{item.activity}</strong>
+                        <CButton color='success'>view</CButton>
                       </CTableDataCell>
                     </CTableRow>
                   ))}

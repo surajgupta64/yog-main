@@ -4,6 +4,8 @@ import { CWidgetStatsD, CRow, CCol } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
   cibFacebook,
+  cibGoogle,
+  cibInstagram,
   cibLinkedin,
   cibTwitter,
   cilCalendar,
@@ -121,14 +123,14 @@ const WidgetsBrand = ({ withCharts }) => {
             ),
           })}
           icon={
-            <CIcon icon={cibTwitter} height={52} className="my-4 text-white" />
+            <CIcon icon={cibGoogle} height={52} className="my-4 text-white" />
           }
           values={[
             { title: 'followers', value: '973k' },
             { title: 'tweets', value: '1.792' },
           ]}
           style={{
-            '--cui-card-cap-bg': '#00aced',
+            '--cui-card-cap-bg': '#F14151',
           }}
         />
       </CCol>
@@ -182,7 +184,6 @@ const WidgetsBrand = ({ withCharts }) => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsD
           className="mb-4"
-          color="warning"
           {...(withCharts && {
             chart: (
               <CChart
@@ -214,12 +215,16 @@ const WidgetsBrand = ({ withCharts }) => {
             ),
           })}
           icon={
-            <CIcon icon={cilCalendar} height={52} className="my-4 text-white" />
+            <CIcon icon={cibInstagram} height={52} className="my-4 text-white" />
           }
           values={[
             { title: 'events', value: '12+' },
             { title: 'meetings', value: '4' },
           ]}
+
+          style={{
+            '--cui-card-cap-bg': '#AD2789',
+          }}
         />
       </CCol>
     </CRow>

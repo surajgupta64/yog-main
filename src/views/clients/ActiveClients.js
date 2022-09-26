@@ -6,6 +6,7 @@ import {
     CCardBody,
     CCardHeader,
     CCol,
+    CFormInput,
     CFormSelect,
     CInputGroup,
     CInputGroupText,
@@ -20,121 +21,51 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 
-const AllEnquires = () => {
+const ActiveClients = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">All Enquires</strong>
+                        <strong className="mt-2">Active Clients</strong>
                     </CCardHeader>
                     <CCardBody>
-                        <div className='d-flex justify-content-between mb-2'>
-                            <CInputGroup style={{ width: "200px" }}>
-                                <CFormSelect
-                                    id="inputGroupSelect04"
-                                    aria-label="Example select with button addon"
-                                >
-                                    <option>Today</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </CFormSelect>
-                                <CButton type="button" color="primary">
-                                    Go
-                                </CButton>
-                            </CInputGroup>
-                            <CCard>
-                                <CCardBody style={{ padding: "5px" }}>
-                                    Total Member : 0
-                                </CCardBody>
-                            </CCard>
-                            <CButtonGroup>
-                                <CButton color="primary">
-                                    <CIcon icon={cilArrowCircleBottom} />
-                                    {' '}Import
-                                </CButton>
-                                <CButton color="primary">
-                                    <CIcon icon={cilArrowCircleTop} />
-                                    {' '}Export
-                                </CButton>
-                            </CButtonGroup>
-                        </div>
-                        <div className='d-flex justify-content-between mb-2'>
-                            <CCard>
-                                <CCardHeader className='d-flex justify-content-center'>
-                                    Enquiries
-                                </CCardHeader>
-                                <CCardBody className='d-flex justify-content-around'>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Enquiries: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Converted: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Archived/Lost: 0
-                                        </CCardBody>
-                                    </CCard>
-                                </CCardBody>
-                            </CCard>
-                            <CCard>
-                                <CCardHeader className='d-flex justify-content-center'>
-                                    Follow Up
-                                </CCardHeader>
-                                <CCardBody className='d-flex justify-content-around'>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            FollowUps: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Trails: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Post Trails: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Sales: 0
-                                        </CCardBody>
-                                    </CCard>
-                                </CCardBody>
-                            </CCard>
-                            <CCard>
-                                <CCardHeader className='d-flex justify-content-center'>
-                                    Trials
-                                </CCardHeader>
-                                <CCardBody className='d-flex justify-content-around'>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Trial Scheduled: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Trial Completed: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Converted: 0
-                                        </CCardBody>
-                                    </CCard>
-                                </CCardBody>
-                            </CCard>
-                        </div>
-                        <CRow className='mb-3'>
-                            <CCol xs={2}>
+                        <CRow className='d-flex justify-content-center mb-2'>
+                            <CCol lg={5} sm={12} className='mb-2'>
+                                <CInputGroup style={{ width: "500px" }}>
+                                    <CFormSelect
+                                        id="inputGroupSelect04"
+                                        aria-label="Example select with button addon"
+                                    >
+                                        <option>Name</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </CFormSelect>
+                                    <CFormInput
+                                        placeholder="Search"
+                                        aria-label="Recipient's username"
+                                        aria-describedby="button-addon2"
+                                    />
+                                    <CButton type="button" color="primary">
+                                        Search
+                                    </CButton>
+                                </CInputGroup>
+                            </CCol>
+                            <CCol lg={7} sm={12}>
+                                <div className='d-flex justify-content-center'>
+                                    <CButtonGroup role="group" aria-label="Basic example">
+                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Total Clients: 0</CButton>
+                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Active Clients:0</CButton>
+                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Current Renewal: 0</CButton>
+                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Renewed Clients: 0</CButton>
+                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Left Clients: 0</CButton>
+                                    </CButtonGroup>
+                                </div>
+                            </CCol>
+                        </CRow>
+                        <CRow >
+                            <CCol lg={2} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
                                         component="label"
@@ -150,7 +81,7 @@ const AllEnquires = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol xs={3}>
+                            <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
                                         component="label"
@@ -166,7 +97,7 @@ const AllEnquires = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol xs={3}>
+                            <CCol lg={2} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
                                         component="label"
@@ -182,7 +113,7 @@ const AllEnquires = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol xs={3}>
+                            <CCol lg={2} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
                                         component="label"
@@ -197,6 +128,19 @@ const AllEnquires = () => {
                                         <option value="3">Three</option>
                                     </CFormSelect>
                                 </CInputGroup>
+                            </CCol>
+                            <CCol lg={3} sm={6} className='mb-2' >
+
+                                <CButtonGroup>
+                                    <CButton color="primary">
+                                        <CIcon icon={cilArrowCircleBottom} />
+                                        {' '}Import
+                                    </CButton>
+                                    <CButton color="primary">
+                                        <CIcon icon={cilArrowCircleTop} />
+                                        {' '}Export
+                                    </CButton>
+                                </CButtonGroup>
                             </CCol>
                         </CRow>
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
@@ -260,4 +204,4 @@ const AllEnquires = () => {
     )
 }
 
-export default AllEnquires
+export default ActiveClients

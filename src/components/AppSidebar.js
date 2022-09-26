@@ -37,7 +37,7 @@ const AppSidebar = () => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarBrand className="d-none d-md-flex" to="/">
+      <CSidebarBrand to="/">
         <CAvatar src={logo} style={{ width: '190px' }} />
       </CSidebarBrand>
       <CSidebarNav>

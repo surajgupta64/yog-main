@@ -147,45 +147,55 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Clients',
-    to: '/base',
+    to: '/clients',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
       {
         component: CNavGroup,
         name: 'Client Management',
-        to: '/base',
+        to: '/clients/client-management',
         items: [
           {
             component: CNavItem,
             name: 'All Clients',
-            to: '/base/accordion',
+            to: '/clients/client-management/all-clients',
           },
           {
             component: CNavItem,
             name: 'Active Client',
-            to: '/base/breadcrumbs',
+            to: '/clients/client-management/active-clients',
           },
           {
             component: CNavItem,
-            name: 'Renewls Client',
-            to: '/base/cards',
+            name: 'Renewals Client',
+            to: '/client-management/renewals-clients',
           },
           {
             component: CNavItem,
             name: 'Renewed Clients',
-            to: '/base/cards',
+            to: '/client-management/renewed-clients',
           },
           {
             component: CNavItem,
             name: 'Left Clients',
-            to: '/base/cards',
+            to: '/client-management/left-clients',
           },
           {
             component: CNavItem,
             name: 'Multi Service Clients',
-            to: '/base/cards',
+            to: '/client-management/multi-clients',
           },
         ],
+      },
+      {
+        component: CNavItem,
+        name: 'All Service',
+        to: '/clients/all-service',
+      },
+      {
+        component: CNavItem,
+        name: 'Service Calls',
+        to: '/clients/service-call',
       },
       {
         component: CNavGroup,
