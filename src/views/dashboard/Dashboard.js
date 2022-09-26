@@ -401,7 +401,7 @@ const Dashboard = () => {
 
             <CCardBody>
 
-              <CRow className='mb-1'>
+              <CRow >
                 <CCol sm={4}>
                   <h4 id="traffic" className="card-title mb-0">
                     Attendance
@@ -676,64 +676,6 @@ const Dashboard = () => {
                   </div>
                 </div>
               ))}
-            </CCardBody>
-          </CCard>
-        </CCol>
-        <CCol lg={6} sm={12}>
-          <CCard>
-            <CCardBody>
-              <CNav variant="pills" role="tablist">
-                <CNavItem>
-                  <CNavLink
-                    href="javascript:void(0);"
-                    active={activeKey === 1}
-                    onClick={() => setActiveKey(1)}
-                  >
-                    Total Income
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink
-                    href="javascript:void(0);"
-                    active={activeKey === 2}
-                    onClick={() => setActiveKey(2)}
-                  >
-                    Expense
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink
-                    href="javascript:void(0);"
-                    active={activeKey === 3}
-                    onClick={() => setActiveKey(3)}
-                  >
-                    Profit
-                  </CNavLink>
-                </CNavItem>
-              </CNav>
-              <CTabContent>
-                <CTabPane
-                  role="tabpanel"
-                  aria-labelledby="home-tab"
-                  visible={activeKey === 1}
-                >
-                  hello1
-                </CTabPane>
-                <CTabPane
-                  role="tabpanel"
-                  aria-labelledby="profile-tab"
-                  visible={activeKey === 2}
-                >
-                  hello2
-                </CTabPane>
-                <CTabPane
-                  role="tabpanel"
-                  aria-labelledby="contact-tab"
-                  visible={activeKey === 3}
-                >
-                  hello3
-                </CTabPane>
-              </CTabContent>
             </CCardBody>
           </CCard>
         </CCol>
