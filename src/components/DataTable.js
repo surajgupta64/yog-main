@@ -2,6 +2,7 @@ import React from 'react'
 
 import {
     CAvatar,
+    CButton,
     CCard,
     CCardBody,
     CCardHeader,
@@ -132,77 +133,20 @@ const DataTable = ({ title, heading, data }) => {
     ]
 
     return (
-        <CCard className="mb-4">
-            <CCardHeader>{title}</CCardHeader>
-            <CCardBody>
-                <CTable align="middle" className="mb-0 border" hover responsive>
-                    <CTableHead color="light">
-                        <CTableRow>
-                            {heading.map((item, index) => (
-                                <CTableHeaderCell key={index}>{item.heading}</CTableHeaderCell>
-                            ))}
-                        </CTableRow>
-                    </CTableHead>
-                    <CTableBody>
-                        {data.map((item) => (
-                            <TableRow item={item} column={heading} />
-                        ))}
-                        {tableExample.map((item, index) => (
-
-                            <CTableRow v-for="item in tableItems" key={index}>
-                                <CTableDataCell className="text-center">
-                                    <CAvatar
-                                        size="md"
-                                        src={item.avatar.src}
-                                        status={item.avatar.status}
-                                    />
-                                </CTableDataCell>
-                                <CTableDataCell>
-                                    <div>{item.user.name}</div>
-                                    <div className="small text-medium-emphasis">
-                                        <span>{item.user.new ? 'New' : 'Recurring'}</span> |
-                                        Registered: {item.user.registered}
-                                    </div>
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                    <CIcon
-                                        size="xl"
-                                        icon={item.country.flag}
-                                        title={item.country.name}
-                                    />
-                                </CTableDataCell>
-                                <CTableDataCell>
-                                    <div className="clearfix">
-                                        <div className="float-start">
-                                            <strong>{item.usage.value}%</strong>
-                                        </div>
-                                        <div className="float-end">
-                                            <small className="text-medium-emphasis">
-                                                {item.usage.period}
-                                            </small>
-                                        </div>
-                                    </div>
-                                    <CProgress
-                                        thin
-                                        color={item.usage.color}
-                                        value={item.usage.value}
-                                    />
-                                </CTableDataCell>
-                                <CTableDataCell className="text-center">
-                                    <CIcon size="xl" icon={item.payment.icon} />
-                                </CTableDataCell>
-                                <CTableDataCell>
-                                    <div className="small text-medium-emphasis">
-                                        Last login
-                                    </div>
-                                    <strong>{item.activity}</strong>
-                                </CTableDataCell>
-                            </CTableRow>
-                        ))}
-                    </CTableBody>
-                </CTable>
-            </CCardBody>
-        </CCard>
+        <CTable align="middle" bordered style={{ borderColor: "#106103" }} hover responsive>
+            <CTableHead style={{ backgroundColor: "#106103", color: "white" }} >
+                <CTableRow >
+                    {heading.map((item, index) => (
+                        <CTableHeaderCell key={index}>{item.heading}</CTableHeaderCell>
+                    ))}
+                </CTableRow>
+            </CTableHead>
+            <CTableBody>
+                {data.map((item) => (
+                    <TableRow item={item} column={heading} />
+                ))}
+            </CTableBody>
+        </CTable>
     );
 };
 
@@ -211,19 +155,25 @@ const TableRow = ({ item, column }) => (
         {column.map((columnItem, index) => {
             return (
                 <CTableDataCell key={index}>
-                    {columnItem.value !== undefined && item[`${columnItem.value}`]}{" "}
+                    {columnItem.value !== undefined && item[`${columnItem.value}`]}
                     {columnItem.iconBtn !== undefined && (
                         <CIcon
                             size="xl"
                             style={{ borderRadius: '15px' }}
                             icon={columnItem.iconBtn}
                         />
-                    )}{" "}
+                    )}
+                    {columnItem.btn !== undefined && (
+                        <CButton style={{ color: 'white', backgroundColor: 'green' }}> {columnItem.btn}</CButton>
+                    )}
+                    {columnItem.com !== undefined && (
+                        columnItem.com
+                    )}
                 </CTableDataCell>
 
             )
         })}
-    </CTableRow>
+    </CTableRow >
 );
 
 export default DataTable;

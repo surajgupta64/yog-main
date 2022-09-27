@@ -441,7 +441,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Center Setup',
-    to: '/theme/colors',
+    to: '/master/center-setup',
     icon: <CIcon icon={cilCenterFocus} customClassName="nav-icon" />,
   },
   {

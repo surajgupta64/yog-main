@@ -469,7 +469,7 @@ const Dashboard = () => {
         </CCol>
 
         <CCol lg={6} sm={12}>
-          <CCard className="mb-4">
+          <CCard className="mb-2">
             <CCardBody>
               <CRow>
                 <CCol sm={5}>
@@ -499,7 +499,7 @@ const Dashboard = () => {
                 </CCol>
               </CRow>
               <CChartLine
-                style={{ height: '300px', marginTop: '40px' }}
+                style={{ height: '270px', marginTop: '20px' }}
                 data={{
                   labels: [
                     'January',
@@ -643,7 +643,7 @@ const Dashboard = () => {
               <hr className="mt-0" />
 
               {progressGroupExample2.map((item, index) => (
-                <div className="progress-group mb-4" key={index}>
+                <div className="progress-group mb-2" key={index}>
                   <div className="progress-group-header">
                     <CIcon className="me-2" icon={item.icon} size="lg" />
                     <span>{item.title}</span>
@@ -657,7 +657,7 @@ const Dashboard = () => {
                 </div>
               ))}
 
-              <div className="mb-5"></div>
+              <div className="mb-4"></div>
 
               {progressGroupExample3.map((item, index) => (
                 <div className="progress-group" key={index}>

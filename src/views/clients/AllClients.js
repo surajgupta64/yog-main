@@ -20,7 +20,9 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop, cilInfo } from '@coreui/icons'
+import { FaBeer } from 'react-icons/fa';
 import DataTable from 'src/components/DataTable'
+
 
 const AllClients = () => {
 
@@ -45,6 +47,7 @@ const AllClients = () => {
         { heading: 'Expiry Date', value: 'expiry_date' },
         { heading: 'Info', iconBtn: cilInfo },
         { heading: 'Renew', btn: 'renew' },
+        { heading: 'Action', com: (<> <FaBeer size='20px' /></>) },
     ]
 
     const Users = [
@@ -119,7 +122,7 @@ const AllClients = () => {
                                 </div>
                             </CCol>
                         </CRow>
-                        <CRow >
+                        <CRow className='mb-1'>
                             <CCol lg={2} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
@@ -198,61 +201,7 @@ const AllClients = () => {
                                 </CButtonGroup>
                             </CCol>
                         </CRow>
-                        <CTable bordered style={{ borderColor: "#106103" }} responsive>
-                            <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
-                                        Achieved/Collected
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">
-                                        Balance Collection
-                                    </CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                    <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
-                                </CTableRow>
-                            </CTableHead>
-                            <CTableBody>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
-                                </CTableRow>
-                                <CTableRow>
-                                    <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                    <CTableDataCell>Sejal</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>10000</CTableDataCell>
-                                    <CTableDataCell>5000</CTableDataCell>
-                                    <CTableDataCell>2000</CTableDataCell>
-                                    <CTableDataCell>3000</CTableDataCell>
-                                    <CTableDataCell>View</CTableDataCell>
-                                    <CTableDataCell>100%</CTableDataCell>
-                                </CTableRow>
-                            </CTableBody>
-                        </CTable>
-                        <DataTable title={'All Clients'} heading={header} data={Users} />
+                        <DataTable heading={header} data={Users} />
                     </CCardBody>
                 </CCard>
             </CCol>
