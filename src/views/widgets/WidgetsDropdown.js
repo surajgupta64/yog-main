@@ -12,6 +12,7 @@ import { getStyle } from '@coreui/utils'
 import { CChartBar, CChartLine } from '@coreui/react-chartjs'
 import CIcon from '@coreui/icons-react'
 import { cilArrowBottom, cilArrowTop, cilOptions } from '@coreui/icons'
+import { FaEye } from 'react-icons/fa'
 
 const WidgetsDropdown = () => {
   return (
@@ -19,7 +20,7 @@ const WidgetsDropdown = () => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
-          color="primary"
+          style={{ backgroundColor: 'red', color: "white" }}
           value={
             <>
               26K{' '}
@@ -28,7 +29,7 @@ const WidgetsDropdown = () => {
               </span>
             </>
           }
-          title="Users"
+          title="Members"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle
@@ -36,10 +37,10 @@ const WidgetsDropdown = () => {
                 caret={false}
                 className="p-0"
               >
-                <CIcon
-                  icon={cilOptions}
-                  className="text-high-emphasis-inverse"
-                />
+                <FaEye
+                  size='25px'
+                  className="text-high-emphasis-inverse" />
+
               </CDropdownToggle>
               <CDropdownMenu>
                 <CDropdownItem>Action</CDropdownItem>
@@ -68,7 +69,7 @@ const WidgetsDropdown = () => {
                     label: 'My First dataset',
                     backgroundColor: 'transparent',
                     borderColor: 'rgba(255,255,255,.55)',
-                    pointBackgroundColor: getStyle('--cui-primary'),
+                    pointBackgroundColor: getStyle('--cui-red'),
                     data: [65, 59, 84, 84, 51, 55, 40],
                   },
                 ],
@@ -130,7 +131,7 @@ const WidgetsDropdown = () => {
               </span>
             </>
           }
-          title="Income"
+          title="Collection"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle
@@ -231,7 +232,7 @@ const WidgetsDropdown = () => {
               </span>
             </>
           }
-          title="Conversion Rate"
+          title="Expense"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle
@@ -310,7 +311,7 @@ const WidgetsDropdown = () => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
-          color="danger"
+          color="success"
           value={
             <>
               44K{' '}
@@ -319,7 +320,7 @@ const WidgetsDropdown = () => {
               </span>
             </>
           }
-          title="Sessions"
+          title="Profit"
           action={
             <CDropdown alignment="end">
               <CDropdownToggle

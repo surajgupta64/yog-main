@@ -59,14 +59,31 @@ const _nav = [
         to: '/employee/sales-target',
       },
       {
-        component: CNavItem,
-        name: 'PT Target',
-        to: '/employee/pt',
+        component: CNavGroup,
+        name: 'Daily Task',
+        to: '/base',
+        items: [
+          {
+            component: CNavItem,
+            name: 'Service Call',
+            to: '/trainer-dashboard',
+          },
+          {
+            component: CNavItem,
+            name: 'Sales Call',
+            to: '/base/breadcrumbs',
+          },
+          {
+            component: CNavItem,
+            name: 'Report',
+            to: '/base/cards',
+          },
+        ],
       },
       {
         component: CNavItem,
-        name: 'Corporate Target',
-        to: '/employee/corporate-target',
+        name: 'Employee Proformance',
+        to: '/employee/pt',
       },
     ],
   },
@@ -194,7 +211,7 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Service Calls',
+        name: 'Member Calls',
         to: '/clients/service-call',
       },
       {

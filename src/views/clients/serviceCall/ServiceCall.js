@@ -96,21 +96,6 @@ const ServiceCall = () => {
                             <CTabPane responsives role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 1}>
 
                                 <CRow className='mb-3'>
-                                    <CCol lg={3} sm={6} className='mb-2'>
-                                        <CInputGroup>
-                                            <CInputGroupText
-                                                component="label"
-                                                htmlFor="inputGroupSelect01"
-                                            >
-                                                All
-                                            </CInputGroupText>
-                                            <CFormSelect id="inputGroupSelect01">
-                                                <option>All Clients</option>
-                                                <option value="1">Active Clients</option>
-                                                <option value="2">Inactive Clients</option>
-                                            </CFormSelect>
-                                        </CInputGroup>
-                                    </CCol>
                                     <CCol lg={2} sm={6} className='mb-2'>
                                         <CInputGroup>
                                             <CInputGroupText

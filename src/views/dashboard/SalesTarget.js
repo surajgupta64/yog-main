@@ -102,6 +102,25 @@ const SalesTarget = () => {
                                     Media Target
                                 </CNavLink>
                             </CNavItem>
+
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 7}
+                                    onClick={() => setActiveKey(7)}
+                                >
+                                    PT Target
+                                </CNavLink>
+                            </CNavItem>
+                            <CNavItem>
+                                <CNavLink
+                                    href="javascript:void(0);"
+                                    active={activeKey === 7}
+                                    onClick={() => setActiveKey(7)}
+                                >
+                                    Corporate Target
+                                </CNavLink>
+                            </CNavItem>
                         </CNav>
                     </CCardHeader>
                     <CCardBody>

@@ -25,7 +25,7 @@ import {
   cilUserPlus,
 } from '@coreui/icons'
 import { AppBreadcrumb } from './index'
-import { AppHeaderDropdown } from './header/index'
+import { AppHeaderDropdown, AppHeaderDropdownForm } from './header/index'
 import logo from 'src/assets/images/avatars/YPI-Logo-2022.png'
 
 const AppHeader = () => {
@@ -60,8 +60,8 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#">
-              <CIcon icon={cilUserPlus} size="lg" />
+            <CNavLink href='#'>
+              <AppHeaderDropdownForm />
             </CNavLink>
           </CNavItem>
           <CNavItem>
