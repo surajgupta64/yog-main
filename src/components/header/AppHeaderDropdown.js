@@ -110,7 +110,7 @@ const AppHeaderDropdownForm = () => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
 
-        <CDropdownItem href="#">
+        <CDropdownItem style={{ textDecoration: 'none' }} href="#">
           <Link to="/forms/enquiry-form">
             <CIcon icon={cilBell} className="me-2"
               tabIndex={-1}

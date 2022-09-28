@@ -215,6 +215,11 @@ const _nav = [
         to: '/clients/service-call',
       },
       {
+        component: CNavItem,
+        name: 'Member Details',
+        to: '/clients/member-details',
+      },
+      {
         component: CNavGroup,
         name: `All Service's`,
         to: '/base',

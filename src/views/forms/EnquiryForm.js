@@ -6,7 +6,6 @@ import {
     CCardTitle,
     CCol,
     CForm,
-    CFormCheck,
     CFormInput,
     CFormSelect,
     CFormTextarea,
@@ -18,8 +17,10 @@ import React from "react";
 
 const EnquiryForm = () => {
     return (
-        <CCard>
-            <CCardHeader>Enquiry Form</CCardHeader>
+        <CCard className="mb-3 border-success">
+            <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                <CCardTitle>Enquiry Form</CCardTitle>
+            </CCardHeader>
             <CCardBody>
                 <CForm>
                     <CRow>
@@ -125,7 +126,7 @@ const EnquiryForm = () => {
 
                             <CCardTitle>Schedule enquiry follow-up</CCardTitle>
                             <CRow>
-                                <CCol xs={6}>
+                                <CCol xs={4}>
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Staff Name"
@@ -138,7 +139,20 @@ const EnquiryForm = () => {
                                         ]}
                                     />
                                 </CCol>
-                                <CCol>
+                                <CCol xs={4}>
+                                    <CFormSelect
+                                        className="mb-1"
+                                        aria-label="Select Staff Name"
+                                        label="Center Name"
+                                        options={[
+                                            "Select Center Name",
+                                            { label: "prabha", value: "1" },
+                                            { label: "sejal", value: "2" },
+                                            { label: "sonali", value: "3" },
+                                        ]}
+                                    />
+                                </CCol>
+                                <CCol xs={4}>
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Call Status"

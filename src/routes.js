@@ -23,9 +23,11 @@ const AllClients = React.lazy(() => import('./views/clients/AllClients'))
 const ActiveClients = React.lazy(() => import('./views/clients/ActiveClients'))
 const ServiceCall = React.lazy(() => import('./views/clients/serviceCall/ServiceCall'))
 const AllService = React.lazy(() => import('./views/clients/allService/AllService'))
+const MemberDetails = React.lazy(() => import('./views/clients/MemberDetails/MemberDetails'))
 
 //Master
 const CenterSetup = React.lazy(() => import('./views/Master/centerSetup/CenterSetup'))
+const CompanyProfile = React.lazy(() => import('./views/Master/centerSetup/CompanyProfile'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -141,11 +143,13 @@ const routes = [
   { path: '/clients/client-management/all-clients', name: 'All Clients', element: AllClients },
   { path: '/clients/service-call', name: 'Service Calls', element: ServiceCall },
   { path: '/clients/all-service', name: 'All Service', element: AllService },
+  { path: '/clients/member-details', name: 'Member Details', element: MemberDetails },
 
 
-  //Clients
+  //Master
   { path: '/master', name: 'Master', element: CenterSetup, exact: true },
   { path: '/master/center-setup', name: 'Center Setup', element: CenterSetup, exact: true },
+  { path: '/master/center-setup/company-profile', name: 'Company Profile', element: CompanyProfile, exact: true },
 
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },

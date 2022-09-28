@@ -1,25 +1,28 @@
-import { cilImage } from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
-import { CButton, CCard, CCardBody, CCardHeader, CCardText, CCardTitle, CCol, CForm, CRow } from '@coreui/react'
+import { CButton, CCard, CCardBody, CCardHeader, CCardText, CCardTitle, CCol, CRow } from '@coreui/react'
 import React from 'react'
-import { FaImage, FaPowerOff } from 'react-icons/fa'
+import { FaFileInvoiceDollar, FaImage, FaPowerOff } from 'react-icons/fa'
+import { HiCurrencyRupee } from 'react-icons/hi'
+import { BsCalendar3, BsFileText } from 'react-icons/bs'
+import { AiOutlineForm } from 'react-icons/ai'
+import { MdOutlineMiscellaneousServices } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
 const CenterSetup = () => {
     return (
-        <CCard>
-            <CCardHeader>
+        <CCard className="mb-3 border-success">
+            <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                 <h4>Center Setup Master</h4>
                 <span>Complete the following steps for center setup</span>
             </CCardHeader>
             <CCardBody style={{ padding: '25px' }}>
                 {[
                     { color: 'primary', icon: <FaImage style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Company Logo Setup', subtitle: 'Brand logo' },
-                    { color: 'secondary', icon: <FaImage style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Company Profile Setup', subtitle: 'Set Up Branch Profile' },
-                    { color: 'success', icon: <FaImage style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Services Master', subtitle: 'Set Up Branch Profile' },
-                    { color: 'danger', icon: <FaImage style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Price Master', subtitle: 'Set Up Branch Profile' },
-                    { color: 'warning', icon: <FaImage style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Batch time Master', subtitle: 'Brand logo' },
-                    { color: 'info', icon: <FaImage style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Form Master', subtitle: 'Brand logo' },
-                    { color: 'dark', icon: <FaImage style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Invoice Master', subtitle: 'Brand logo' },
+                    { color: 'secondary', icon: <BsFileText style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Company Profile Setup', subtitle: 'Set Up Branch Profile', link: '/master/center-setup/company-profile' },
+                    { color: 'success', icon: <MdOutlineMiscellaneousServices style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Services Master', subtitle: 'Set Up Branch Profile' },
+                    { color: 'danger', icon: <HiCurrencyRupee style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Price Master', subtitle: 'Set Up Branch Profile' },
+                    { color: 'warning', icon: <BsCalendar3 style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Batch time Master', subtitle: 'Brand logo' },
+                    { color: 'info', icon: <AiOutlineForm style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Form Master', subtitle: 'Brand logo' },
+                    { color: 'dark', icon: <FaFileInvoiceDollar style={{ marginLeft: '20px', marginRight: '20px' }} className='ml-2' size='60px' />, title: 'Invoice Master', subtitle: 'Brand logo' },
                 ].map((item, index) => (
                     <CCard
                         color={item.color}
@@ -34,7 +37,7 @@ const CenterSetup = () => {
                                     <CCardTitle>{item.title}</CCardTitle>
                                     <CCardText>{item.subtitle}</CCardText>
                                 </CCol>
-                                <CCol xs={2}><CButton className='mt-2' style={{ backgroundColor: 'white', color: 'black' }}><FaPowerOff size='15px' /> Start</CButton></CCol>
+                                <CCol xs={2}><Link to={item.link}><CButton className='mt-2' style={{ backgroundColor: 'white', color: 'black' }} tabIndex={-1}><FaPowerOff size='15px' /> Start</CButton></Link></CCol>
                             </CRow>
                         </CCardBody>
                     </CCard>

@@ -41,6 +41,7 @@ const AppBreadcrumb = () => {
               ? { active: true }
               : { href: breadcrumb.pathname })}
             key={index}
+            tabIndex={-1}
           >
             {breadcrumb.name}
           </CBreadcrumbItem>
