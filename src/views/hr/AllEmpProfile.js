@@ -5,6 +5,7 @@ import {
     CCard,
     CCardBody,
     CCardHeader,
+    CCardTitle,
     CCol,
     CFormInput,
     CFormSelect,
@@ -18,7 +19,7 @@ import { FaBeer } from 'react-icons/fa';
 import DataTable from 'src/components/DataTable'
 
 
-const AllClients = () => {
+const AllEmpProfile = () => {
 
 
     const header = [
@@ -77,9 +78,9 @@ const AllClients = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
-                <CCard className='mb-3 border-top-success border-top-3'>
-                    <CCardHeader>
-                        <strong className="mt-2">All Clients</strong>
+                <CCard className="mb-3 border-success">
+                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                        <CCardTitle className="mt-2">All Employee Profile</CCardTitle>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex mb-2'>
@@ -90,9 +91,10 @@ const AllClients = () => {
                                         aria-label="Example select with button addon"
                                     >
                                         <option>Name</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option value="1">Location</option>
+                                        <option value="2">Profile</option>
+                                        <option value="3">Mobile</option>
+                                        <option value="3">Email</option>
                                     </CFormSelect>
                                     <CFormInput
                                         placeholder="Search"
@@ -105,13 +107,11 @@ const AllClients = () => {
                                 </CInputGroup>
                             </CCol>
                             <CCol lg={6} sm={12}>
-                                <div className='d-flex justify-content-between'>
+                                <div className='d-flex justify-content-around'>
                                     <CButtonGroup role="group" aria-label="Basic example">
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Total Clients: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Active Clients:0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Current Renewal: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Renewed Clients: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Left Clients: 0</CButton>
+                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Total Employee: 0</CButton>
+                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Active Employee:0</CButton>
+                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Left Employee: 0</CButton>
                                     </CButtonGroup>
                                 </div>
                             </CCol>
@@ -126,58 +126,9 @@ const AllClients = () => {
                                         All
                                     </CInputGroupText>
                                     <CFormSelect id="inputGroupSelect01">
-                                        <option>Sep</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Service Category
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={2} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Sub-Filter
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={2} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Marketing
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option>All Employee</option>
+                                        <option value="1">Active Employee</option>
+                                        <option value="2">Left Employee</option>
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
@@ -202,4 +153,4 @@ const AllClients = () => {
     )
 }
 
-export default AllClients
+export default AllEmpProfile

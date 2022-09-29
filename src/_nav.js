@@ -37,10 +37,7 @@ const _nav = [
       text: 'NEW',
     },
   },
-  {
-    component: CNavTitle,
-    name: 'Target Dashboard',
-  },
+
   {
     component: CNavGroup,
     name: 'Employee',
@@ -65,8 +62,8 @@ const _nav = [
         items: [
           {
             component: CNavItem,
-            name: 'Service Call',
-            to: '/trainer-dashboard',
+            name: 'Member Calls',
+            to: '/clients/service-call',
           },
           {
             component: CNavItem,
@@ -75,7 +72,7 @@ const _nav = [
           },
           {
             component: CNavItem,
-            name: 'Report',
+            name: 'Calls Report',
             to: '/base/cards',
           },
         ],
@@ -163,13 +160,13 @@ const _nav = [
   },
   {
     component: CNavGroup,
-    name: 'Clients',
+    name: 'Client Management',
     to: '/clients',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
       {
         component: CNavGroup,
-        name: 'Client Management',
+        name: 'Clients',
         to: '/clients/client-management',
         items: [
           {
@@ -206,87 +203,13 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'All Service',
+        name: 'All Services',
         to: '/clients/all-service',
-      },
-      {
-        component: CNavItem,
-        name: 'Member Calls',
-        to: '/clients/service-call',
       },
       {
         component: CNavItem,
         name: 'Member Details',
         to: '/clients/member-details',
-      },
-      {
-        component: CNavGroup,
-        name: `All Service's`,
-        to: '/base',
-        items: [
-          {
-            component: CNavItem,
-            name: 'Yoga Client',
-            to: '/base/accordion',
-          },
-          {
-            component: CNavItem,
-            name: 'Zoomba Client',
-            to: '/base/breadcrumbs',
-          },
-          {
-            component: CNavItem,
-            name: `Teacher Training Clients`,
-            to: '/base/cards',
-          },
-          {
-            component: CNavItem,
-            name: 'PT Client',
-            to: '/base/breadcrumbs',
-          },
-          {
-            component: CNavItem,
-            name: 'Diet Client',
-            to: '/base/breadcrumbs',
-          },
-        ],
-      },
-      {
-        component: CNavGroup,
-        name: `Services Calls`,
-        to: '/base',
-        items: [
-          {
-            component: CNavItem,
-            name: 'Welcome Calls',
-            to: '/base/accordion',
-          },
-          {
-            component: CNavItem,
-            name: 'Feedback Calls',
-            to: '/base/breadcrumbs',
-          },
-          {
-            component: CNavItem,
-            name: `Payment Calls`,
-            to: '/base/cards',
-          },
-          {
-            component: CNavItem,
-            name: 'Irregular Member Call',
-            to: '/base/breadcrumbs',
-          },
-          {
-            component: CNavItem,
-            name: 'Courtesy Calls',
-            to: '/base/breadcrumbs',
-          },
-          {
-            component: CNavItem,
-            name: 'All Wishes Calls',
-            to: '/base/breadcrumbs',
-          },
-        ],
       },
     ],
   },
@@ -322,17 +245,37 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
+        name: 'E-Mail Marketing',
         to: '/base/accordion',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'SMS Marketing',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Classes',
+        name: 'Push Marketing',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Offers Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Bulk Mailer Data',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Bulk Calling Data',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Data From App',
         to: '/base/cards',
       },
     ],
@@ -395,17 +338,52 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
+        name: 'IMP Call List',
         to: '/base/accordion',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'All Suppiler List',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Classes',
+        name: 'Guesst List',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Stock Listing',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Stock Classification',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Purchases',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Recepits',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Stock Assigning',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Stock Report',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Stock Alert',
         to: '/base/cards',
       },
     ],
@@ -418,17 +396,77 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
+        name: 'Total Invoices',
         to: '/base/accordion',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'Paid Invoices',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Classes',
+        name: 'Receipts',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Cancelled Invioces',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Written Off Invoices',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Refund Report',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Revenue Report',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Revenue Realization',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Revenue Realization (Sale)',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Revenue Realization (FY)',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Revenue VS Utilization',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Postpaid Revenue Realisation',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Collection Report',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Payment Mode',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Subscription Balance Payment',
         to: '/base/cards',
       },
     ],
@@ -436,22 +474,82 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'HR Management',
-    to: '/base',
+    to: '/hr',
     icon: <CIcon icon={cilContact} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
-        to: '/base/accordion',
+        name: 'All Emp Profile',
+        to: '/hr/all-emp',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'Staff Check Ins',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Classes',
+        name: 'Attendance Register',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Biometric Staff',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Job Profile',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: ' EMP Of Documents ',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Emp Indictaion',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Staff Payrol Setup',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'HR Policy',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Holidays List',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Class - Trainner Report',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Class utilisation',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Trial Report',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Class No Show Report',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'View Staff Substitution',
         to: '/base/cards',
       },
     ],
@@ -480,17 +578,32 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
+        name: 'Lead Sources Master',
         to: '/base/accordion',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'Sms, E-mail, Template Master',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Classes',
+        name: 'Guest Pass Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Gallery Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Automated Communication To staff  Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Automated Communication To Member  Master',
         to: '/base/cards',
       },
     ],
@@ -503,17 +616,27 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
+        name: 'Cilent Transfer Master',
         to: '/base/accordion',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'Appoinment Page Master',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Classes',
+        name: 'Support & Rights Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Call Setup Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Extension',
         to: '/base/cards',
       },
     ],
@@ -526,17 +649,17 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
+        name: 'Body Measurement ',
         to: '/base/accordion',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'Fitness Goal',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Classes',
+        name: 'Fitness Workout',
         to: '/base/cards',
       },
     ],
@@ -549,17 +672,57 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
+        name: 'Employee Designation',
         to: '/base/accordion',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'Holidays Master',
         to: '/base/breadcrumbs',
       },
       {
         component: CNavItem,
-        name: 'Classes',
+        name: 'Payroll Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Job Profile  JD Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'EMP Documents Check List ',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'HR Policy',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'daily Task ( note paid )',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Employee Profile  ',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'All Access Rights Master  ',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Shift Master',
+        to: '/base/cards',
+      },
+      {
+        component: CNavItem,
+        name: 'Bio matric',
         to: '/base/cards',
       },
     ],
@@ -573,19 +736,15 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Batches',
+        name: 'All Produst Listing Master',
         to: '/base/accordion',
       },
       {
         component: CNavItem,
-        name: 'PT',
+        name: 'All Product setting Master',
         to: '/base/breadcrumbs',
       },
-      {
-        component: CNavItem,
-        name: 'Classes',
-        to: '/base/cards',
-      },
+
     ],
   },
   {

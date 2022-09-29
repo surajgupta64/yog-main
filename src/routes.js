@@ -25,6 +25,9 @@ const ServiceCall = React.lazy(() => import('./views/clients/serviceCall/Service
 const AllService = React.lazy(() => import('./views/clients/allService/AllService'))
 const MemberDetails = React.lazy(() => import('./views/clients/MemberDetails/MemberDetails'))
 
+// Hr
+const AllEmpProfile = React.lazy(() => import('./views/hr/AllEmpProfile'))
+
 //Master
 const CenterSetup = React.lazy(() => import('./views/Master/centerSetup/CenterSetup'))
 const CompanyProfile = React.lazy(() => import('./views/Master/centerSetup/CompanyProfile'))
@@ -145,6 +148,10 @@ const routes = [
   { path: '/clients/all-service', name: 'All Service', element: AllService },
   { path: '/clients/member-details', name: 'Member Details', element: MemberDetails },
 
+
+  //Master
+  { path: '/hr', name: 'HR Management', element: AllEmpProfile, exact: true },
+  { path: '/hr/all-emp', name: 'All Employee Profile', element: AllEmpProfile, exact: true },
 
   //Master
   { path: '/master', name: 'Master', element: CenterSetup, exact: true },

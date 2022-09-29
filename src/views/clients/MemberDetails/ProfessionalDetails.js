@@ -8,39 +8,26 @@ import {
     CFormSelect,
     CFormSwitch,
     CFormTextarea,
-    CImage,
     CListGroup,
     CListGroupItem,
     CRow,
 } from "@coreui/react";
-import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import React from "react";
 
-const PersonalDetails = () => {
+const ProfessionalDetails = () => {
     return (
         <CForm>
             <CRow>
                 <CCol lg={6} sm={12}>
-                    <CCardTitle>Personal Details</CCardTitle>
+                    <CCardTitle>Professional Information Primary Contact</CCardTitle>
                     <CRow>
-                        <CCol xs={4} className='mt-2 mb-1' >
-                            <CImage className="mb-1" style={{ borderRadius: "50px" }} width={'200px'} src={ProfileIcon} />
-                        </CCol>
-                        <CCol xs={8} className='mt-5'>
-                            <CRow>
-                                <CButton className="me-3 ms-3" style={{ margin: '5px', width: '200px' }}>Upload Image</CButton>
-                            </CRow>
-                            <CRow>
-                                <CButton className="me-3 ms-3" style={{ margin: '5px', width: '200px' }}>Capture Image</CButton>
-                            </CRow>
-                        </CCol>
                         <CCol xs={6}>
                             <CFormInput
                                 className="mb-1"
                                 type="text"
                                 id="exampleFormControlInput1"
-                                label="Full name"
-                                placeholder="Enter Name"
+                                label="Occupation"
+                                placeholder="Enter Occupation"
                             />
                         </CCol>
                         <CCol>
@@ -514,4 +501,4 @@ const PersonalDetails = () => {
     );
 };
 
-export default PersonalDetails;
+export default ProfessionalDetails;

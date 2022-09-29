@@ -131,10 +131,9 @@ const DataTable = ({ title, heading, data }) => {
             activity: 'Last week',
         },
     ]
-
     return (
-        <CTable align="middle" bordered style={{ borderColor: "#106103" }} hover responsive>
-            <CTableHead style={{ backgroundColor: "#106103", color: "white" }} >
+        <CTable align="middle" bordered style={{ borderColor: "##0B5345" }} hover responsive>
+            <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                 <CTableRow >
                     {heading.map((item, index) => (
                         <CTableHeaderCell key={index}>{item.heading}</CTableHeaderCell>
@@ -164,7 +163,7 @@ const TableRow = ({ item, column }) => (
                         />
                     )}
                     {columnItem.btn !== undefined && (
-                        <CButton style={{ color: 'white', backgroundColor: 'green' }}> {columnItem.btn}</CButton>
+                        <CButton style={{ color: 'white', backgroundColor: '#0B5345' }}> {columnItem.btn}</CButton>
                     )}
                     {columnItem.com !== undefined && (
                         columnItem.com
