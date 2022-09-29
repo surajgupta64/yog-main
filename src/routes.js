@@ -30,7 +30,12 @@ const AllEmpProfile = React.lazy(() => import('./views/hr/AllEmpProfile'))
 
 //Master
 const CenterSetup = React.lazy(() => import('./views/Master/centerSetup/CenterSetup'))
+const LogoSetup = React.lazy(() => import('./views/Master/centerSetup/LogoSetup'))
 const CompanyProfile = React.lazy(() => import('./views/Master/centerSetup/CompanyProfile'))
+const ServiceMaster = React.lazy(() => import('./views/Master/centerSetup/ServiceMaster'))
+const PackageMaster = React.lazy(() => import('./views/Master/centerSetup/PackageMaster'))
+const BatchMaster = React.lazy(() => import('./views/Master/centerSetup/BatchMaster'))
+const FormMaster = React.lazy(() => import('./views/Master/centerSetup/FormMaster'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -157,6 +162,11 @@ const routes = [
   { path: '/master', name: 'Master', element: CenterSetup, exact: true },
   { path: '/master/center-setup', name: 'Center Setup', element: CenterSetup, exact: true },
   { path: '/master/center-setup/company-profile', name: 'Company Profile', element: CompanyProfile, exact: true },
+  { path: '/master/center-setup/logo-setup', name: 'Logo Setup', element: LogoSetup, exact: true },
+  { path: '/master/center-setup/service-master', name: 'Service Master', element: ServiceMaster, exact: true },
+  { path: '/master/center-setup/package-master', name: 'Package Master', element: PackageMaster, exact: true },
+  { path: '/master/center-setup/batch-master', name: 'Batch Master', element: BatchMaster, exact: true },
+  { path: '/master/center-setup/form-master', name: 'Form Master', element: FormMaster, exact: true },
 
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },

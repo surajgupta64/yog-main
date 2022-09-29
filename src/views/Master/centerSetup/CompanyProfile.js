@@ -183,7 +183,8 @@ const CompanyProfile = () => {
                             </CRow>
                         </CCol>
                     </CRow>
-                    <CButton className="mt-2">Save</CButton>
+                    <CButton className="ms-1 mt-2">Save</CButton>
+                    <CButton className="ms-2 mt-2">Cancel</CButton>
                 </CForm>
             </CCardBody>
         </CCard>
