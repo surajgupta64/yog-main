@@ -73,6 +73,7 @@ const Dropdowns = React.lazy(() =>
 const EnquiryForm = React.lazy(() => import('./views/forms/EnquiryForm'))
 const MemberForm = React.lazy(() => import('./views/forms/MemberForm'))
 const StaffForm = React.lazy(() => import('./views/forms/StaffForm'))
+const LiveClass = React.lazy(() => import('./views/forms/LiveClass'))
 const ChecksRadios = React.lazy(() =>
   import('./views/forms/checks-radios/ChecksRadios')
 )
@@ -160,7 +161,7 @@ const routes = [
   //HR
   { path: '/hr', name: 'HR Management', element: AllEmpProfile, exact: true },
   { path: '/hr/all-emp', name: 'All Employee Profile', element: AllEmpProfile, exact: true },
-  { path: '/hr/emp-details', name: 'Employee Details', element: CreateEmployee, exact: true },
+  { path: '/hr/emp-recruitment', name: 'Recruitment', element: CreateEmployee, exact: true },
 
   //Master
   { path: '/master', name: 'Master', element: CenterSetup, exact: true },
@@ -203,6 +204,7 @@ const routes = [
   { path: '/forms/enquiry-form', name: 'Enquiry Form', element: EnquiryForm },
   { path: '/forms/staff-form', name: 'Employee Form', element: StaffForm },
   { path: '/forms/member-form', name: 'Member Form', element: MemberForm },
+  { path: '/forms/live-class', name: 'Live Class', element: LiveClass },
   { path: '/forms/form-control', name: 'Form Control', element: FormControl },
   { path: '/forms/select', name: 'Select', element: Select },
   {

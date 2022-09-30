@@ -166,7 +166,7 @@ const AppHeaderDropdownBook = () => {
       <CDropdownMenu className="pt-0" placement="bottom-end">
 
         <CDropdownItem href="#">
-          <Link style={{ textDecoration: 'none' }} to="/forms/enquiry-form">
+          <Link style={{ textDecoration: 'none' }} to="/forms/live-class">
             <CIcon icon={cilBell} className="me-2"
               tabIndex={-1}
             />

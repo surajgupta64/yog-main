@@ -484,6 +484,11 @@ const _nav = [
       },
       {
         component: CNavItem,
+        name: 'Emp Recruitment',
+        to: '/hr/emp-recruitment',
+      },
+      {
+        component: CNavItem,
         name: 'Staff Check Ins',
         to: '/base/breadcrumbs',
       },
