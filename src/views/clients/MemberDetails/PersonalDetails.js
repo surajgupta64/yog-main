@@ -475,16 +475,16 @@ const PersonalDetails = () => {
                             <CFormCheck label="Digestive Disorder" />
                         </CListGroupItem>
                         <CListGroupItem>
-                            <CFormCheck label="Epilepsy" />
+                            <CFormCheck label="Shoulder Pain" />
                         </CListGroupItem>
                         <CListGroupItem>
                             <CFormCheck label="Foot Pain" />
                         </CListGroupItem>
                         <CListGroupItem>
-                            <CFormCheck label="Glaucoma" />
+                            <CFormCheck label="Knee Replacement" />
                         </CListGroupItem>
                         <CListGroupItem>
-                            <CFormCheck label="Heart Disease/Condition" />
+                            <CFormCheck label="High Cholestrol" />
                         </CListGroupItem>
                     </CListGroup>
                 </CCol>
@@ -492,13 +492,13 @@ const PersonalDetails = () => {
                 <CCol>
                     <CListGroup>
                         <CListGroupItem>
-                            <CFormCheck label="Hernia/Diastasis Recti" />
+                            <CFormCheck label="Joint Pain" />
                         </CListGroupItem>
                         <CListGroupItem>
-                            <CFormCheck label="eart Disease/Condition" />
+                            <CFormCheck label="Pregnancy" />
                         </CListGroupItem>
                         <CListGroupItem>
-                            <CFormCheck label="Hernia/Diastasis Recti" />
+                            <CFormCheck label="Surgery" />
                         </CListGroupItem>
                         <CListGroupItem>
                             <CFormCheck label="High Blood Pressure" />

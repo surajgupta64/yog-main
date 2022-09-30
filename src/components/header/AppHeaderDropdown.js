@@ -22,6 +22,10 @@ import {
   cilTask,
   cilUser,
   cilUserPlus,
+  cilClock,
+  cilCalendarCheck,
+  cilFingerprint,
+  cilLinkAlt,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 
@@ -110,8 +114,8 @@ const AppHeaderDropdownForm = () => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
 
-        <CDropdownItem style={{ textDecoration: 'none' }} href="#">
-          <Link to="/forms/enquiry-form">
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/enquiry-form">
             <CIcon icon={cilBell} className="me-2"
               tabIndex={-1}
             />
@@ -119,12 +123,17 @@ const AppHeaderDropdownForm = () => {
           </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
-          <CIcon icon={cilEnvelopeOpen} className="me-2" />
-          Member
+          <Link style={{ textDecoration: 'none' }} to="/forms/member-form">
+            <CIcon icon={cilEnvelopeOpen} className="me-2" tabIndex={-1} />
+            Member
+          </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
-          <CIcon icon={cilTask} className="me-2" />
-          Staff
+
+          <Link style={{ textDecoration: 'none' }} to="/forms/staff-form">
+            <CIcon icon={cilTask} className="me-2" />
+            Staff
+          </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
           <CIcon icon={cilCommentSquare} className="me-2" />
@@ -148,4 +157,120 @@ const AppHeaderDropdownForm = () => {
   )
 }
 
-export { AppHeaderDropdown, AppHeaderDropdownForm }
+const AppHeaderDropdownBook = () => {
+  return (
+    <CDropdown variant="nav-item">
+      <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
+        <CIcon icon={cilClock} size="lg" />
+      </CDropdownToggle>
+      <CDropdownMenu className="pt-0" placement="bottom-end">
+
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/enquiry-form">
+            <CIcon icon={cilBell} className="me-2"
+              tabIndex={-1}
+            />
+            Live Classes
+          </Link>
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/member-form">
+            <CIcon icon={cilEnvelopeOpen} className="me-2" tabIndex={-1} />
+            Offline Batch
+          </Link>
+        </CDropdownItem>
+        <CDropdownItem href="#">
+
+          <Link style={{ textDecoration: 'none' }} to="/forms/staff-form">
+            <CIcon icon={cilTask} className="me-2" />
+            PT Classes
+          </Link>
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <CIcon icon={cilCommentSquare} className="me-2" />
+          TTC
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <CIcon icon={cilCommentSquare} className="me-2" />
+          Event
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <CIcon icon={cilUser} className="me-2" />
+          Venue
+        </CDropdownItem>
+        <CDropdownDivider />
+      </CDropdownMenu>
+    </CDropdown>
+  )
+}
+
+
+const AppHeaderDropdownCheckIn = () => {
+  return (
+    <CDropdown variant="nav-item">
+      <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
+        <CIcon icon={cilFingerprint} size="lg" />
+      </CDropdownToggle>
+      <CDropdownMenu className="pt-0" placement="bottom-end">
+
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/enquiry-form">
+            <CIcon icon={cilBell} className="me-2"
+              tabIndex={-1}
+            />
+            Client CheckIn
+          </Link>
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/member-form">
+            <CIcon icon={cilEnvelopeOpen} className="me-2" tabIndex={-1} />
+            Employee CheckIn
+          </Link>
+        </CDropdownItem>
+        <CDropdownDivider />
+      </CDropdownMenu>
+    </CDropdown>
+  )
+}
+
+const AppHeaderDropdownLink = () => {
+  return (
+    <CDropdown variant="nav-item">
+      <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
+        <CIcon icon={cilLinkAlt} size="lg" />
+      </CDropdownToggle>
+      <CDropdownMenu className="pt-0" placement="bottom-end">
+
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/enquiry-form">
+            <CIcon icon={cilBell} className="me-2"
+              tabIndex={-1}
+            />
+            Feedback Link
+          </Link>
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/member-form">
+            <CIcon icon={cilEnvelopeOpen} className="me-2" tabIndex={-1} />
+            Google Review Link
+          </Link>
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/member-form">
+            <CIcon icon={cilEnvelopeOpen} className="me-2" tabIndex={-1} />
+            Payment Link
+          </Link>
+        </CDropdownItem>
+        <CDropdownItem href="#">
+          <Link style={{ textDecoration: 'none' }} to="/forms/member-form">
+            <CIcon icon={cilEnvelopeOpen} className="me-2" tabIndex={-1} />
+            Social Media Link
+          </Link>
+        </CDropdownItem>
+        <CDropdownDivider />
+      </CDropdownMenu>
+    </CDropdown>
+  )
+}
+
+export { AppHeaderDropdown, AppHeaderDropdownForm, AppHeaderDropdownBook, AppHeaderDropdownCheckIn, AppHeaderDropdownLink }

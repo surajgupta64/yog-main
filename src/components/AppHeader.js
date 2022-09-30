@@ -18,15 +18,16 @@ import CIcon from '@coreui/icons-react'
 import {
   cilBasket,
   cilCalendar,
+  cilCalendarCheck,
   cilClock,
   cilFingerprint,
   cilLinkAlt,
   cilMenu,
-  cilUserPlus,
 } from '@coreui/icons'
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown, AppHeaderDropdownForm } from './header/index'
 import logo from 'src/assets/images/avatars/YPI-Logo-2022.png'
+import { AppHeaderDropdownBook, AppHeaderDropdownCheckIn, AppHeaderDropdownLink } from './header/AppHeaderDropdown'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
@@ -66,17 +67,18 @@ const AppHeader = () => {
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilClock} size="lg" />
+              <AppHeaderDropdownBook />
             </CNavLink>
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilCalendar} size="lg" />
+              <CIcon icon={cilCalendarCheck} size="lg" />
             </CNavLink>
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilFingerprint} size="lg" />
+
+              <AppHeaderDropdownCheckIn />
             </CNavLink>
           </CNavItem>
           <CNavItem>
@@ -86,7 +88,7 @@ const AppHeader = () => {
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilLinkAlt} size="lg" />
+              <AppHeaderDropdownLink />
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
