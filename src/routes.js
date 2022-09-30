@@ -74,6 +74,10 @@ const EnquiryForm = React.lazy(() => import('./views/forms/EnquiryForm'))
 const MemberForm = React.lazy(() => import('./views/forms/MemberForm'))
 const StaffForm = React.lazy(() => import('./views/forms/StaffForm'))
 const LiveClass = React.lazy(() => import('./views/forms/LiveClass'))
+const OfflineClass = React.lazy(() => import('./views/forms/OfflineClass'))
+const TTC = React.lazy(() => import('./views/forms/TTC'))
+const EventCom = React.lazy(() => import('./views/forms/Event'))
+const PTClass = React.lazy(() => import('./views/forms/PTClass'))
 const ChecksRadios = React.lazy(() =>
   import('./views/forms/checks-radios/ChecksRadios')
 )
@@ -200,11 +204,17 @@ const routes = [
     element: ButtonGroups,
   },
   { path: '/charts', name: 'Charts', element: Charts },
+
+  //Form
   { path: '/forms', name: 'Forms', element: FormControl, exact: true },
   { path: '/forms/enquiry-form', name: 'Enquiry Form', element: EnquiryForm },
   { path: '/forms/staff-form', name: 'Employee Form', element: StaffForm },
   { path: '/forms/member-form', name: 'Member Form', element: MemberForm },
   { path: '/forms/live-class', name: 'Live Class', element: LiveClass },
+  { path: '/forms/offline-class', name: 'Offline Class', element: OfflineClass },
+  { path: '/forms/pt-class', name: 'PT Class', element: PTClass },
+  { path: '/forms/ttc', name: 'TTC', element: TTC },
+  { path: '/forms/event', name: 'Event', element: EventCom },
   { path: '/forms/form-control', name: 'Form Control', element: FormControl },
   { path: '/forms/select', name: 'Select', element: Select },
   {

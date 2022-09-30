@@ -174,25 +174,28 @@ const AppHeaderDropdownBook = () => {
           </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
-          <Link style={{ textDecoration: 'none' }} to="/forms/member-form">
+          <Link style={{ textDecoration: 'none' }} to="/forms/offline-class">
             <CIcon icon={cilEnvelopeOpen} className="me-2" tabIndex={-1} />
             Offline Batch
           </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
-
-          <Link style={{ textDecoration: 'none' }} to="/forms/staff-form">
+          <Link style={{ textDecoration: 'none' }} to="/forms/pt-class">
             <CIcon icon={cilTask} className="me-2" />
             PT Classes
           </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
-          <CIcon icon={cilCommentSquare} className="me-2" />
-          TTC
+          <Link style={{ textDecoration: 'none' }} to="/forms/ttc">
+            <CIcon icon={cilCommentSquare} className="me-2" />
+            TTC
+          </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
-          <CIcon icon={cilCommentSquare} className="me-2" />
-          Event
+          <Link style={{ textDecoration: 'none' }} to="/forms/event">
+            <CIcon icon={cilCommentSquare} className="me-2" />
+            Event
+          </Link>
         </CDropdownItem>
         <CDropdownItem href="#">
           <CIcon icon={cilUser} className="me-2" />
