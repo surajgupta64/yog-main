@@ -78,6 +78,7 @@ const OfflineClass = React.lazy(() => import('./views/forms/OfflineClass'))
 const TTC = React.lazy(() => import('./views/forms/TTC'))
 const EventCom = React.lazy(() => import('./views/forms/Event'))
 const PTClass = React.lazy(() => import('./views/forms/PTClass'))
+const ClientCheckin = React.lazy(() => import('./views/forms/ClientCheckin'))
 const ChecksRadios = React.lazy(() =>
   import('./views/forms/checks-radios/ChecksRadios')
 )
@@ -215,6 +216,7 @@ const routes = [
   { path: '/forms/pt-class', name: 'PT Class', element: PTClass },
   { path: '/forms/ttc', name: 'TTC', element: TTC },
   { path: '/forms/event', name: 'Event', element: EventCom },
+  { path: '/forms/client-checkin', name: 'Client CheckIn', element: ClientCheckin },
   { path: '/forms/form-control', name: 'Form Control', element: FormControl },
   { path: '/forms/select', name: 'Select', element: Select },
   {

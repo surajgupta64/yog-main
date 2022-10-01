@@ -77,7 +77,6 @@ const AppHeader = () => {
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
-
               <AppHeaderDropdownCheckIn />
             </CNavLink>
           </CNavItem>

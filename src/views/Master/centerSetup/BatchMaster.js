@@ -107,18 +107,12 @@ const BatchMaster = () => {
                                     />
                                     <CFormInput
                                         className="mb-1"
-                                        type="text"
-                                        id="exampleFormControlInput1"
-                                        label="Trainer Name"
-                                        placeholder="Enter Trainer Name"
-                                    />
-                                    <CFormInput
-                                        className="mb-1"
                                         type="time"
                                         id="exampleFormControlInput1"
                                         label="Batch Timing "
                                         placeholder="Enter Batch Timing"
                                     />
+                                    <CFormSwitch size="xl" className="mt-2" label="Status" style={{ defaultChecked: 'false' }} />
                                     <CButton className="mt-2" onClick={() => setAction(false)}>Save</CButton>
                                 </CCol>
                                 <CCol>
@@ -146,7 +140,6 @@ const BatchMaster = () => {
                                             { label: "3 hr 30 min", value: "2" },
                                         ]}
                                     />
-                                    <CFormSwitch size="xl" className="mt-2" label="Status" style={{ defaultChecked: 'false' }} />
                                 </CCol>
                             </CRow>
                         </div>

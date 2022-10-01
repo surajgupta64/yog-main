@@ -9,6 +9,9 @@ import {
   CCardFooter,
   CCardHeader,
   CCol,
+  CFormInput,
+  CFormSelect,
+  CInputGroup,
   CNav,
   CNavItem,
   CNavLink,
@@ -62,7 +65,7 @@ import WidgetsDropdown from '../widgets/WidgetsDropdown'
 
 const Dashboard = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
-  const [activeKey, setActiveKey] = useState(1)
+  const [active, setActive] = useState('Today')
 
   const progressExample = [
     { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
@@ -199,6 +202,19 @@ const Dashboard = () => {
     <>
       <CCard className="mb-4">
         <CCardBody>
+          <CInputGroup style={{ width: '250px' }} className="left mb-2">
+            <CFormSelect id="inputGroupSelect01" value={active}>
+              <option onClick={() => setAction('Today')}>Today</option>
+              <option onClick={() => setAction('Last 7 day')}>Last 7 day</option>
+              <option value="2">1 Month</option>
+              <option value='4'>Year</option>
+              <option>Custom Date</option>
+            </CFormSelect>
+
+            <CButton type="button" color="primary" id="button-addon2">
+              Go
+            </CButton>
+          </CInputGroup>
           <CRow>
             <CCol lg={3} sm={6}>
               <CCard className="mb-4">
@@ -206,7 +222,7 @@ const Dashboard = () => {
                 <CCardBody>
                   <CChartPie
                     data={{
-                      labels: ['ENQUIRE', 'TRIALS', 'CONVERTED ', 'PROSPECT', 'COLD '],
+                      labels: ['ENQUIRE', 'TRIALS', 'NEW', 'CONVERTED ', 'PROSPECT', 'COLD '],
                       datasets: [
                         {
                           data: [30, 50, 100, 60, 80],
@@ -260,6 +276,7 @@ const Dashboard = () => {
                     data={{
                       labels: [
                         'ALL CLIENT',
+                        'ACTIVE',
                         'NEW',
                         'RENEWAL',
                         'RENEWED',
@@ -267,10 +284,11 @@ const Dashboard = () => {
                       ],
                       datasets: [
                         {
-                          data: [30, 50, 100, 80, 50],
-                          backgroundColor: ['red', 'green', 'yellow', 'orange', 'blue',],
+                          data: [30, 40, 50, 100, 80, 50],
+                          backgroundColor: ['red', 'pink', 'green', 'yellow', 'orange', 'blue',],
                           hoverBackgroundColor: [
                             '#FF6384',
+                            'darkpick',
                             '#52BE80',
                             '#F7DC6F',
                             '#F8C471',

@@ -1,7 +1,10 @@
-import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem, CBadge, CButton, CCard, CCardBody, CCardHeader, CCardImage, CCardText, CCardTitle, CCol, CForm, CFormInput, CFormSelect, CFormSwitch, CFormTextarea, CImage, CInputGroup, CListGroup, CListGroupItem, CPopover, CRow, CSpinner } from '@coreui/react'
+import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem, CBadge, CButton, CCard, CCardBody, CCardHeader, CCardImage, CCardText, CCardTitle, CCol, CForm, CFormInput, CFormSelect, CFormSwitch, CFormTextarea, CImage, CInputGroup, CListGroup, CListGroupItem, CPopover, CRow, CSpinner, CWidgetStatsD } from '@coreui/react'
 import React, { useState } from 'react'
 import Profile from 'src/assets/images/avatars/img_avatar.png'
 import EventImage from 'src/assets/images/avatars/eventImage.jpg'
+import { CChartLine } from '@coreui/react-chartjs'
+import { cibFacebook } from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
 
 const Event = () => {
     const [liveClass, setLiveClass] = useState(false)
@@ -251,79 +254,88 @@ const Event = () => {
                     </CCardBody>
                 </CCard>
 
-                <CCard className='mt-3'>
-                    <CCardHeader>
-                        All Event
+                <CCard className="mt-3 border-success">
+                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                        Event Pass
                     </CCardHeader>
                     <CCardBody>
                         <CRow>
-                            <CCol lg={4} sm={6} className='mt-1'>
-                                <CAccordion activeItemKey={2}>
-                                    <CAccordionItem itemKey={1}>
-                                        <CAccordionHeader>
-                                            <CRow >
-                                                <CCol xs={5} className='mt-2'>
-                                                    <CImage src={Profile} style={{ borderRadius: '50%', width: '100%' }} />
-                                                </CCol>
-                                                <CCol>
-                                                    <CRow >
-                                                        <label style={{ fontWeight: 'bold' }}>Trainer Name : Prabha Yadav</label>
-                                                        <span style={{ fontWeight: 'bold' }}>Service : Yoga</span>
-                                                        <span>Batch Timing: 12PM</span>
-                                                        <span>Duration: 30 min</span>
-                                                        <span>Registered User : 45</span>
-                                                    </CRow>
-                                                </CCol>
-                                            </CRow>
-                                        </CAccordionHeader>
-                                        <CAccordionBody>
-                                            <CListGroup>
-                                                <CListGroupItem component="a" href="#" >
-                                                    <CRow>
-                                                        <CCol>Sr. No</CCol>
-                                                        <CCol>Attendance ID</CCol>
-                                                        <CCol>Client Name</CCol>
-                                                        <CCol>Joining time</CCol>
-                                                        <CCol>Details</CCol>
-                                                    </CRow>
-                                                </CListGroupItem>
-                                                <CListGroupItem component="a" href="#" >
-                                                    <CRow>
-                                                        <CCol>1</CCol>
-                                                        <CCol>CLIENT456</CCol>
-                                                        <CCol>Sejal</CCol>
-                                                        <CCol>11 pm</CCol>
-                                                        <CCol>
-                                                            <CButton>View</CButton>
-                                                        </CCol>
-                                                    </CRow>
-                                                </CListGroupItem>
-                                                <CListGroupItem component="a" href="#" >
-                                                    <CRow>
-                                                        <CCol>2</CCol>
-                                                        <CCol>107</CCol>
-                                                        <CCol>Sejal</CCol>
-                                                        <CCol>11 pm</CCol>
-                                                        <CCol>
-                                                            <CButton>View</CButton>
-                                                        </CCol>
-                                                    </CRow>
-                                                </CListGroupItem>
-                                                <CListGroupItem component="a" href="#" >
-                                                    <CRow>
-                                                        <CCol>3</CCol>
-                                                        <CCol>154</CCol>
-                                                        <CCol>Sejal</CCol>
-                                                        <CCol>11 pm</CCol>
-                                                        <CCol>
-                                                            <CButton>View</CButton>
-                                                        </CCol>
-                                                    </CRow>
-                                                </CListGroupItem>
-                                            </CListGroup>
-                                        </CAccordionBody>
-                                    </CAccordionItem>
-                                </CAccordion>
+                            <CCol xs={6}>
+                                <CCard>
+                                    <CCardHeader>
+                                        <CRow>
+                                            <CCol xs={4}>
+                                                <CImage src={EventImage} width='100%' />
+                                            </CCol>
+                                            <CCol>
+                                                <CCardTitle className='mt-2'>Navratri Pass <CBadge color="success float-end">Active</CBadge></CCardTitle>
+                                                <CCardText><small className="text-medium-emphasis" style={{ fontWeight: 'bold' }}>Start Date : 30-09-2022</small><small className="text-medium-emphasis float-end " style={{ fontWeight: 'bold' }}>End Date : 30-09-2022</small>
+                                                    <br /><small className="text-medium-emphasis" style={{ fontWeight: 'bold' }}>Event Name : Navratri Event</small></CCardText>
+                                                <CCardText><small className="text-medium-emphasis" style={{ fontWeight: 'bold' }}>Event Time: 4PM </small><small className="text-medium-emphasis float-end mt-1" style={{ fontWeight: 'bold' }}>Duration: 2Hr </small></CCardText>
+                                            </CCol>
+                                        </CRow>
+                                    </CCardHeader>
+                                    <CCardBody style={{ backgroundColor: 'rgba(255,255,255,.1)', padding: '0' }}>
+                                        <CAccordion activeItemKey={2}>
+                                            <CAccordionItem itemKey={1}>
+                                                <CAccordionHeader>
+                                                    <CCardTitle>Participants</CCardTitle>
+                                                </CAccordionHeader>
+                                                <CAccordionBody style={{ padding: '0' }}>
+                                                    <CListGroup>
+                                                        <CListGroupItem component="a" href="#" >
+                                                            <CRow>
+                                                                <CCol>Sr. No</CCol>
+                                                                <CCol>PASS ID</CCol>
+                                                                <CCol>Client Name</CCol>
+                                                                <CCol>Details</CCol>
+                                                            </CRow>
+                                                        </CListGroupItem>
+                                                        <CListGroupItem component="a" href="#" >
+                                                            <CRow>
+                                                                <CCol>1</CCol>
+                                                                <CCol>25-10-2022</CCol>
+                                                                <CCol>NAV202201</CCol>
+                                                                <CCol>Sejal</CCol>
+                                                                <CCol>11 pm</CCol>
+                                                                <CCol>P</CCol>
+                                                                <CCol>
+                                                                    <CButton>View</CButton>
+                                                                </CCol>
+                                                            </CRow>
+                                                        </CListGroupItem>
+                                                        <CListGroupItem component="a" href="#" >
+                                                            <CRow>
+                                                                <CCol>2</CCol>
+                                                                <CCol>25-10-2022</CCol>
+                                                                <CCol>CLIENT456</CCol>
+                                                                <CCol>Sejal</CCol>
+                                                                <CCol>11 pm</CCol>
+                                                                <CCol>P</CCol>
+                                                                <CCol>
+                                                                    <CButton>View</CButton>
+                                                                </CCol>
+                                                            </CRow>
+                                                        </CListGroupItem>
+                                                        <CListGroupItem component="a" href="#" >
+                                                            <CRow>
+                                                                <CCol>3</CCol>
+                                                                <CCol>25-10-2022</CCol>
+                                                                <CCol>CLIENT456</CCol>
+                                                                <CCol>Sejal</CCol>
+                                                                <CCol>11 pm</CCol>
+                                                                <CCol>P</CCol>
+                                                                <CCol>
+                                                                    <CButton>View</CButton>
+                                                                </CCol>
+                                                            </CRow>
+                                                        </CListGroupItem>
+                                                    </CListGroup>
+                                                </CAccordionBody>
+                                            </CAccordionItem>
+                                        </CAccordion>
+                                    </CCardBody>
+                                </CCard>
                             </CCol>
                         </CRow>
                     </CCardBody>

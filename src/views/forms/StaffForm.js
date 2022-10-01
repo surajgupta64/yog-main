@@ -236,15 +236,6 @@ const StaffForm = () => {
                                 <CCol xs={6}>
                                     <CFormInput
                                         className="mb-1"
-                                        type="text"
-                                        id="exampleFormControlInput1"
-                                        label="PAN Card"
-                                        placeholder="Enter PAN Card"
-                                    />
-                                </CCol>
-                                <CCol xs={6}>
-                                    <CFormInput
-                                        className="mb-1"
                                         type="number"
                                         id="exampleFormControlInput1"
                                         label="Account No"
@@ -261,16 +252,45 @@ const StaffForm = () => {
                                     />
                                 </CCol>
 
+                                <CCol xs={6}>
+                                    <CFormInput
+                                        className="mb-1"
+                                        type="text"
+                                        id="exampleFormControlInput1"
+                                        label="PAN Card"
+                                        placeholder="Enter PAN Card"
+                                    />
+                                </CCol>
+
                                 <CCol>
                                     <CFormInput
                                         className="mb-1"
-                                        type="password"
+                                        type="number"
                                         id="exampleFormControlInput1"
-                                        label="Login Password"
-                                        placeholder="Enter Password"
+                                        label="Aadhar Number"
+                                        placeholder="Enter Aadhar Number"
                                     />
                                 </CCol>
                             </CRow>
+
+                            <CCol>
+                                <CFormInput
+                                    className="mb-1"
+                                    type="file"
+                                    id="exampleFormControlInput1"
+                                    label="PAN Card"
+                                    placeholder="Enter PAN Card"
+                                />
+                            </CCol>
+                            <CCol>
+                                <CFormInput
+                                    className="mb-1"
+                                    type="file"
+                                    id="exampleFormControlInput1"
+                                    label="Aadhar Card"
+                                    placeholder="Enter Aadhar Card"
+                                />
+                            </CCol>
                         </CCol>
                     </CRow>
                     <CButton className="mt-2">Save</CButton>

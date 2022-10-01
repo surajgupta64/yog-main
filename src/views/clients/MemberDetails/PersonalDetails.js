@@ -92,10 +92,10 @@ const PersonalDetails = () => {
                         <CCol>
                             <CFormInput
                                 className="mb-1"
-                                type="email"
+                                type="date"
                                 id="exampleFormControlInput1"
-                                label="Email Address"
-                                placeholder="Enter Number"
+                                label="Date of Birth"
+                                placeholder="Enter Date"
                             />
                         </CCol>
                     </CRow>
@@ -110,15 +110,6 @@ const PersonalDetails = () => {
                                     { label: "Male", value: "1" },
                                     { label: "Female", value: "2" },
                                 ]}
-                            />
-                        </CCol>
-                        <CCol>
-                            <CFormInput
-                                className="mb-1"
-                                type="date"
-                                id="exampleFormControlInput1"
-                                label="Date of Birth"
-                                placeholder="Enter Date"
                             />
                         </CCol>
                     </CRow>
@@ -371,17 +362,8 @@ const PersonalDetails = () => {
                                 className="mb-1"
                                 type="text"
                                 id="exampleFormControlInput1"
-                                label="Club ID"
+                                label="Center ID"
                                 placeholder="Enter Club ID"
-                            />
-                        </CCol>
-                        <CCol xs={6}>
-                            <CFormInput
-                                className="mb-1"
-                                type="text"
-                                id="exampleFormControlInput1"
-                                label="National ID"
-                                placeholder="Enter National ID"
                             />
                         </CCol>
                         <CCol xs={6}>
@@ -403,49 +385,7 @@ const PersonalDetails = () => {
                             />
                         </CCol>
                     </CRow>
-                    <CRow>
-                        <CCardTitle>Apparel and Shoes</CCardTitle>
-                        <CCol xs={6}>
-                            <CFormSelect
-                                className="mb-1"
-                                aria-label="Select T-Shirt Size"
-                                label="T-Shirt Size"
-                                options={[
-                                    "Select T-Shirt Size",
-                                    { label: "Yoga", value: "1" },
-                                    { label: "PT", value: "2" },
-                                    { label: "TTC", value: "3" },
-                                ]}
-                            />
-                        </CCol>
 
-                        <CCol xs={6}>
-                            <CFormSelect
-                                className="mb-1"
-                                aria-label="Select Shoes Size"
-                                label="Shoes Size"
-                                options={[
-                                    "Select Shoes Size",
-                                    { label: "Yoga", value: "1" },
-                                    { label: "PT", value: "2" },
-                                    { label: "TTC", value: "3" },
-                                ]}
-                            />
-                        </CCol>
-                        <CCol xs={6}>
-                            <CFormSelect
-                                className="mb-1"
-                                aria-label="Select Shorts Size"
-                                label="Shorts Size"
-                                options={[
-                                    "Select Shorts Size",
-                                    { label: "Yoga", value: "1" },
-                                    { label: "PT", value: "2" },
-                                    { label: "TTC", value: "3" },
-                                ]}
-                            />
-                        </CCol>
-                    </CRow>
                 </CCol>
             </CRow>
             <CRow className="mt-2">

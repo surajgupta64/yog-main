@@ -217,7 +217,7 @@ const AppHeaderDropdownCheckIn = () => {
       <CDropdownMenu className="pt-0" placement="bottom-end">
 
         <CDropdownItem href="#">
-          <Link style={{ textDecoration: 'none' }} to="/forms/enquiry-form">
+          <Link style={{ textDecoration: 'none' }} to="/forms/client-checkin">
             <CIcon icon={cilBell} className="me-2"
               tabIndex={-1}
             />
