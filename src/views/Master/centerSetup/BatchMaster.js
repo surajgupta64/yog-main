@@ -14,13 +14,22 @@ import {
     CInputGroupText,
     CRow,
 } from "@coreui/react";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { FaBeer } from "react-icons/fa";
 
 import DataTable from "src/components/DataTable";
 
 const BatchMaster = () => {
     const [action, setAction] = useState(false)
+    const [data, setData] = useState(null)
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/Batch/all').then((response) => {
+            setData(response.data);
+            console.log(response.data)
+        });
+    }, []);
 
     const header = [
 

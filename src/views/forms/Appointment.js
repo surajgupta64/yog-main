@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     CButton,
     CCard,
@@ -6,6 +6,7 @@ import {
     CCardHeader,
     CCol,
     CFormInput,
+    CFormSelect,
     CInputGroup,
     CInputGroupText,
     CRow,
@@ -18,6 +19,7 @@ import {
 } from '@coreui/react'
 
 const Appointment = () => {
+    const [appointment, setAppointment] = useState(false)
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -58,8 +60,90 @@ const Appointment = () => {
                                     </CButton>
                                 </CInputGroup>
                             </CCol>
-                            <CCol></CCol>
+                            <CCol>
+                                <CButton className='float-end' onClick={() => setAppointment(!appointment)} >{appointment ? 'Close' : 'Add Appointment'}</CButton>
+                            </CCol>
                         </CRow>
+                        {appointment &&
+                            <CCard className='mt-1 mb-2'>
+                                <CCardBody>
+                                    <CRow>
+                                        <CCol xs={3}>
+                                            <CFormInput
+                                                className="mb-1"
+                                                type="text"
+                                                id="exampleFormControlInput1"
+                                                label="Client Name"
+                                                placeholder="Enter Name"
+                                            />
+                                        </CCol>
+                                        <CCol xs={3}>
+                                            <CFormInput
+                                                className="mb-1"
+                                                type="text"
+                                                id="exampleFormControlInput1"
+                                                label="Client Number"
+                                                placeholder="Enter Number"
+                                            />
+                                        </CCol>
+                                        <CCol xs={3}>
+                                            <CFormSelect
+                                                className="mb-1"
+                                                aria-label="Select Service"
+                                                label="Appointment Type"
+                                                options={[
+                                                    "Select Appointment type",
+                                                    { label: "Trial", value: "1" },
+                                                    { label: "Diet", value: "2" },
+                                                    { label: "Yoga", value: "3" },
+                                                    { label: "Treatment", value: "3" },
+                                                    { label: "Other", value: "3" },
+                                                ]}
+                                            />
+                                        </CCol>
+                                        <CCol xs={3}>
+                                            <CFormInput
+                                                className="mb-1"
+                                                type="date"
+                                                id="exampleFormControlInput1"
+                                                label="Appointment Date"
+                                                placeholder="Enter date"
+                                            />
+                                        </CCol>
+                                        <CCol xs={3}>
+                                            <CFormInput
+                                                className="mb-1"
+                                                type="number"
+                                                id="exampleFormControlInput1"
+                                                label="Fees"
+                                                placeholder="Enter Fees"
+                                            />
+                                        </CCol>
+                                        <CCol xs={3}>
+                                            <CFormSelect
+                                                className="mb-1"
+                                                aria-label="Select Service"
+                                                label="Staff"
+                                                options={[
+                                                    "Select Staff",
+                                                    { label: "Sejal", value: "1" },
+                                                    { label: "Prabha", value: "2" },
+                                                    { label: "Yoga", value: "3" },
+                                                    { label: "Treatment", value: "3" },
+                                                    { label: "Other", value: "3" },
+                                                ]}
+                                            />
+                                        </CCol>
+
+                                        <CCol className='mb-2 mt-4 float-end'>
+                                            <CButton className=' ms-2 float-end'>Cancel</CButton>
+                                            <CButton className=' float-end'>Book</CButton>
+                                        </CCol>
+
+                                    </CRow>
+                                </CCardBody>
+                            </CCard>
+                        }
 
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
                             <CTableHead style={{ backgroundColor: "#106103", color: "white" }}>
