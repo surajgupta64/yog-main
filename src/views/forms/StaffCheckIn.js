@@ -3,7 +3,7 @@ import CIcon from '@coreui/icons-react'
 import { CButton, CCard, CCardBody, CCardHeader, CCardText, CCol, CFormInput, CRow } from '@coreui/react'
 import React, { useState } from 'react'
 
-const ClientCheckin = () => {
+const StaffCheckIn = () => {
     const [attendance, setAttendance] = useState(0);
     const time = null;
     const [ctime, setDate] = useState(time);
@@ -19,7 +19,7 @@ const ClientCheckin = () => {
     return (
         <CCard className="mb-3 border-success">
             <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                Client CheckIn
+                Staff CheckIn
             </CCardHeader>
             <CCardBody>
                 <CRow>
@@ -53,9 +53,9 @@ const ClientCheckin = () => {
                                             <CIcon icon={cilCheckCircle} size="8xl" />
                                         </CCol>
                                         <CCol className='mt-3'>
-                                            <CCardText>Client Name: sejel<br />
-                                                Attendance ID: CLI044<br />
-                                                Attendance Time: {ctime}</CCardText>
+                                            <CCardText>Staff Name: sejel<br />
+                                                EMP ID: CLI044<br />
+                                                CheckIn Time: {ctime}</CCardText>
                                         </CCol>
                                     </CRow>
                                     {ctime == null &&
@@ -95,4 +95,4 @@ const ClientCheckin = () => {
     )
 }
 
-export default ClientCheckin
+export default StaffCheckIn

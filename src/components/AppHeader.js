@@ -28,6 +28,7 @@ import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown, AppHeaderDropdownForm } from './header/index'
 import logo from 'src/assets/images/avatars/YPI-Logo-2022.png'
 import { AppHeaderDropdownBook, AppHeaderDropdownCheckIn, AppHeaderDropdownLink } from './header/AppHeaderDropdown'
+import { Link } from 'react-router-dom'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
@@ -72,7 +73,9 @@ const AppHeader = () => {
           </CNavItem>
           <CNavItem>
             <CNavLink href="#">
-              <CIcon icon={cilCalendarCheck} size="lg" />
+              <Link style={{ textDecoration: 'none' }} to="/forms/appointment">
+                <CIcon icon={cilCalendarCheck} size="lg" />
+              </Link>
             </CNavLink>
           </CNavItem>
           <CNavItem>
