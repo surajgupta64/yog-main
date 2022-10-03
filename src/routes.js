@@ -25,6 +25,14 @@ const ServiceCall = React.lazy(() => import('./views/clients/serviceCall/Service
 const AllService = React.lazy(() => import('./views/clients/allService/AllService'))
 const MemberDetails = React.lazy(() => import('./views/clients/MemberDetails/MemberDetails'))
 
+// Inventory
+const AllCallList = React.lazy(() => import('./views/Inventory/AllCallList'))
+const ImpCallList = React.lazy(() => import('./views/Inventory/ImpCallList'))
+const AllSuppilerList = React.lazy(() => import('./views/Inventory/AllSuppilerList'))
+const GuestList = React.lazy(() => import('./views/Inventory/GuestList'))
+const StockListing = React.lazy(() => import('./views/Inventory/StockListing'))
+const StockReport = React.lazy(() => import('./views/Inventory/StockReport'))
+
 // Hr
 const AllEmpProfile = React.lazy(() => import('./views/hr/AllEmpProfile'))
 const CreateEmployee = React.lazy(() => import('./views/hr/employee/RegisterEmployee'))
@@ -164,6 +172,15 @@ const routes = [
   { path: '/clients/all-service', name: 'All Service', element: AllService },
   { path: '/clients/member-details', name: 'Member Details', element: MemberDetails },
 
+
+  //Inventory
+  { path: '/inventory', name: 'Inventory', element: ImpCallList, exact: true },
+  { path: '/inventory/all-call-list', name: 'All Call List', element: AllCallList },
+  { path: '/inventory/imp-call', name: 'Imp Call List', element: ImpCallList },
+  { path: '/inventory/all-suppiler', name: 'All Suppiler List', element: AllSuppilerList },
+  { path: '/inventory/guest-list', name: 'Guest List', element: GuestList },
+  { path: '/inventory/stock-listing', name: 'Stock Listing', element: StockListing },
+  { path: '/inventory/stock-report', name: 'Stock Report', element: StockReport },
 
   //HR
   { path: '/hr', name: 'HR Management', element: AllEmpProfile, exact: true },

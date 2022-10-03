@@ -333,28 +333,23 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Inventory',
-    to: '/base',
+    to: '/inventory',
     icon: <CIcon icon={cilGraph} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
-        name: 'IMP Call List',
-        to: '/base/accordion',
-      },
-      {
-        component: CNavItem,
-        name: 'All Suppiler List',
-        to: '/base/breadcrumbs',
-      },
-      {
-        component: CNavItem,
-        name: 'Guesst List',
-        to: '/base/cards',
+        name: 'All Call List',
+        to: '/inventory/all-call-list',
       },
       {
         component: CNavItem,
         name: 'Stock Listing',
-        to: '/base/cards',
+        to: '/inventory/stock-listing',
+      },
+      {
+        component: CNavItem,
+        name: 'Stock Report',
+        to: '/inventory/stock-report',
       },
       {
         component: CNavItem,
@@ -374,11 +369,6 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Stock Assigning',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Stock Report',
         to: '/base/cards',
       },
       {
