@@ -25,7 +25,7 @@ const FollowupCallReport = () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Followup Call Report</strong>
+                        <strong className="mt-2">Calls Report</strong>
                     </CCardHeader>
                     <CCardBody>
                         <div className='d-flex justify-content-between mb-2'>

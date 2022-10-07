@@ -25,10 +25,14 @@ const BatchMaster = () => {
     const [data, setData] = useState(null)
 
     useEffect(() => {
-        axios.get('http://localhost:5000/Batch/all').then((response) => {
-            setData(response.data);
-            console.log(response.data)
-        });
+        axios.get('http://localhost:5000/Batch/all')
+            .then((response) => {
+                setData(response.data),
+                    console.log(response.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }, []);
 
     const header = [

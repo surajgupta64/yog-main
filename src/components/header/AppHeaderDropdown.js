@@ -30,9 +30,18 @@ import {
 import CIcon from '@coreui/icons-react'
 
 import avatar8 from './../../assets/images/avatars/8.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const AppHeaderDropdown = () => {
+  const navigate = useNavigate()
+  let user = JSON.parse(localStorage.getItem('user-info'))
+  console.warn(user);
+
+  const Logout = () => {
+    localStorage.clear()
+    navigate('/login')
+  }
+
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -96,9 +105,9 @@ const AppHeaderDropdown = () => {
           </CBadge>
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
+        <CDropdownItem href="#" onClick={Logout} >
           <CIcon icon={cilLockLocked} className="me-2" />
-          Lock Account
+          Logout
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
@@ -132,7 +141,7 @@ const AppHeaderDropdownForm = () => {
 
           <Link style={{ textDecoration: 'none' }} to="/forms/staff-form">
             <CIcon icon={cilTask} className="me-2" />
-            Staff
+            Recruitment
           </Link>
         </CDropdownItem>
         <CDropdownItem href="#">

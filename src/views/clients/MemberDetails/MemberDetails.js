@@ -44,7 +44,6 @@ const MemberDetails = () => {
                                 { id: '6', heading: 'Refers' },
                                 { id: '7', heading: 'Shop' },
                                 { id: '8', heading: 'Calls' },
-                                { id: '9', heading: 'Trials' },
                                 { id: '10', heading: 'Fitness' },
                                 { id: '11', heading: 'Docs' },
                                 { id: '12', heading: 'T&C' },

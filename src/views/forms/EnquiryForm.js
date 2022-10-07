@@ -13,9 +13,29 @@ import {
     CInputGroupText,
     CRow,
 } from "@coreui/react";
-import React from "react";
+import React, { useState } from "react";
 
 const EnquiryForm = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [mobile, setMobile] = useState("");
+    function saveData() {
+        let data = { name, email, mobile }
+        // console.warn(data);
+        fetch("http://localhost:5000/enquiryForm/create", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((resp) => {
+            // console.warn("resp",resp);;
+            resp.json().then((result) => {
+                console.warn("result", result)
+            })
+        })
+    }
     return (
         <CCard className="mb-3 border-success">
             <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>

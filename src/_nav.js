@@ -143,12 +143,12 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Follow ups Scheduling',
+        name: 'Prospects',
         to: '/leads/followups-scheduling',
       },
       {
         component: CNavItem,
-        name: 'Follow ups Call Report',
+        name: 'Calls Report',
         to: '/leads/followups-call-report',
       },
       {

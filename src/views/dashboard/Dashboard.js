@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   CAvatar,
@@ -9,23 +9,17 @@ import {
   CCardFooter,
   CCardHeader,
   CCol,
-  CFormInput,
   CFormSelect,
   CInputGroup,
-  CNav,
-  CNavItem,
-  CNavLink,
   CProgress,
   CProgressBar,
   CRow,
-  CTabContent,
   CTable,
   CTableBody,
   CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
-  CTabPane,
 } from '@coreui/react'
 import { CChartBar, CChartLine, CChartPie } from '@coreui/react-chartjs'
 import { getStyle, hexToRgba } from '@coreui/utils'
@@ -62,8 +56,17 @@ import avatar6 from 'src/assets/images/avatars/6.jpg'
 
 import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
+import { useNavigate } from 'react-router-dom'
 
 const Dashboard = () => {
+  const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('user-info'))
+  useEffect(() => {
+    if (user == null) {
+      navigate('/login')
+    }
+  }, [])
+
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
   const [active, setActive] = useState('Today')
 

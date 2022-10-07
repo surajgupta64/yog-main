@@ -35,7 +35,7 @@ const StockReport = React.lazy(() => import('./views/Inventory/StockReport'))
 
 // Hr
 const AllEmpProfile = React.lazy(() => import('./views/hr/AllEmpProfile'))
-const CreateEmployee = React.lazy(() => import('./views/hr/employee/RegisterEmployee'))
+const CreateEmployee = React.lazy(() => import('./views/hr/EmpRecruitment'))
 
 //Master
 const CenterSetup = React.lazy(() => import('./views/Master/centerSetup/CenterSetup'))
@@ -80,7 +80,7 @@ const Dropdowns = React.lazy(() =>
 //Forms
 const EnquiryForm = React.lazy(() => import('./views/forms/EnquiryForm'))
 const MemberForm = React.lazy(() => import('./views/forms/MemberForm'))
-const StaffForm = React.lazy(() => import('./views/forms/StaffForm'))
+const StaffForm = React.lazy(() => import('./views/forms/Recruitment'))
 const LiveClass = React.lazy(() => import('./views/forms/LiveClass'))
 const OfflineClass = React.lazy(() => import('./views/forms/OfflineClass'))
 const TTC = React.lazy(() => import('./views/forms/TTC'))
@@ -159,8 +159,8 @@ const routes = [
   { path: '/leads/all-enquires', name: 'All Enquires', element: AllEnquires },
   { path: '/leads/enquires-appointment', name: 'Enquiry Appointment', element: EnquireAppoitment },
   { path: '/leads/trial-updated', name: 'Trial Updated', element: TrialUpdated },
-  { path: '/leads/followups-scheduling', name: 'Follow ups Scheduling', element: FollowupScheduling },
-  { path: '/leads/followups-call-report', name: 'Follow ups Call Report', element: FollowupCallReport },
+  { path: '/leads/followups-scheduling', name: 'Prospect', element: FollowupScheduling },
+  { path: '/leads/followups-call-report', name: 'Calls Report', element: FollowupCallReport },
   { path: '/leads/cold-enquires', name: 'Cold Enquires', element: ColdEnquires },
 
   //Clients

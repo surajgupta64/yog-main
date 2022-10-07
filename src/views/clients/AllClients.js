@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     CButton,
     CButtonGroup,
@@ -19,6 +19,7 @@ import DataTable from 'src/components/DataTable'
 
 
 const AllClients = () => {
+    const [apiData, setApiData] = useState()
 
 
     const header = [

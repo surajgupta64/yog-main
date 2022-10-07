@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   CButton,
   CCard,
@@ -7,14 +7,41 @@ import {
   CContainer,
   CForm,
   CFormInput,
+  CFormSelect,
   CInputGroup,
   CInputGroupText,
   CRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [repeatPassword, setRepeatPassword] = useState("")
+  const [dashboardAccess, setDashboardAccess] = useState("")
+  const navigate = useNavigate()
+
+  function saveData() {
+    let data = { username, email, password, dashboardAccess }
+    // console.warn(data);
+    fetch("https://yoga-power-appv0.herokuapp.com/signup/create", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    }).then((resp) => {
+      // console.warn("resp",resp);;
+      resp.json().then(() => {
+        navigate('/login')
+      })
+    })
+  }
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -32,11 +59,15 @@ const Register = () => {
                     <CFormInput
                       placeholder="Username"
                       autoComplete="username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
-                    <CFormInput placeholder="Email" autoComplete="email" />
+                    <CFormInput placeholder="Email" autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
@@ -45,6 +76,8 @@ const Register = () => {
                     <CFormInput
                       type="password"
                       placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       autoComplete="new-password"
                     />
                   </CInputGroup>
@@ -54,12 +87,31 @@ const Register = () => {
                     </CInputGroupText>
                     <CFormInput
                       type="password"
+                      value={repeatPassword}
+                      onChange={(e) => setRepeatPassword(e.target.value)}
                       placeholder="Repeat password"
                       autoComplete="new-password"
+
                     />
                   </CInputGroup>
+                  <CInputGroup className="mb-4">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormSelect
+                      placeholder="Select"
+                      autoComplete="new-password"
+                      value={dashboardAccess}
+                      onChange={(e) => setDashboardAccess(e.target.value)}
+                    >
+                      <option>Admin</option>
+                      <option>Partner</option>
+                      <option>Trainer</option>
+                      <option>Employee</option>
+                    </CFormSelect>
+                  </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="success">Create Account</CButton>
+                    <CButton color="success" onClick={saveData}>Create Account</CButton>
                   </div>
                 </CForm>
               </CCardBody>

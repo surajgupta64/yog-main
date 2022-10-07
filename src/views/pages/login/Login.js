@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -17,11 +17,44 @@ import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
 const Login = () => {
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    let user = JSON.parse(localStorage.getItem('user-info'))
+
+    if (localStorage.getItem('user-info')) {
+      if (user.username == undefined || user.username == null) {
+        localStorage.clear
+      }
+    }
+  }, [])
+
+  async function login() {
+    console.log(email, password);
+    let item = { email, password }
+
+    let result = await fetch("https://yoga-power-appv0.herokuapp.com/login", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(item)
+    })
+    result = await result.json()
+    localStorage.setItem('user-info', JSON.stringify(result))
+    navigate('/')
+
+  }
+
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
         <CRow className="justify-content-center">
-          <CCol md={8}>
+          <CCol lg={5} md={8}>
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
@@ -37,6 +70,8 @@ const Login = () => {
                       <CFormInput
                         placeholder="Username"
                         autoComplete="username"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
@@ -47,49 +82,23 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <Link to="/dashboard">
-                          <CButton color="primary" className="px-4" active
-                            tabIndex={-1}>
-                            Login
-                          </CButton>
-                        </Link>
+                        <CButton color="primary" onClick={login} className="px-4" active>
+                          Login
+                        </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
-                        <CButton color="link" className="px-0" >
+                        <CButton color="link" className="px-0 float-end" >
                           Forgot password?
                         </CButton>
                       </CCol>
                     </CRow>
                   </CForm>
-                </CCardBody>
-              </CCard>
-              <CCard
-                className="text-white bg-primary py-5"
-                style={{ width: '44%' }}
-              >
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                    <Link to="/register">
-                      <CButton
-                        color="primary"
-                        className="mt-3"
-                        active
-                        tabIndex={-1}
-                      >
-                        Register Now!
-                      </CButton>
-                    </Link>
-                  </div>
                 </CCardBody>
               </CCard>
             </CCardGroup>
