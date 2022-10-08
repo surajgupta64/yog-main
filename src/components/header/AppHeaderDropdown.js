@@ -34,9 +34,6 @@ import { Link, useNavigate } from 'react-router-dom'
 
 const AppHeaderDropdown = () => {
   const navigate = useNavigate()
-  let user = JSON.parse(localStorage.getItem('user-info'))
-  console.warn(user);
-
   const Logout = () => {
     localStorage.clear()
     navigate('/login')

@@ -5,6 +5,7 @@ import {
   CCard,
   CCardBody,
   CCardGroup,
+  CCardText,
   CCol,
   CContainer,
   CForm,
@@ -20,11 +21,12 @@ const Login = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem('user-info'))
-
+    console.log(user);
     if (localStorage.getItem('user-info')) {
       if (user.user.username == undefined || user.user.username == null) {
         alert('Incorrect Details')
@@ -35,6 +37,7 @@ const Login = () => {
 
   async function login() {
     if (email != '' || password != '') {
+
       console.log(email, password);
       let item = { email, password }
 
@@ -48,7 +51,9 @@ const Login = () => {
       })
       result = await result.json()
       localStorage.setItem('user-info', JSON.stringify(result))
-      navigate('/')
+      let user = JSON.parse(localStorage.getItem('user-info'))
+      console.log(user);
+
     } else {
       alert('Please Enter Details')
     }
@@ -60,6 +65,13 @@ const Login = () => {
         <CRow className="justify-content-center">
           <CCol lg={5} md={8}>
             <CCardGroup>
+              {error !== null && (
+                <CCard color='danger'>
+                  <CCardBody>
+                    <CCardText>{error}</CCardText>
+                  </CCardBody>
+                </CCard>
+              )}
               <CCard className="p-4">
                 <CCardBody>
                   <CForm onSubmit={login}>
