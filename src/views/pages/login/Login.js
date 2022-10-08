@@ -53,7 +53,7 @@ const Login = () => {
       localStorage.setItem('user-info', JSON.stringify(result))
       let user = JSON.parse(localStorage.getItem('user-info'))
       console.log(user);
-
+      navigate('/')
     } else {
       alert('Please Enter Details')
     }
