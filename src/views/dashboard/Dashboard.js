@@ -66,6 +66,7 @@ const Dashboard = () => {
       navigate('/login')
     }
     if (user.user.username == null || user.user.username == undefined) {
+      alert('Incorrect Details')
       localStorage.clear()
     }
   }, [])

@@ -27,6 +27,7 @@ const Login = () => {
 
     if (localStorage.getItem('user-info')) {
       if (user.user.username == undefined || user.user.username == null) {
+        alert('Incorrect Details')
         localStorage.clear()
       }
     }
