@@ -15,12 +15,51 @@ import {
     CRow,
 } from "@coreui/react";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { FaBeer } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import DataTable from "src/components/DataTable";
 
 const PackageMaster = () => {
     const [action, setAction] = useState(false)
+    const [Package_Name, setPackageName] = useState("");
+    const [duration, setDuration] = useState("");
+    const [fees, setFees] = useState("");
+    const [status, setStatus] = useState(false);
+
+
+    const navigate = useNavigate()
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    console.log(user);
+    const username = user.user.username;
+    const token = user.token;
+    const [result, setResult] = useState();
+    useEffect(() => {
+        fetch('https://yoga-power-appv0.herokuapp.com/Package/all', {
+            method: "get",
+            headers: { "Authorization": `Bearer ${token}` }
+        }).then(res => res.json()).then(json => setResult(json));
+    }, []);
+
+    const savePackage = () => {
+        let data = { Package_Name, fees, duration, status }
+        // console.warn(data);
+        fetch("https://yoga-power-appv0.herokuapp.com/Package/create", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((resp) => {
+            // console.warn("resp",resp);;
+            resp.json().then(() => {
+                alert("successfully submitted")
+            })
+        })
+    }
 
     const header = [
 
@@ -100,6 +139,8 @@ const PackageMaster = () => {
                                         type="text"
                                         id="exampleFormControlInput1"
                                         label="Package Name"
+                                        value={Package_Name}
+                                        onChange={(e) => setPackageName(e.target.value)}
                                         placeholder="Enter Package Name"
                                     />
                                     <CInputGroup>
@@ -109,7 +150,9 @@ const PackageMaster = () => {
                                         >
                                             Duration
                                         </CInputGroupText>
-                                        <CFormSelect id="inputGroupSelect01">
+                                        <CFormSelect id="inputGroupSelect01"
+                                            value={duration}
+                                            onChange={(e) => setDuration(e.target.value)}>
                                             <option>Weekly Trail</option>
                                             <option value="1">Monthly</option>
                                             <option value="2">Quarterly</option>
@@ -117,7 +160,7 @@ const PackageMaster = () => {
                                             <option value="3">Year</option>
                                         </CFormSelect>
                                     </CInputGroup>
-                                    <CButton className="mt-2" onClick={() => setAction(false)}>Save</CButton>
+                                    <CButton className="mt-2" onClick={savePackage}>Save</CButton>
                                 </CCol>
                                 <CCol>
                                     <CFormInput
@@ -125,9 +168,13 @@ const PackageMaster = () => {
                                         type="number"
                                         id="exampleFormControlInput1"
                                         label="Fees"
+                                        value={fees}
+                                        onChange={(e) => setFees(e.target.value)}
                                         placeholder="Enter Fees"
                                     />
-                                    <CFormSwitch size="xl" label="Status" style={{ defaultChecked: 'false' }} />
+                                    <CFormSwitch size="xl" label="Status" style={{ defaultChecked: 'false' }}
+                                        value={status}
+                                        onChange={() => setStatus(!status)} />
                                 </CCol>
                             </CRow>
                         </div>

@@ -49,7 +49,7 @@ const Register = () => {
           <CCol md={9} lg={7} xl={6}>
             <CCard className="mx-4">
               <CCardBody className="p-4">
-                <CForm>
+                <CForm onSubmit={saveData}>
                   <h1>Register</h1>
                   <p className="text-medium-emphasis">Create your account</p>
                   <CInputGroup className="mb-3">
@@ -111,7 +111,7 @@ const Register = () => {
                     </CFormSelect>
                   </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="success" onClick={saveData}>Create Account</CButton>
+                    <CButton color="success" type='submit' >Create Account</CButton>
                   </div>
                 </CForm>
               </CCardBody>

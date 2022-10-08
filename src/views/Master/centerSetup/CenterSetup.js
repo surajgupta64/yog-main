@@ -32,12 +32,12 @@ const CenterSetup = () => {
                     >
                         <CCardBody >
                             <CRow>
-                                <CCol xs={1}>{item.icon}</CCol>
+                                <CCol lg={1} md={2}>{item.icon}</CCol>
                                 <CCol>
                                     <CCardTitle>{item.title}</CCardTitle>
                                     <CCardText>{item.subtitle}</CCardText>
                                 </CCol>
-                                <CCol xs={2}><Link to={item.link}><CButton className='mt-2' style={{ backgroundColor: 'white', color: 'black' }} tabIndex={-1}><FaPowerOff size='15px' /> Start</CButton></Link></CCol>
+                                <CCol lg={2} md={3}><Link to={item.link}><CButton className='mt-2' style={{ backgroundColor: 'white', color: 'black' }} tabIndex={-1}><FaPowerOff size='15px' /> Start</CButton></Link></CCol>
                             </CRow>
                         </CCardBody>
                     </CCard>

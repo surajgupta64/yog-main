@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaBeer } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import DataTable from "src/components/DataTable";
 
@@ -24,45 +25,77 @@ const ServiceMaster = () => {
     const [action, setAction] = useState(false)
     const [action1, setAction1] = useState(false)
     const [ServiceName, setServiceName] = useState("");
+    const [sub_Service_Name, setSub_Service_Name] = useState("");
+    const [selected_service, setSelected_service] = useState("");
     const [duration, setDuration] = useState("");
     const [fees, setFees] = useState("");
     const [status, setStatus] = useState(false);
-    const [myData, setMyData] = useState();
-    const [isError, setIsError] = useState("");
 
-    function saveData() {
+
+    const navigate = useNavigate()
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    console.log(user);
+    const username = user.user.username;
+    const token = user.token;
+    const [result, setResult] = useState();
+    useEffect(() => {
+        fetch('https://yoga-power-appv0.herokuapp.com/service/all', {
+            method: "get",
+            headers: { "Authorization": `Bearer ${token}` }
+        }).then(res => res.json()).then(json => setResult(json));
+    }, []);
+    console.log(result);
+    const saveService = () => {
         let data = { ServiceName, fees, duration, status }
         // console.warn(data);
-        fetch("http://localhost:5000/service/create", {
+        fetch("https://yoga-power-appv0.herokuapp.com/service/create", {
             method: "POST",
             headers: {
+                "Authorization": `Bearer ${token}`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         }).then((resp) => {
             // console.warn("resp",resp);;
-            resp.json().then((result) => {
-                console.warn("result", result)
+            resp.json().then(() => {
+                alert("successfully submitted")
+                setFees("")
+                setDuration('')
+                setStatus(false)
             })
         })
     }
 
-    // using Async Await
-    const getMyPostData = async () => {
-        try {
-            const res = await axios.get("https://yoga-power-appv0.herokuapp.com/service/all");
-            setMyData(res.data);
-        } catch (error) {
-            setIsError(error.message);
-        }
-    };
 
-    // NOTE:  calling the function
-    useEffect(() => {
-        getMyPostData();
-    }, []);
-    console.log(myData);
+    const saveSubservice = () => {
+        let data = { sub_Service_Name, selected_service, fees, duration, status }
+        // console.warn(data);
+        fetch("https://yoga-power-appv0.herokuapp.com/subservice/create", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((resp) => {
+            // console.warn("resp",resp);;
+            resp.json().then(() => {
+                alert("successfully submitted")
+            })
+        })
+    }
+
+    const serviceClose1 = () => {
+        setAction(!action)
+        setAction1(false)
+    }
+    const subserviceClose = () => {
+        setAction1(!action1)
+        setAction(false)
+    }
+
     const header = [
 
         /* 
@@ -127,8 +160,8 @@ const ServiceMaster = () => {
                         <div>
                             <CRow>
                                 <CCol>
-                                    <CButton className="ms-1 mt-2" onClick={() => setAction(!action)}>{action ? 'close' : 'Add New Service'}</CButton>
-                                    <CButton className="ms-1 mt-2" onClick={() => setAction1(!action1)}>{action1 ? 'close' : 'Add Sub Service'}</CButton>
+                                    <CButton className="ms-1 mt-2" onClick={serviceClose1}>{action ? 'close' : 'Add New Service'}</CButton>
+                                    <CButton className="ms-1 mt-2" onClick={subserviceClose}>{action1 ? 'close' : 'Add Sub Service'}</CButton>
                                 </CCol>
                             </CRow>
                         </div>
@@ -165,7 +198,7 @@ const ServiceMaster = () => {
 
                                         </CFormSelect>
                                     </CInputGroup>
-                                    <CButton className="mt-2" onClick={saveData}>Save</CButton>
+                                    <CButton className="mt-2" onClick={saveService}>Save</CButton>
                                 </CCol>
                                 <CCol>
                                     <CFormInput
@@ -191,6 +224,8 @@ const ServiceMaster = () => {
                                         type="text"
                                         id="exampleFormControlInput1"
                                         label="Sub Service Name"
+                                        value={sub_Service_Name}
+                                        onChange={(e) => setSub_Service_Name(e.target.value)}
                                         placeholder="Enter Sub Service Name"
                                     />
                                     <CInputGroup>
@@ -200,7 +235,9 @@ const ServiceMaster = () => {
                                         >
                                             Duration
                                         </CInputGroupText>
-                                        <CFormSelect id="inputGroupSelect01">
+                                        <CFormSelect id="inputGroupSelect01"
+                                            value={duration}
+                                            onChange={(e) => setDuration(e.target.value)}>
                                             <option>Weekly</option>
                                             <option value="1">Monthly</option>
                                             <option value="2">Quarterly</option>
@@ -215,12 +252,13 @@ const ServiceMaster = () => {
                                         className="mb-1"
                                         aria-label="Select Service"
                                         label="Select Service"
-                                        options={[
-                                            "Select Service",
-                                            { label: "Yoga", value: "1" },
-                                            { label: "TTC", value: "2" },
-                                        ]}
-                                    />
+                                        value={selected_service}
+                                        onChange={(e) => setSelected_service(e.target.value)}>
+
+                                        {result.map((item, index) => (
+                                            <option key={index}>{item.ServiceName}</option>
+                                        ))}
+                                    </CFormSelect>
                                     <CRow>
                                         <CCol>
 
@@ -236,6 +274,8 @@ const ServiceMaster = () => {
                                                 <CFormInput
                                                     className="mb-1"
                                                     type="number"
+                                                    value={fees}
+                                                    onChange={(e) => setFees(e.target.value)}
                                                     id="exampleFormControlInput1"
                                                     placeholder="Enter Fees"
                                                 />
@@ -243,7 +283,7 @@ const ServiceMaster = () => {
 
                                         </CCol>
                                         <CCol>
-                                            <CFormSwitch size="xl" label="Status" style={{ defaultChecked: 'false' }} />
+                                            <CFormSwitch size="xl" label="Status" value={status} onClick={() => setStatus(!status)} style={{ defaultChecked: 'false' }} />
                                         </CCol>
                                     </CRow>
                                 </CCol>

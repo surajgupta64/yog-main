@@ -14,35 +14,85 @@ import {
     CRow,
 } from "@coreui/react";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EnquiryForm = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [mobile, setMobile] = useState("");
-    function saveData() {
-        let data = { name, email, mobile }
+    const [Fullname, setFullName] = useState("");
+    const [Emailaddress, setEmailAddress] = useState("");
+    const [CountryCode, setCountryCode] = useState("");
+    const [ContactNumber, setContactNumber] = useState("");
+    const [Gander, setGander] = useState("");
+    const [DateofBirth, setDateofBirth] = useState("");
+    const [address, setAddress] = useState("");
+    const [Area, setArea] = useState("");
+    const [city, setCity] = useState("");
+    const [Profession, setProfession] = useState("");
+
+
+    const [StaffName, setStaffName] = useState("");
+    const [CenterName, setCenterName] = useState("");
+    const [CallStatus, setCallStatus] = useState("");
+    const [Message, setMessage] = useState("");
+
+
+    const [person_Name, setperson_Name] = useState("");
+    const [Relation, setRelation] = useState("");
+    const [CountryCode2, setCountryCode2] = useState("");
+    const [ContactNumber2, setContactNumber2] = useState("");
+
+
+    const [EnquiryDate, setEnquiryDate] = useState("");
+    const [ServiceName, setServiceName] = useState("");
+    const [Customertype, setCustomertype] = useState("");
+    const [enquirytype, setEnquirytype] = useState("");
+    const [appointmentDate, setappointmentDate] = useState("");
+    const [appointmentTime, setappointmentTime] = useState("");
+    const [appointmentfor, setappointmentfor] = useState("");
+
+    const navigate = useNavigate()
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    console.log(user);
+    const username = user.user.username;
+    const token = user.token;
+    const [result, setResult] = useState();
+    useEffect(() => {
+        fetch('https://yoga-power-appv0.herokuapp.com/enquiryForm/all', {
+            method: "get",
+            headers: { "Authorization": `Bearer ${token}` }
+        }).then(res => res.json()).then(json => setResult(json));
+    }, []);
+
+    const saveEnquiry = () => {
+        let PersonalDetails = { Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession }
+        let Scheduleenquiryfollowup = { StaffName, CenterName, CallStatus, Message }
+        let EmergencyContact = { person_Name, Relation, CountryCode2, ContactNumber2 }
+        let LeadInformation = { EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor }
+        let data = { PersonalDetails, Scheduleenquiryfollowup, EmergencyContact, LeadInformation }
         // console.warn(data);
-        fetch("http://localhost:5000/enquiryForm/create", {
+        fetch("https://yoga-power-appv0.herokuapp.com/enquiryForm/create", {
             method: "POST",
             headers: {
+                "Authorization": `Bearer ${token}`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         }).then((resp) => {
             // console.warn("resp",resp);;
-            resp.json().then((result) => {
-                console.warn("result", result)
+            resp.json().then(() => {
+                alert("successfully submitted")
             })
         })
     }
+
     return (
         <CCard className="mb-3 border-success">
             <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
                 <CCardTitle>Enquiry Form</CCardTitle>
             </CCardHeader>
             <CCardBody>
-                <CForm>
+                <CForm onSubmit={saveEnquiry}>
                     <CRow>
                         <CCol lg={6} sm={12}>
                             <CCardTitle>Personal Details</CCardTitle>
@@ -53,6 +103,8 @@ const EnquiryForm = () => {
                                         type="text"
                                         id="exampleFormControlInput1"
                                         label="Full name"
+                                        value={Fullname}
+                                        onChange={(e) => setFullName(e.target.value)}
                                         placeholder="Enter Name"
                                     />
                                 </CCol>
@@ -62,6 +114,8 @@ const EnquiryForm = () => {
                                         type="email"
                                         id="exampleFormControlInput1"
                                         label="Email address"
+                                        value={Emailaddress}
+                                        onChange={(e) => setEmailAddress(e.target.value)}
                                         placeholder="name@example.com"
                                         text="Must be 8-20 characters long."
                                         aria-describedby="exampleFormControlInputHelpInline"
@@ -74,6 +128,8 @@ const EnquiryForm = () => {
                                         className="mb-1"
                                         aria-label="Select Currency"
                                         label="Country Code"
+                                        value={CountryCode}
+                                        onChange={(e) => setCountryCode(e.target.value)}
                                         options={[
                                             "Select Country Code",
                                             { label: "One", value: "1" },
@@ -86,6 +142,8 @@ const EnquiryForm = () => {
                                     <CFormInput
                                         className="mb-1"
                                         type="number"
+                                        value={ContactNumber}
+                                        onChange={(e) => setContactNumber(e.target.value)}
                                         id="exampleFormControlInput1"
                                         label="Contact Number"
                                         placeholder="Enter Number"
@@ -97,6 +155,8 @@ const EnquiryForm = () => {
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Currency"
+                                        value={Gander}
+                                        onChange={(e) => setGander(e.target.value)}
                                         label="Gander"
                                         options={[
                                             "Select Gender",
@@ -109,6 +169,8 @@ const EnquiryForm = () => {
                                     <CFormInput
                                         className="mb-1"
                                         type="date"
+                                        value={DateofBirth}
+                                        onChange={(e) => setDateofBirth(e.target.value)}
                                         id="exampleFormControlInput1"
                                         label="Date of Birth"
                                         placeholder="Enter Date"
@@ -120,6 +182,8 @@ const EnquiryForm = () => {
                                     <CFormInput
                                         className="mb-1"
                                         type="text"
+                                        value={Area}
+                                        onChange={(e) => setArea(e.target.value)}
                                         id="exampleFormControlInput1"
                                         label="Area"
                                         placeholder="Enter Locality"
@@ -129,6 +193,8 @@ const EnquiryForm = () => {
                                     <CFormInput
                                         className="mb-1"
                                         type="text"
+                                        value={city}
+                                        onChange={(e) => setCity(e.target.value)}
                                         id="exampleFormControlInput1"
                                         label="City"
                                         placeholder="Enter City"
@@ -139,6 +205,8 @@ const EnquiryForm = () => {
                             <CFormInput
                                 className="mb-1"
                                 type="text"
+                                value={Profession}
+                                onChange={(e) => setProfession(e.target.value)}
                                 id="exampleFormControlInput1"
                                 label="Profession"
                                 placeholder="Enter Profession"
@@ -151,6 +219,8 @@ const EnquiryForm = () => {
                                         className="mb-1"
                                         aria-label="Select Staff Name"
                                         label="Staff Name"
+                                        value={StaffName}
+                                        onChange={(e) => setStaffName(e.target.value)}
                                         options={[
                                             "Select Staff Name",
                                             { label: "prabha", value: "1" },
@@ -163,6 +233,8 @@ const EnquiryForm = () => {
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Staff Name"
+                                        value={CenterName}
+                                        onChange={(e) => setCenterName(e.target.value)}
                                         label="Center Name"
                                         options={[
                                             "Select Center Name",
@@ -176,6 +248,8 @@ const EnquiryForm = () => {
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Call Status"
+                                        value={CallStatus}
+                                        onChange={(e) => setCallStatus(e.target.value)}
                                         label="Call Status"
                                         options={[
                                             "Select Call Status",
@@ -189,6 +263,8 @@ const EnquiryForm = () => {
                             <CFormTextarea
                                 id="exampleFormControlTextarea1"
                                 label="Message"
+                                value={Message}
+                                onChange={(e) => setMessage(e.target.value)}
                                 rows="2"
                                 text="Must be 8-20 words long."
                             ></CFormTextarea>
@@ -203,6 +279,8 @@ const EnquiryForm = () => {
                                         type="text"
                                         id="exampleFormControlInput1"
                                         label="Name"
+                                        value={person_Name}
+                                        onChange={(e) => setperson_Name(e.target.value)}
                                         placeholder="Enter Name"
                                     />
                                 </CCol>
@@ -212,6 +290,8 @@ const EnquiryForm = () => {
                                         type="text"
                                         id="exampleFormControlInput1"
                                         label="Relationship"
+                                        value={Relation}
+                                        onChange={(e) => setRelation(e.target.value)}
                                         placeholder="Enter Relationship"
                                     />
                                 </CCol>
@@ -220,6 +300,8 @@ const EnquiryForm = () => {
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Working Days"
+                                        value={CountryCode2}
+                                        onChange={(e) => setCountryCode2(e.target.value)}
                                         label="Country Code"
                                         options={[
                                             "Select Country Code",
@@ -234,6 +316,8 @@ const EnquiryForm = () => {
                                     <CFormInput
                                         className="mb-1"
                                         type="number"
+                                        value={ContactNumber2}
+                                        onChange={(e) => setContactNumber2(e.target.value)}
                                         id="exampleFormControlInput1"
                                         label="Contact Number"
                                         placeholder="Enter Number"
@@ -247,6 +331,8 @@ const EnquiryForm = () => {
                                         className="mb-1"
                                         type="date"
                                         id="exampleFormControlInput1"
+                                        value={EnquiryDate}
+                                        onChange={(e) => setEnquiryDate(e.target.value)}
                                         label="Enquiry Date"
                                         placeholder="Enter date"
                                     />
@@ -256,6 +342,8 @@ const EnquiryForm = () => {
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Service Name"
+                                        value={ServiceName}
+                                        onChange={(e) => setServiceName(e.target.value)}
                                         label="Service Name"
                                         options={[
                                             "Select Service Name",
@@ -270,6 +358,8 @@ const EnquiryForm = () => {
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Customer type"
+                                        value={Customertype}
+                                        onChange={(e) => setCustomertype(e.target.value)}
                                         label="Customer type"
                                         options={[
                                             "Select Customer type",
@@ -283,6 +373,8 @@ const EnquiryForm = () => {
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Enquiry Type"
+                                        value={enquirytype}
+                                        onChange={(e) => setEnquirytype(e.target.value)}
                                         label="Enquiry Type"
                                         options={[
                                             "Select Enquiry Type",
@@ -297,18 +389,24 @@ const EnquiryForm = () => {
                                     <CFormInput
                                         className="mb-1"
                                         type="date"
+                                        value={appointmentDate}
+                                        onChange={(e) => setappointmentDate(e.target.value)}
                                         id="exampleFormControlInput1"
-                                        placeholder="Enter Number"
+
                                     />
                                     <CFormInput
                                         className="mb-1"
                                         type="time"
                                         id="exampleFormControlInput1"
-                                        placeholder="Enter Number"
+                                        value={appointmentTime}
+                                        onChange={(e) => setappointmentTime(e.target.value)}
+
                                     />
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select"
+                                        value={appointmentfor}
+                                        onChange={(e) => setappointmentfor(e.target.value)}
                                         options={[
                                             "Select",
                                             { label: "Appointment", value: "1" },
@@ -320,7 +418,7 @@ const EnquiryForm = () => {
                             </CRow>
                         </CCol>
                     </CRow>
-                    <CButton className="mt-2">Save</CButton>
+                    <CButton className="mt-2" type="submit">Save</CButton>
                 </CForm>
             </CCardBody>
         </CCard>

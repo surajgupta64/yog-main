@@ -58,7 +58,7 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm onSubmit={login}>
                     <h1>Login</h1>
                     <p className="text-medium-emphasis">
                       Sign In to your account
@@ -68,8 +68,9 @@ const Login = () => {
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
                       <CFormInput
-                        placeholder="Username"
-                        autoComplete="username"
+                        type='email'
+                        placeholder="Email Address"
+                        autoComplete="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -88,7 +89,7 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" onClick={login} className="px-4" active>
+                        <CButton color="primary" type='submit' className="px-4" active>
                           Login
                         </CButton>
                       </CCol>

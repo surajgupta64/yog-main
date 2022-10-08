@@ -6,14 +6,50 @@ import {
     CCardTitle,
     CCol,
     CForm,
+    CFormInput,
     CImage,
+    CInputGroup,
     CRow,
 } from "@coreui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 
 const LogoSetup = () => {
+    const [logoImage, setImage] = useState()
+    const navigate = useNavigate()
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    console.log(user);
+    const token = user.token;
+    const [result, setResult] = useState();
+    useEffect(() => {
+        fetch('https://yoga-power-appv0.herokuapp.com/brandlogoupdate/all', {
+            method: "get",
+            headers: { "Authorization": `Bearer ${token}` }
+        }).then(res => res.json()).then(json => setResult(json));
+    }, []);
+
+    const saveLogo = () => {
+        let data = { logoImage }
+        // console.warn(data);
+        fetch("https://yoga-power-appv0.herokuapp.com/brandlogoupdate/create", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((resp) => {
+            // console.warn("resp",resp);;
+            resp.json().then(() => {
+                alert("successfully submitted")
+                navigate('/master/center-setup')
+            })
+        })
+    }
+
     return (
         <CCard className="mb-3 border-success">
             <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
@@ -23,20 +59,26 @@ const LogoSetup = () => {
                 <CForm>
                     <CCardTitle>Upload and Update logo </CCardTitle>
                     <CRow>
-                        <CCol xs={2} className='mt-2 mb-1' >
+                        <CCol lg={2} md={3} className='mt-2 mb-1' >
                             <CImage className="mb-1" style={{ borderRadius: "50px" }} width={'200px'} src={ProfileIcon} />
                         </CCol>
-                        <CCol xs={8} className='mt-5'>
+                        <CCol lg={8} md={8} className='mt-5'>
                             <CRow>
-                                <CButton className="me-3 ms-3" style={{ margin: '5px', width: '200px' }}>Upload Image</CButton>
+                                <CInputGroup className="mb-4">
+                                    <CFormInput
+                                        type="file"
+                                        value={logoImage}
+                                        onChange={(e) => setImage(e.target.value)}
+                                        autoComplete="image"
+                                    />
+                                </CInputGroup>
                             </CRow>
-                            <CRow>
-                                <CButton className="me-3 ms-3" style={{ margin: '5px', width: '200px' }}>Capture Image</CButton>
-                            </CRow>
+
+                            <CButton className="ms-1 mt-2" onClick={saveLogo}>Save</CButton>
+                            <CButton className="mt-2 ms-2" onClick={() => navigate('/master/center-setup')} >Cancel</CButton>
+
                         </CCol>
                     </CRow>
-                    <CButton className="ms-4 mt-2">Save</CButton>
-                    <CButton className="mt-2 ms-2">Cancel</CButton>
                 </CForm>
             </CCardBody>
         </CCard>

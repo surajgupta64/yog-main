@@ -10,30 +10,53 @@ import {
     CFormInput,
     CFormSelect,
     CFormSwitch,
-    CInputGroup,
-    CInputGroupText,
     CRow,
 } from "@coreui/react";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaBeer } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 import DataTable from "src/components/DataTable";
 
 const BatchMaster = () => {
     const [action, setAction] = useState(false)
-    const [data, setData] = useState(null)
+    const [service_name, setServiceName] = useState('')
+    const [service_variation, setService_variation] = useState('')
+    const [Batch_Duration, setBatch_Duration] = useState('')
+    const [batch_timing, setBatch_timing] = useState('')
+    const [status, setStatus] = useState('')
 
+    const navigate = useNavigate()
+    let user = JSON.parse(localStorage.getItem('user-info'))
+    console.log(user);
+    const username = user.user.username;
+    const token = user.token;
+    const [result, setResult] = useState();
     useEffect(() => {
-        axios.get('http://localhost:5000/Batch/all')
-            .then((response) => {
-                setData(response.data),
-                    console.log(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+        fetch('https://yoga-power-appv0.herokuapp.com/Batch/all', {
+            method: "get",
+            headers: { "Authorization": `Bearer ${token}` }
+        }).then(res => res.json()).then(json => setResult(json));
     }, []);
+
+    const saveBatch = () => {
+        let data = { service_name, service_variation, Batch_Duration, batch_timing, status }
+        // console.warn(data);
+        fetch("https://yoga-power-appv0.herokuapp.com/Batch/create", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((resp) => {
+            // console.warn("resp",resp);;
+            resp.json().then(() => {
+                alert("successfully submitted")
+            })
+        })
+    }
 
     const header = [
 
@@ -99,7 +122,7 @@ const BatchMaster = () => {
                         <div>
                             <CRow>
                                 <CCol>
-                                    <CButton className="ms-1 mt-2" onClick={() => setAction(!action)}>Add New Batch</CButton>
+                                    <CButton className="ms-1 mt-2" onClick={() => setAction(!action)}>{action ? 'close' : 'Add New Batch'}</CButton>
                                 </CCol>
                             </CRow>
                         </div>
@@ -112,6 +135,8 @@ const BatchMaster = () => {
                                         className="mb-1"
                                         aria-label="Select Service"
                                         label="Service Name"
+                                        value={service_name}
+                                        onChange={(e) => setServiceName(e.target.value)}
                                         options={[
                                             "Select Service",
                                             { label: "Yoga", value: "1" },
@@ -123,16 +148,20 @@ const BatchMaster = () => {
                                         type="time"
                                         id="exampleFormControlInput1"
                                         label="Batch Timing "
+                                        value={batch_timing}
+                                        onChange={(e) => setBatch_timing(e.target.value)}
                                         placeholder="Enter Batch Timing"
                                     />
-                                    <CFormSwitch size="xl" className="mt-2" label="Status" style={{ defaultChecked: 'false' }} />
-                                    <CButton className="mt-2" onClick={() => setAction(false)}>Save</CButton>
+                                    <CFormSwitch size="xl" className="mt-2" value={status} onChange={() => setStatus(!status)} label="Status" style={{ defaultChecked: 'false' }} />
+                                    <CButton className="mt-2" onClick={saveBatch}>Save</CButton>
                                 </CCol>
                                 <CCol>
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Service"
                                         label="Service Variation"
+                                        value={service_variation}
+                                        onChange={(e) => setService_variation(e.target.value)}
                                         options={[
                                             "None",
                                             { label: "Power yoga", value: "1" },
@@ -143,6 +172,8 @@ const BatchMaster = () => {
                                         className="mb-1"
                                         aria-label="Select Service"
                                         label="Batch Duration"
+                                        value={Batch_Duration}
+                                        onChange={(e) => setBatch_Duration(e.target.value)}
                                         options={[
                                             "Select Duration",
                                             { label: "30 min", value: "1" },
