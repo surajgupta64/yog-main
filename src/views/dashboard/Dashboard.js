@@ -65,6 +65,9 @@ const Dashboard = () => {
     if (user == null) {
       navigate('/login')
     }
+    if (user.user.username == null || user.user.username == undefined) {
+      localStorage.clear()
+    }
   }, [])
 
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)

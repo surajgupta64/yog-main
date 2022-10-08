@@ -26,28 +26,31 @@ const Login = () => {
     let user = JSON.parse(localStorage.getItem('user-info'))
 
     if (localStorage.getItem('user-info')) {
-      if (user.username == undefined || user.username == null) {
-        localStorage.clear
+      if (user.user.username == undefined || user.user.username == null) {
+        localStorage.clear()
       }
     }
   }, [])
 
   async function login() {
-    console.log(email, password);
-    let item = { email, password }
+    if (email != '' || password != '') {
+      console.log(email, password);
+      let item = { email, password }
 
-    let result = await fetch("https://yoga-power-appv0.herokuapp.com/login", {
-      method: "POST",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(item)
-    })
-    result = await result.json()
-    localStorage.setItem('user-info', JSON.stringify(result))
-    navigate('/')
-
+      let result = await fetch("https://yoga-power-appv0.herokuapp.com/login", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item)
+      })
+      result = await result.json()
+      localStorage.setItem('user-info', JSON.stringify(result))
+      navigate('/')
+    } else {
+      alert('Please Enter Details')
+    }
   }
 
   return (
