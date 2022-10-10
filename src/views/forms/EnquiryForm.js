@@ -381,6 +381,7 @@ const EnquiryForm = () => {
                                             { label: "E-mail", value: "E-mail" },
                                             { label: "Social Media", value: "Social Media" },
                                             { label: "Website", value: "Website" },
+                                            { label: "Call Enquiry", value: "Call Enquiry" },
                                         ]}
                                     />
                                 </CCol>
