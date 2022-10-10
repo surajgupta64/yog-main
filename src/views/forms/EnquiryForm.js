@@ -54,9 +54,10 @@ const EnquiryForm = () => {
 
     let user = JSON.parse(localStorage.getItem('user-info'))
     const token = user.token;
+    console.log(token);
     const [result, setResult] = useState([]);
     useEffect(() => {
-        axios.get('https://yoga-power-appv0.herokuapp.com/service/all', {
+        axios.get('http://localhost:5000/service/all', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -66,7 +67,7 @@ const EnquiryForm = () => {
                 setResult(res.data)
             })
             .catch((error) => {
-                console.error(error)
+                console.log(error)
             })
     }, []);
     console.log(result);
@@ -386,12 +387,16 @@ const EnquiryForm = () => {
                                         onChange={(e) => setServiceName(e.target.value)}
                                         label="Service Name"
 
-                                    >{result.map((item, index) => (
-                                        <option key={index} value={item.id}>{item.ServiceName}</option>
-                                    ))}
+                                    >
+                                        <option>Yoga</option>
+                                        <option>Zumba</option>
+                                        <option>PT</option>
+                                        <option>Therapeutic Yoga</option>
                                     </CFormSelect>
                                 </CCol>
-
+                                {/*{result.map((item, index) => (
+                                            <option key={index} value={item.id}>{item.ServiceName}</option>
+                                        ))} */}
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
                                         className="mb-1"

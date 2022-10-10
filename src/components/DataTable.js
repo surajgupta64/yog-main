@@ -1,13 +1,8 @@
 import React from 'react'
 
 import {
-    CAvatar,
     CButton,
-    CCard,
-    CCardBody,
-    CCardHeader,
     CFormSwitch,
-    CProgress,
     CTable,
     CTableBody,
     CTableDataCell,
@@ -29,8 +24,8 @@ const DataTable = ({ heading, data }) => {
                 </CTableRow>
             </CTableHead>
             <CTableBody>
-                {data.map((item) => (
-                    <TableRow item={item} column={heading} />
+                {data.map((item, index) => (
+                    <TableRow key={index} item={item} column={heading} />
                 ))}
             </CTableBody>
         </CTable>
@@ -42,7 +37,7 @@ const TableRow = ({ item, column }) => (
         {column.map((columnItem, index) => {
             return (
                 <CTableDataCell key={index}>
-                    {columnItem.value === 'key' && index + 1}
+                    {columnItem.value === 'sr' && index + 1}
                     {columnItem.value !== undefined && item[`${columnItem.value}`]}
                     {columnItem.iconBtn !== undefined && (
                         <CIcon
@@ -52,7 +47,8 @@ const TableRow = ({ item, column }) => (
                         />
                     )}
                     {columnItem.Btn === 'switch' && (
-                        <CFormSwitch size="xl" checked={item[`${columnItem.switchValue}`]} />
+                        <CFormSwitch size="xl" style={{ cursor: 'pointer' }} />
+                        //checked={item[`${columnItem.switchValue}`]} onChange={columnItem.change(item['_id'])}
                     )}
                     {columnItem.btn !== undefined && (
                         <CButton style={{ color: 'white', backgroundColor: '#0B5345' }}> {columnItem.btn}</CButton>

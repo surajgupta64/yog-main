@@ -13,10 +13,15 @@ import {
     CInputGroup,
     CInputGroupText,
     CRow,
+    CTable,
+    CTableHead,
+    CTableHeaderCell,
+    CTableRow,
 } from "@coreui/react";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaBeer } from "react-icons/fa";
+import { FaBeer, FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 import DataTable from "src/components/DataTable";
@@ -30,6 +35,8 @@ const ServiceMaster = () => {
     const [duration, setDuration] = useState("");
     const [fees, setFees] = useState("");
     const [status, setStatus] = useState(false);
+    const [updateStatus, setUpdateStatus] = useState(false);
+
 
 
     const navigate = useNavigate()
@@ -37,7 +44,7 @@ const ServiceMaster = () => {
     const token = user.token;
     const [result, setResult] = useState([]);
     useEffect(() => {
-        axios.get('https://yoga-power-appv0.herokuapp.com/service/all', {
+        axios.get('http://localhost:5000/service/all', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -94,12 +101,37 @@ const ServiceMaster = () => {
     }
 
     const updateSwitch = (e) => {
-        axios.post(url, {
-            //...data
-        }, {
+        let data = { updateStatus }
+        fetch(`https://yoga-power-appv0.herokuapp.com/service/update/${e}`, {
+            method: "PUT",
             headers: {
-                'Authorization': `Basic ${token}`
-            }
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((resp) => {
+            // console.warn("resp",resp);;
+            resp.json().then(() => {
+                alert("successfully submitted")
+            })
+        })
+    }
+    const updateUser = (e) => {
+        let item = { name, mobile, email }
+        console.warn("item", item)
+        fetch(`http://localhost:4000/todo/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        }).then((result) => {
+            result.json().then((resp) => {
+                console.warn(resp)
+                getUsers()
+            })
         })
     }
 
@@ -122,43 +154,13 @@ const ServiceMaster = () => {
         Note: please don't pass empty values or perameters
         */
 
-        { heading: 'Sr. No', value: 'key' },
+        { heading: 'Sr. No', value: 'sr' },
         { heading: 'Service Name', value: 'ServiceName' },
         { heading: 'Duration', value: 'duration' },
         { heading: 'Fees', value: 'fees' },
-        { heading: 'Status', Btn: 'switch', switchValue: 'status' },
-        { heading: 'Renew', btn: 'renew' },
-        { heading: 'Action', com: (<> <FaBeer size='20px' /></>) },
+        { heading: 'Status', Btn: 'switch', },//switchValue: 'status', change: updateSwitch
+        { heading: 'Action', com: (<> <FaEdit style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> </>) },
     ]
-
-    const Users = [
-        {
-            id: 1,
-            date_time: "25-08-2022 03:00 PM",
-            member_name: "Nayana Nagrecha",
-            mobile: "9136123476",
-            service_name: "Yoga",
-            variation_name: "3 Months",
-            expiry_date: "31-08-2022",
-            sales_rep: "Sejal Ganatra",
-            pt_trainer: "-",
-            trainer: "Prabha Yadav",
-            staff_name: "Sejal Ganatra",
-        },
-        {
-            id: 2,
-            date_time: "25-08-2022 03:00 PM",
-            member_name: "Nayana Nagrecha",
-            mobile: "9136123476",
-            service_name: "Yoga",
-            variation_name: "3 Months",
-            expiry_date: "31-08-2022",
-            sales_rep: "Sejal Ganatra",
-            pt_trainer: "-",
-            trainer: "Prabha Yadav",
-            staff_name: "Sejal Ganatra",
-        },
-    ];
 
     return (
         <CCard className="mb-3 border-success">
@@ -304,6 +306,18 @@ const ServiceMaster = () => {
                     }
                 </CForm>
                 <DataTable className='mt-2' heading={header} data={result} />
+
+
+                <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
+                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
+                        <CTableRow >
+                            <CTableHeaderCell> </CTableHeaderCell>
+                        </CTableRow>
+                    </CTableHead>
+                    <CTableBody>
+
+                    </CTableBody>
+                </CTable>
             </CCardBody>
         </CCard>
     );
