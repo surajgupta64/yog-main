@@ -13,6 +13,7 @@ import {
     CInputGroupText,
     CRow,
 } from "@coreui/react";
+import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -51,18 +52,24 @@ const EnquiryForm = () => {
     const [appointmentTime, setappointmentTime] = useState("");
     const [appointmentfor, setappointmentfor] = useState("");
 
-    const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
-    const username = user.user.username;
     const token = user.token;
-    const [result, setResult] = useState();
+    const [result, setResult] = useState([]);
     useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/enquiryForm/all', {
-            method: "get",
-            headers: { "Authorization": `Bearer ${token}` }
-        }).then(res => res.json()).then(json => setResult(json));
+        axios.get('https://yoga-power-appv0.herokuapp.com/service/all', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                console.log(res.data)
+                setResult(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }, []);
+    console.log(result);
 
     const saveEnquiry = (e) => {
         let PersonalDetails = { Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession }
@@ -160,7 +167,7 @@ const EnquiryForm = () => {
                                         onChange={(e) => setCountryCode(e.target.value)}
 
                                     >{CountryList.map((item, index) => (
-                                        <option key={index}>{item.name} {item.dial_code}</option>
+                                        <option key={index} value={item.dial_code}>{item.name} {item.dial_code}</option>
                                     ))}
                                     </CFormSelect>
                                 </CCol>
@@ -204,6 +211,15 @@ const EnquiryForm = () => {
                                     />
                                 </CCol>
                             </CRow>
+
+                            <CFormTextarea
+                                id="exampleFormControlTextarea1"
+                                label="Address"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                                rows="2"
+                                text="Must be 8-20 words long."
+                            ></CFormTextarea>
                             <CRow>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
@@ -331,7 +347,7 @@ const EnquiryForm = () => {
                                         onChange={(e) => setCountryCode2(e.target.value)}
                                         label="Country Code"
                                     >{CountryList.map((item, index) => (
-                                        <option key={index}>{item.name} {item.dial_code}</option>
+                                        <option key={index} value={item.dial_code}>{item.name} {item.dial_code}</option>
                                     ))}
                                     </CFormSelect>
                                 </CCol>
@@ -369,13 +385,11 @@ const EnquiryForm = () => {
                                         value={ServiceName}
                                         onChange={(e) => setServiceName(e.target.value)}
                                         label="Service Name"
-                                        options={[
-                                            "Select Service Name",
-                                            { label: "Yoga", value: "1" },
-                                            { label: "PT", value: "2" },
-                                            { label: "TTC", value: "3" },
-                                        ]}
-                                    />
+
+                                    >{result.map((item, index) => (
+                                        <option key={index} value={item.id}>{item.ServiceName}</option>
+                                    ))}
+                                    </CFormSelect>
                                 </CCol>
 
                                 <CCol lg={6} md={6} sm={12}>

@@ -34,15 +34,21 @@ const ServiceMaster = () => {
 
     const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
-    const username = user.user.username;
     const token = user.token;
-    const [result, setResult] = useState();
+    const [result, setResult] = useState([]);
     useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/service/all', {
-            method: "get",
-            headers: { "Authorization": `Bearer ${token}` }
-        }).then(res => res.json()).then(json => setResult(json));
+        axios.get('https://yoga-power-appv0.herokuapp.com/service/all', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                console.log(res.data)
+                setResult(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }, []);
     console.log(result);
     const saveService = () => {
@@ -87,6 +93,16 @@ const ServiceMaster = () => {
         })
     }
 
+    const updateSwitch = (e) => {
+        axios.post(url, {
+            //...data
+        }, {
+            headers: {
+                'Authorization': `Basic ${token}`
+            }
+        })
+    }
+
     const serviceClose1 = () => {
         setAction(!action)
         setAction1(false)
@@ -106,15 +122,11 @@ const ServiceMaster = () => {
         Note: please don't pass empty values or perameters
         */
 
-        { heading: 'Sr. No', value: 'id' },
-        { heading: 'Service Name', value: 'mobile' },
-        { heading: 'Duration', value: 'mobile' },
-        { heading: 'Member Name', value: 'member_name' },
-        { heading: 'Mobile', value: 'mobile' },
-        { heading: 'Service Name', value: 'service_name' },
-        { heading: 'Service Variation Name', value: 'variation_name' },
-        { heading: 'Expiry Date', value: 'expiry_date' },
-        { heading: 'Info', iconBtn: cilInfo },
+        { heading: 'Sr. No', value: 'key' },
+        { heading: 'Service Name', value: 'ServiceName' },
+        { heading: 'Duration', value: 'duration' },
+        { heading: 'Fees', value: 'fees' },
+        { heading: 'Status', Btn: 'switch', switchValue: 'status' },
         { heading: 'Renew', btn: 'renew' },
         { heading: 'Action', com: (<> <FaBeer size='20px' /></>) },
     ]
@@ -291,7 +303,7 @@ const ServiceMaster = () => {
                         </div>
                     }
                 </CForm>
-                <DataTable className='mt-2' heading={header} data={Users} />
+                <DataTable className='mt-2' heading={header} data={result} />
             </CCardBody>
         </CCard>
     );

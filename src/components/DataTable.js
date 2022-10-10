@@ -6,6 +6,7 @@ import {
     CCard,
     CCardBody,
     CCardHeader,
+    CFormSwitch,
     CProgress,
     CTable,
     CTableBody,
@@ -41,6 +42,7 @@ const TableRow = ({ item, column }) => (
         {column.map((columnItem, index) => {
             return (
                 <CTableDataCell key={index}>
+                    {columnItem.value === 'key' && index + 1}
                     {columnItem.value !== undefined && item[`${columnItem.value}`]}
                     {columnItem.iconBtn !== undefined && (
                         <CIcon
@@ -48,6 +50,9 @@ const TableRow = ({ item, column }) => (
                             style={{ borderRadius: '15px' }}
                             icon={columnItem.iconBtn}
                         />
+                    )}
+                    {columnItem.Btn === 'switch' && (
+                        <CFormSwitch size="xl" checked={item[`${columnItem.switchValue}`]} />
                     )}
                     {columnItem.btn !== undefined && (
                         <CButton style={{ color: 'white', backgroundColor: '#0B5345' }}> {columnItem.btn}</CButton>
