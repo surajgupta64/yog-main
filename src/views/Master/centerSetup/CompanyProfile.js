@@ -17,6 +17,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CountryList } from "src/components/CountryList";
 
 const CompanyProfile = () => {
     const [profileId, setProfileId] = useState("")
@@ -187,13 +188,10 @@ const CompanyProfile = () => {
                                         value={state}
                                         onChange={(e) => setState(e.target.value)}
                                         label="Country Name"
-                                        options={[
-                                            "Select Country",
-                                            { label: "One", value: "1" },
-                                            { label: "Two", value: "2" },
-                                            { label: "Three", value: "3" },
-                                        ]}
-                                    />
+                                    >{CountryList.map((item, index) => (
+                                        <option key={index}>{item.name}</option>
+                                    ))}
+                                    </CFormSelect>
                                 </CCol>
                             </CRow>
                         </CCol>
@@ -232,9 +230,13 @@ const CompanyProfile = () => {
                                         label="Working Days"
                                         options={[
                                             "Select Working Days",
-                                            { label: "One", value: "1" },
-                                            { label: "Two", value: "2" },
-                                            { label: "Three", value: "3" },
+                                            { label: "One Day", value: "One Day" },
+                                            { label: "Two Day", value: "Two Day" },
+                                            { label: "Three Day", value: "Three Day" },
+                                            { label: "Four Day", value: "Four Day" },
+                                            { label: "Five Day", value: "Five Day" },
+                                            { label: "Six Day", value: "Six Day" },
+                                            { label: "Sever Day", value: "Sever Day" },
                                         ]}
                                     />
                                 </CCol>
@@ -247,9 +249,13 @@ const CompanyProfile = () => {
                                         label="Half Day"
                                         options={[
                                             "Select Half Day",
-                                            { label: "One", value: "1" },
-                                            { label: "Two", value: "2" },
-                                            { label: "Three", value: "3" },
+                                            { label: "Monday", value: "Monday" },
+                                            { label: "Tuesday", value: "Tuesday" },
+                                            { label: "Wednesday", value: "Wednesday" },
+                                            { label: "Thursday", value: "Thursday" },
+                                            { label: "Friday", value: "Friday" },
+                                            { label: "Saturday", value: "Saturday" },
+                                            { label: "Sunday", value: "Sunday" },
                                         ]}
                                     />
                                 </CCol>
@@ -262,9 +268,13 @@ const CompanyProfile = () => {
                                         label="Holidays"
                                         options={[
                                             "Select Holidays",
-                                            { label: "One", value: "1" },
-                                            { label: "Two", value: "2" },
-                                            { label: "Three", value: "3" },
+                                            { label: "Monday", value: "Monday" },
+                                            { label: "Tuesday", value: "Tuesday" },
+                                            { label: "Wednesday", value: "Wednesday" },
+                                            { label: "Thursday", value: "Thursday" },
+                                            { label: "Friday", value: "Friday" },
+                                            { label: "Saturday", value: "Saturday" },
+                                            { label: "Sunday", value: "Sunday" },
                                         ]}
                                     />
                                 </CCol>

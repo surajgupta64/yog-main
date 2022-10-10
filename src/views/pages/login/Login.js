@@ -13,31 +13,26 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
+  CSpinner,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
 const Login = () => {
-
+  const [click, setClick] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
-    let user = JSON.parse(localStorage.getItem('user-info'))
-    console.log(user);
-    if (localStorage.getItem('user-info')) {
-      if (user.user.username == undefined || user.user.username == null) {
-        alert('Incorrect Details')
-        localStorage.clear()
-      }
-    }
+    localStorage.clear()
   }, [])
 
   async function login() {
     if (email != '' || password != '') {
-
+      setClick(true)
+      setError(null)
       console.log(email, password);
       let item = { email, password }
 
@@ -49,34 +44,45 @@ const Login = () => {
         },
         body: JSON.stringify(item)
       })
+      if (result.status == 400) {
+        setClick(false)
+        setError('Invalid Details! Please Enter Valid Details')
+      }
       result = await result.json()
       localStorage.setItem('user-info', JSON.stringify(result))
       let user = JSON.parse(localStorage.getItem('user-info'))
       console.log(user);
-      navigate('/')
+      if (user.user.username != null) {
+        navigate('/')
+      }
     } else {
-      alert('Please Enter Details')
+      setClick(false)
+      setError('Please Enter Details')
     }
   }
 
   return (
-    <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
-      <CContainer>
+    <div className=" min-vh-100 d-flex flex-row align-items-center" style={{ backgroundColor: '#0B5345' }}>
+      <CContainer className="justify-content-center" >
+        {error !== null && (
+          <CRow className="justify-content-center mb-2">
+            <CCol lg={5} md={8}>
+              <CCard color='danger'>
+                <CCardBody>
+                  <CCardText style={{ color: "white" }}>{error}</CCardText>
+                </CCardBody>
+              </CCard>
+            </CCol>
+          </CRow>
+        )}
         <CRow className="justify-content-center">
           <CCol lg={5} md={8}>
             <CCardGroup>
-              {error !== null && (
-                <CCard color='danger'>
-                  <CCardBody>
-                    <CCardText>{error}</CCardText>
-                  </CCardBody>
-                </CCard>
-              )}
               <CCard className="p-4">
                 <CCardBody>
                   <CForm onSubmit={login}>
                     <h1>Login</h1>
-                    <p className="text-medium-emphasis">
+                    <p>
                       Sign In to your account
                     </p>
                     <CInputGroup className="mb-3">
@@ -105,9 +111,14 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" type='submit' className="px-4" active>
-                          Login
-                        </CButton>
+                        {!click ?
+                          <CButton color="primary" type='submit' className="px-4" active>
+                            Login
+                          </CButton> :
+                          <CButton disabled>
+                            <CSpinner component="span" size="sm" aria-hidden="true" />
+                            {"  "}Please wait...
+                          </CButton>}
                       </CCol>
                       <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0 float-end" >

@@ -1,268 +1,678 @@
-import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
+import React, { useEffect, useState } from 'react'
+
 import {
-    CAccordion,
-    CAccordionBody,
-    CAccordionHeader,
-    CAccordionItem,
+    CAvatar,
     CButton,
     CButtonGroup,
     CCard,
     CCardBody,
+    CCardFooter,
     CCardHeader,
     CCol,
-    CFormInput,
-    CFormSelect,
-    CInputGroup,
-    CInputGroupText,
-    CNav,
-    CNavItem,
-    CNavLink,
+    CProgress,
+    CProgressBar,
     CRow,
-    CTabContent,
     CTable,
     CTableBody,
     CTableDataCell,
     CTableHead,
     CTableHeaderCell,
     CTableRow,
-    CTabPane,
 } from '@coreui/react'
-import React, { useState } from 'react'
+import { CChartBar, CChartLine } from '@coreui/react-chartjs'
+import { getStyle, hexToRgba } from '@coreui/utils'
+import CIcon from '@coreui/icons-react'
+import {
+    cibCcAmex,
+    cibCcApplePay,
+    cibCcMastercard,
+    cibCcPaypal,
+    cibCcStripe,
+    cibCcVisa,
+    cibGoogle,
+    cibFacebook,
+    cibLinkedin,
+    cifBr,
+    cifEs,
+    cifFr,
+    cifIn,
+    cifPl,
+    cifUs,
+    cibTwitter,
+    cilCloudDownload,
+    cilUser,
+    cilUserFemale,
+    cilPeople,
+} from '@coreui/icons'
+
+import avatar1 from 'src/assets/images/avatars/1.jpg'
+import avatar2 from 'src/assets/images/avatars/2.jpg'
+import avatar3 from 'src/assets/images/avatars/3.jpg'
+import avatar4 from 'src/assets/images/avatars/4.jpg'
+import avatar5 from 'src/assets/images/avatars/5.jpg'
+import avatar6 from 'src/assets/images/avatars/6.jpg'
+
+import WidgetsBrand from '../widgets/WidgetsBrand'
+import { useNavigate } from 'react-router-dom'
+import WidgetsDropdown2 from '../widgets/WidgetsDropdown2'
 
 const EmployeeDashboard = () => {
-    const [activeKey, setActiveKey] = useState(1)
-    return (
-        <CRow>
-            <CCol xs={12}>
-                <CCard>
-                    <CCardHeader>
-                        <CNav variant="pills" role="tablist">
-                            <CNavItem>
-                                <CNavLink
-                                    href="javascript:void(0);"
-                                    active={activeKey === 1}
-                                    onClick={() => setActiveKey(1)}
-                                >
-                                    Sales Closure
-                                </CNavLink>
-                            </CNavItem>
-                            <CNavItem>
-                                <CNavLink
-                                    href="javascript:void(0);"
-                                    active={activeKey === 2}
-                                    onClick={() => setActiveKey(2)}
-                                >
+    const navigate = useNavigate()
+    const user = JSON.parse(localStorage.getItem('user-info'))
+    useEffect(() => {
+        if (user == null) {
+            navigate('/login')
+        }
+        else if (user.user.username == null || user.user.username == undefined) {
+            alert('Incorrect Details')
+            localStorage.clear()
+        }
+    }, [])
 
-                                    Client Closure
-                                </CNavLink>
-                            </CNavItem>
-                            <CNavItem>
-                                <CNavLink
-                                    href="javascript:void(0);"
-                                    active={activeKey === 3}
-                                    onClick={() => setActiveKey(3)}
-                                >
-                                    Lead Target
-                                </CNavLink>
-                            </CNavItem>
-                        </CNav>
-                    </CCardHeader>
-                    <CCardBody>
-                        <CTabContent>
-                            <CTabPane role="tabpanel" aria-labelledby="home-tab" visible={activeKey === 1}>
-                                Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown
-                                aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan
-                                helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh
-                                mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan
-                                aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-                            </CTabPane>
-                            <CTabPane role="tabpanel" aria-labelledby="profile-tab" visible={activeKey === 2}>
-                                Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                                Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan
-                                four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft
-                                beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda
-                                labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit
-                                sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-                                shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown,
-                                tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
-                            </CTabPane>
-                            <CTabPane role="tabpanel" aria-labelledby="contact-tab" visible={activeKey === 3}>
-                                Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic
-                                lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork
-                                tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica.
-                                DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
-                                mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog.
-                                Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown.
-                                Pitchfork sustainable tofu synth chambray yr.
-                            </CTabPane>
-                        </CTabContent>
-                    </CCardBody>
-                </CCard>
-            </CCol>
-            <CCol xs={12}>
-                <CAccordion activeItemKey={1}>
-                    <CAccordionItem itemKey={1}>
-                        <CAccordionHeader>Accordion Item #1</CAccordionHeader>
-                        <CAccordionBody>
-                            <CCard>
-                                <CCardHeader>
-                                    <CRow>
-                                        <CCol xs={3}>
-                                            <strong className="mt-2">PT Target</strong>
-                                        </CCol>
-                                        <CCol xs={2}>
-                                            <CInputGroup>
-                                                <CInputGroupText
-                                                    component="label"
-                                                    htmlFor="inputGroupSelect01"
-                                                >
-                                                    Month
-                                                </CInputGroupText>
-                                                <CFormSelect id="inputGroupSelect01">
-                                                    <option>Sep</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </CFormSelect>
-                                            </CInputGroup>
-                                        </CCol>
-                                        <CCol xs={2}>
-                                            <CInputGroup>
-                                                <CInputGroupText
-                                                    component="label"
-                                                    htmlFor="inputGroupSelect01"
-                                                >
-                                                    Year
-                                                </CInputGroupText>
-                                                <CFormSelect id="inputGroupSelect01">
-                                                    <option>2022</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </CFormSelect>
-                                            </CInputGroup>
-                                        </CCol>
-                                        <CCol xs={2}>
-                                            <CInputGroup className="left">
-                                                <CFormInput
-                                                    placeholder="Staff Name"
-                                                    aria-label="Recipient's username"
-                                                    aria-describedby="button-addon2"
-                                                />
-                                                <CButton type="button" color="primary" id="button-addon2">
-                                                    Go
-                                                </CButton>
-                                            </CInputGroup>
-                                        </CCol>
-                                        <CCol xs={3}>
-                                            <CButtonGroup>
-                                                <CButton color="primary">
-                                                    <CIcon icon={cilArrowCircleBottom} />
-                                                    Import
-                                                </CButton>
-                                                <CButton color="primary">
-                                                    <CIcon icon={cilArrowCircleTop} />
-                                                    Export
-                                                </CButton>
-                                            </CButtonGroup>
-                                        </CCol>
-                                    </CRow>
-                                </CCardHeader>
-                                <CCardBody>
-                                    <CTable bordered borderColor="primary" responsive>
-                                        <CTableHead color="dark">
-                                            <CTableRow>
-                                                <CTableHeaderCell scope="col">Sr No</CTableHeaderCell>
-                                                <CTableHeaderCell scope="col">Counseller</CTableHeaderCell>
-                                                <CTableHeaderCell scope="col">Target</CTableHeaderCell>
-                                                <CTableHeaderCell scope="col">
-                                                    Achieved/Collected
-                                                </CTableHeaderCell>
-                                                <CTableHeaderCell scope="col">New Sales</CTableHeaderCell>
-                                                <CTableHeaderCell scope="col">Renewals</CTableHeaderCell>
-                                                <CTableHeaderCell scope="col">
-                                                    Balance Collection
-                                                </CTableHeaderCell>
-                                                <CTableHeaderCell scope="col">View</CTableHeaderCell>
-                                                <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
-                                            </CTableRow>
-                                        </CTableHead>
-                                        <CTableBody>
-                                            <CTableRow>
-                                                <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                                <CTableDataCell>Sejal</CTableDataCell>
-                                                <CTableDataCell>10000</CTableDataCell>
-                                                <CTableDataCell>10000</CTableDataCell>
-                                                <CTableDataCell>5000</CTableDataCell>
-                                                <CTableDataCell>2000</CTableDataCell>
-                                                <CTableDataCell>3000</CTableDataCell>
-                                                <CTableDataCell>View</CTableDataCell>
-                                                <CTableDataCell>100%</CTableDataCell>
-                                            </CTableRow>
-                                            <CTableRow>
-                                                <CTableHeaderCell scope="row">2</CTableHeaderCell>
-                                                <CTableDataCell>Sejal</CTableDataCell>
-                                                <CTableDataCell>10000</CTableDataCell>
-                                                <CTableDataCell>10000</CTableDataCell>
-                                                <CTableDataCell>5000</CTableDataCell>
-                                                <CTableDataCell>2000</CTableDataCell>
-                                                <CTableDataCell>3000</CTableDataCell>
-                                                <CTableDataCell>View</CTableDataCell>
-                                                <CTableDataCell>100%</CTableDataCell>
-                                            </CTableRow>
-                                            <CTableRow>
-                                                <CTableHeaderCell scope="row">3</CTableHeaderCell>
-                                                <CTableDataCell>Sejal</CTableDataCell>
-                                                <CTableDataCell>10000</CTableDataCell>
-                                                <CTableDataCell>10000</CTableDataCell>
-                                                <CTableDataCell>5000</CTableDataCell>
-                                                <CTableDataCell>2000</CTableDataCell>
-                                                <CTableDataCell>3000</CTableDataCell>
-                                                <CTableDataCell>View</CTableDataCell>
-                                                <CTableDataCell>100%</CTableDataCell>
-                                            </CTableRow>
-                                        </CTableBody>
-                                    </CTable>
-                                </CCardBody>
+    const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+    const [active, setActive] = useState('Today')
+
+    const progressExample = [
+        { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
+        { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
+        {
+            title: 'Pageviews',
+            value: '78.706 Views',
+            percent: 60,
+            color: 'warning',
+        },
+        { title: 'New Users', value: '22.123 Users', percent: 80, color: 'danger' },
+        {
+            title: 'Bounce Rate',
+            value: 'Average Rate',
+            percent: 40.15,
+            color: 'primary',
+        },
+    ]
+
+    const progressGroupExample1 = [
+        { title: 'Monday', value1: 34, value2: 78 },
+        { title: 'Tuesday', value1: 56, value2: 94 },
+        { title: 'Wednesday', value1: 12, value2: 67 },
+        { title: 'Thursday', value1: 43, value2: 91 },
+        { title: 'Friday', value1: 22, value2: 73 },
+        { title: 'Saturday', value1: 53, value2: 82 },
+        { title: 'Sunday', value1: 9, value2: 69 },
+    ]
+
+    const progressGroupExample2 = [
+        { title: 'Male', icon: cilUser, value: 53 },
+        { title: 'Female', icon: cilUserFemale, value: 43 },
+    ]
+
+    const progressGroupExample3 = [
+        { title: 'Organic Search', icon: cibGoogle, percent: 56, value: '191,235' },
+        { title: 'Facebook', icon: cibFacebook, percent: 15, value: '51,223' },
+        { title: 'Twitter', icon: cibTwitter, percent: 11, value: '37,564' },
+        { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
+    ]
+
+    const tableExample = [
+        {
+            avatar: { src: avatar1, status: 'success' },
+            user: {
+                name: 'Yiorgos Avraamu',
+                new: true,
+                registered: 'Jan 1, 2021',
+            },
+            country: { name: 'USA', flag: cifUs },
+            usage: {
+                value: 50,
+                period: 'Jun 11, 2021 - Jul 10, 2021',
+                color: 'success',
+            },
+            payment: { name: 'Mastercard', icon: cibCcMastercard },
+            activity: '10 sec ago',
+        },
+        {
+            avatar: { src: avatar2, status: 'danger' },
+            user: {
+                name: 'Avram Tarasios',
+                new: false,
+                registered: 'Jan 1, 2021',
+            },
+            country: { name: 'Brazil', flag: cifBr },
+            usage: {
+                value: 22,
+                period: 'Jun 11, 2021 - Jul 10, 2021',
+                color: 'info',
+            },
+            payment: { name: 'Visa', icon: cibCcVisa },
+            activity: '5 minutes ago',
+        },
+        {
+            avatar: { src: avatar3, status: 'warning' },
+            user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
+            country: { name: 'India', flag: cifIn },
+            usage: {
+                value: 74,
+                period: 'Jun 11, 2021 - Jul 10, 2021',
+                color: 'warning',
+            },
+            payment: { name: 'Stripe', icon: cibCcStripe },
+            activity: '1 hour ago',
+        },
+        {
+            avatar: { src: avatar4, status: 'secondary' },
+            user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
+            country: { name: 'France', flag: cifFr },
+            usage: {
+                value: 98,
+                period: 'Jun 11, 2021 - Jul 10, 2021',
+                color: 'danger',
+            },
+            payment: { name: 'PayPal', icon: cibCcPaypal },
+            activity: 'Last month',
+        },
+        {
+            avatar: { src: avatar5, status: 'success' },
+            user: {
+                name: 'Agapetus Tadeáš',
+                new: true,
+                registered: 'Jan 1, 2021',
+            },
+            country: { name: 'Spain', flag: cifEs },
+            usage: {
+                value: 22,
+                period: 'Jun 11, 2021 - Jul 10, 2021',
+                color: 'primary',
+            },
+            payment: { name: 'Google Wallet', icon: cibCcApplePay },
+            activity: 'Last week',
+        },
+        {
+            avatar: { src: avatar6, status: 'danger' },
+            user: {
+                name: 'Friderik Dávid',
+                new: true,
+                registered: 'Jan 1, 2021',
+            },
+            country: { name: 'Poland', flag: cifPl },
+            usage: {
+                value: 43,
+                period: 'Jun 11, 2021 - Jul 10, 2021',
+                color: 'success',
+            },
+            payment: { name: 'Amex', icon: cibCcAmex },
+            activity: 'Last week',
+        },
+    ]
+
+    return (
+        <>
+            <WidgetsDropdown2 />
+            <CRow>
+                <CCol lg={6} sm={12}>
+                    <CCard className="mb-4">
+                        <CCardBody>
+                            <CRow>
+                                <CCol sm={5} className='mb-2'>
+                                    <h4 id="traffic" className="card-title mb-0">
+                                        Income
+                                    </h4>
+                                    <div className="small text-medium-emphasis">
+                                        January - July 2021
+                                    </div>
+                                </CCol>
+                                <CCol sm={7} className="d-none d-md-block">
+                                    <CButton color="primary" className="float-end">
+                                        <CIcon icon={cilCloudDownload} />
+                                    </CButton>
+                                    <CButtonGroup className="float-end me-3">
+                                        {['Day', 'Month', 'Year'].map((value) => (
+                                            <CButton
+                                                color="outline-secondary"
+                                                key={value}
+                                                className="mx-0"
+                                                active={value === 'Month'}
+                                            >
+                                                {value}
+                                            </CButton>
+                                        ))}
+                                    </CButtonGroup>
+                                </CCol>
+                            </CRow>
+                            <CChartBar
+                                data={{
+                                    labels: [
+                                        'January',
+                                        'February',
+                                        'March',
+                                        'April',
+                                        'May',
+                                        'June',
+                                        'July',
+                                        'August',
+                                        'Sep',
+                                    ],
+                                    value: [
+                                        'January',
+                                        'February',
+                                        'March',
+                                        'April',
+                                        'May',
+                                        'June',
+                                        'July',
+                                        'August',
+                                        'Sep',
+                                    ],
+                                    datasets: [
+                                        {
+                                            label: 'Monthly Sales',
+                                            backgroundColor: 'darkgreen',
+                                            data: [61, 85, 100, 120, 150, 40, 39, 80, 40, 100, 300],
+                                        },
+                                    ],
+                                }}
+                                labels="months"
+                                value="value"
+                            />
+                            <CCard style={{ marginRight: '10px', marginLeft: '40px', backgroundColor: 'darkgreen', color: 'white', paddingLeft: '10px', paddingRight: '10px' }}>
+                                <div className='d-flex justify-content-between'>
+                                    <label>40</label>
+                                    <label>20</label>
+                                    <label>12</label>
+                                    <label>39</label>
+                                    <label>10</label>
+                                    <label>40</label>
+                                    <label>39</label>
+                                    <label>80</label>
+                                    <label>40</label>
+                                </div>
                             </CCard>
-                        </CAccordionBody>
-                    </CAccordionItem>
-                    <CAccordionItem itemKey={2}>
-                        <CAccordionHeader>Accordion Item #2</CAccordionHeader>
-                        <CAccordionBody>
-                            <strong>
-                                This is the second item&#39;s accordion body.
-                            </strong>{' '}
-                            It is hidden by default, until the collapse plugin adds the
-                            appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the
-                            showing and hiding via CSS transitions. You can modify any
-                            of this with custom CSS or overriding our default variables.
-                            It&#39;s also worth noting that just about any HTML can go
-                            within the <code>.accordion-body</code>, though the
-                            transition does limit overflow.
-                        </CAccordionBody>
-                    </CAccordionItem>
-                    <CAccordionItem itemKey={3}>
-                        <CAccordionHeader>Accordion Item #3</CAccordionHeader>
-                        <CAccordionBody>
-                            <strong>
-                                This is the second item&#39;s accordion body.
-                            </strong>{' '}
-                            It is hidden by default, until the collapse plugin adds the
-                            appropriate classes that we use to style each element. These
-                            classes control the overall appearance, as well as the
-                            showing and hiding via CSS transitions. You can modify any
-                            of this with custom CSS or overriding our default variables.
-                            It&#39;s also worth noting that just about any HTML can go
-                            within the <code>.accordion-body</code>, though the
-                            transition does limit overflow.
-                        </CAccordionBody>
-                    </CAccordionItem>
-                </CAccordion>
-            </CCol>
-        </CRow>
+                        </CCardBody>
+                    </CCard>
+                </CCol>
+                <CCol lg={6} sm={12}>
+                    <CCard className="mb-4">
+
+                        <CCardBody>
+
+                            <CRow >
+                                <CCol sm={4}>
+                                    <h4 id="traffic" className="card-title mb-0">
+                                        Attendance
+                                    </h4>
+                                    <div className="small text-medium-emphasis mb-3">
+                                        Weekly
+                                    </div>
+                                </CCol>
+                                <CCol sm={4}>
+                                    <div className="border-start border-start-4 border-start-info py-1 px-3">
+                                        <div className="text-medium-emphasis small">
+                                            Attented Clients
+                                        </div>
+                                        <div className="fs-5 fw-semibold">9,123</div>
+                                    </div>
+                                </CCol>
+                                <CCol sm={4}>
+                                    <div className="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">
+                                            Total Active Clients
+                                        </div>
+                                        <div className="fs-5 fw-semibold">22,643</div>
+                                    </div>
+                                </CCol>
+                            </CRow>
+
+                            <CRow>
+                                <CCol xs={12} md={12} xl={12}>
+
+
+                                    <hr className="mt-0" />
+                                    {progressGroupExample1.map((item, index) => (
+                                        <div className="progress-group mb-3" key={index}>
+                                            <div className="progress-group-prepend">
+                                                <span className="text-medium-emphasis small">
+                                                    {item.title}
+                                                </span>
+                                            </div>
+                                            <div className="progress-group-bars">
+                                                <CProgress >
+                                                    <CProgressBar color="success" value={item.value1} />
+                                                    <CProgressBar color="info" value={item.value2} />
+                                                </CProgress>
+                                            </div>
+                                            <div className="progress-group-prepend">
+                                                <span className="ms-auto fw-semibold">
+                                                    {item.value1}
+                                                    <span className="text-medium-emphasis small">
+                                                        ({item.percent}%)
+                                                    </span>
+                                                </span>/
+                                                <span className="ms-auto fw-semibold">
+                                                    {item.value2}
+                                                    <span className="text-medium-emphasis small">
+                                                        ({item.percent}%)
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </CCol>
+                            </CRow>
+                        </CCardBody>
+                    </CCard>
+                </CCol>
+
+                <CCol lg={6} sm={12}>
+                    <CCard className="mb-2">
+                        <CCardBody>
+                            <CRow>
+                                <CCol sm={5}>
+                                    <h4 id="traffic" className="card-title mb-0">
+                                        Traffic
+                                    </h4>
+                                    <div className="small text-medium-emphasis">
+                                        January - July 2021
+                                    </div>
+                                </CCol>
+                                <CCol sm={7} className="d-none d-md-block">
+                                    <CButton color="primary" className="float-end">
+                                        <CIcon icon={cilCloudDownload} />
+                                    </CButton>
+                                    <CButtonGroup className="float-end me-3">
+                                        {['Day', 'Month', 'Year'].map((value) => (
+                                            <CButton
+                                                color="outline-secondary"
+                                                key={value}
+                                                className="mx-0"
+                                                active={value === 'Month'}
+                                            >
+                                                {value}
+                                            </CButton>
+                                        ))}
+                                    </CButtonGroup>
+                                </CCol>
+                            </CRow>
+                            <CChartLine
+                                style={{ height: '270px', marginTop: '20px' }}
+                                data={{
+                                    labels: [
+                                        'January',
+                                        'February',
+                                        'March',
+                                        'April',
+                                        'May',
+                                        'June',
+                                        'July',
+                                    ],
+                                    datasets: [
+                                        {
+                                            label: 'My First dataset',
+                                            backgroundColor: hexToRgba(getStyle('--cui-success'), 50),
+                                            borderColor: getStyle('--cui-info'),
+                                            pointHoverBackgroundColor: getStyle('--cui-info'),
+                                            borderWidth: 2,
+                                            data: [
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                            ],
+                                            fill: true,
+                                        },
+                                        {
+                                            label: 'My Second dataset',
+                                            backgroundColor: 'transparent',
+                                            borderColor: getStyle('--cui-red'),
+                                            pointHoverBackgroundColor: getStyle('--cui-success'),
+                                            borderWidth: 2,
+                                            data: [
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                                random(50, 200),
+                                            ],
+                                        },
+                                        {
+                                            label: 'My Third dataset',
+                                            backgroundColor: 'success',
+                                            borderColor: getStyle('--cui-danger'),
+                                            pointHoverBackgroundColor: getStyle('--cui-danger'),
+                                            borderWidth: 1,
+                                            borderDash: [8, 5],
+                                            data: [65, 65, 65, 65, 65, 65, 65],
+                                        },
+                                    ],
+                                }}
+                                options={{
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                        legend: {
+                                            display: false,
+                                        },
+                                    },
+                                    scales: {
+                                        x: {
+                                            grid: {
+                                                drawOnChartArea: false,
+                                            },
+                                        },
+                                        y: {
+                                            ticks: {
+                                                beginAtZero: true,
+                                                maxTicksLimit: 5,
+                                                stepSize: Math.ceil(250 / 5),
+                                                max: 250,
+                                            },
+                                        },
+                                    },
+                                    elements: {
+                                        line: {
+                                            tension: 0.4,
+                                        },
+                                        point: {
+                                            radius: 0,
+                                            hitRadius: 10,
+                                            hoverRadius: 4,
+                                            hoverBorderWidth: 3,
+                                        },
+                                    },
+                                }}
+                            />
+                        </CCardBody>
+                        <CCardFooter>
+                            <CRow xs={{ cols: 2 }} md={{ cols: 5 }} className="text-center">
+                                {progressExample.map((item, index) => (
+                                    <CCol className="mb-sm-2 mb-0" key={index}>
+                                        <div className="text-medium-emphasis">{item.title}</div>
+                                        <strong style={{ fontSize: '10px' }}>
+                                            {item.value} ({item.percent}%)
+                                        </strong>
+                                        <CProgress
+                                            thin
+                                            className="mt-2"
+                                            color={item.color}
+                                            value={item.percent}
+                                        />
+                                    </CCol>
+                                ))}
+                            </CRow>
+                        </CCardFooter>
+                    </CCard>
+                </CCol>
+                <CCol lg={6} sm={12}>
+                    <CCard className="mb-4">
+
+                        <CCardBody>
+                            <h4 id="traffic" className="card-title mb-0">
+                                Social Media
+                            </h4>
+                            <div className="small text-medium-emphasis mb-3">
+                                Traffic
+                            </div>
+                            <CRow>
+                                <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">
+                                            Pageviews
+                                        </div>
+                                        <div className="fs-5 fw-semibold">78,623</div>
+                                    </div>
+                                </CCol>
+                                <CCol sm={6}>
+                                    <div className="border-start border-start-4 border-start-success py-1 px-3 mb-3">
+                                        <div className="text-medium-emphasis small">
+                                            Organic
+                                        </div>
+                                        <div className="fs-5 fw-semibold">49,123</div>
+                                    </div>
+                                </CCol>
+                            </CRow>
+
+                            <hr className="mt-0" />
+
+                            {progressGroupExample2.map((item, index) => (
+                                <div className="progress-group mb-2" key={index}>
+                                    <div className="progress-group-header">
+                                        <CIcon className="me-2" icon={item.icon} size="lg" />
+                                        <span>{item.title}</span>
+                                        <span className="ms-auto fw-semibold">
+                                            {item.value}%
+                                        </span>
+                                    </div>
+                                    <div className="progress-group-bars">
+                                        <CProgress thin color="warning" value={item.value} />
+                                    </div>
+                                </div>
+                            ))}
+
+                            <div className="mb-4"></div>
+
+                            {progressGroupExample3.map((item, index) => (
+                                <div className="progress-group" key={index}>
+                                    <div className="progress-group-header">
+                                        <CIcon className="me-2" icon={item.icon} size="lg" />
+                                        <span>{item.title}</span>
+                                        <span className="ms-auto fw-semibold">
+                                            {item.value}{' '}
+                                            <span className="text-medium-emphasis small">
+                                                ({item.percent}%)
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div className="progress-group-bars">
+                                        <CProgress thin color="success" value={item.percent} />
+                                    </div>
+                                </div>
+                            ))}
+                        </CCardBody>
+                    </CCard>
+                </CCol>
+
+            </CRow>
+            <WidgetsBrand withCharts />
+
+            <CRow>
+                <CCol >
+                    <CCard className="mb-4">
+                        <CCardHeader>Yog Power Branch</CCardHeader>
+                        <CCardBody>
+                            <CTable align="middle" bordered style={{ borderColor: "#106103" }} hover responsive>
+                                <CTableHead style={{ backgroundColor: "#106103", color: "white" }} >
+                                    <CTableRow>
+                                        <CTableHeaderCell className="text-center">
+                                            <CIcon icon={cilPeople} />
+                                        </CTableHeaderCell>
+                                        <CTableHeaderCell>Center Name</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">
+                                            Location
+                                        </CTableHeaderCell>
+                                        <CTableHeaderCell>Proformance</CTableHeaderCell>
+                                        <CTableHeaderCell className="text-center">
+                                            Royalty Percent
+                                        </CTableHeaderCell>
+                                        <CTableHeaderCell>Details</CTableHeaderCell>
+                                    </CTableRow>
+                                </CTableHead>
+                                <CTableBody>
+                                    {tableExample.map((item, index) => (
+                                        <CTableRow v-for="item in tableItems" key={index}>
+                                            <CTableDataCell className="text-center">
+                                                <CAvatar
+                                                    size="md"
+                                                    src={item.avatar.src}
+                                                    status={item.avatar.status}
+                                                />
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <div>{item.user.name}</div>
+                                                <div className="small text-medium-emphasis">
+                                                    <span>{item.user.new ? 'New' : 'Recurring'}</span> |
+                                                    Registered: {item.user.registered}
+                                                </div>
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <CIcon
+                                                    size="xl"
+                                                    icon={item.country.flag}
+                                                    title={item.country.name}
+                                                />
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+
+                                                <div className="clearfix">
+                                                    <div className="float-start">
+                                                        <strong>Total Target :100000</strong>
+                                                    </div>
+                                                    <div className="float-end">
+                                                        <small className="text-medium-emphasis">
+                                                            Complated : 60000
+                                                        </small>
+                                                    </div>
+                                                </div>
+
+                                                <div className="clearfix">
+                                                    <div className="float-start">
+                                                        <strong>{item.usage.value}%</strong>
+                                                    </div>
+                                                    <div className="float-end">
+                                                        <small className="text-medium-emphasis">
+                                                            {item.usage.period}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                <CProgress
+                                                    thin
+                                                    color={item.usage.color}
+                                                    value={item.usage.value}
+                                                />
+                                            </CTableDataCell>
+                                            <CTableDataCell className="text-center">
+                                                <div>
+                                                    <strong>12%</strong>
+                                                </div>
+                                                <div>
+                                                    <small className="text-medium-emphasis">
+                                                        72000 Received
+                                                    </small>
+                                                </div>
+                                            </CTableDataCell>
+                                            <CTableDataCell>
+                                                <CButton color='success'>view</CButton>
+                                            </CTableDataCell>
+                                        </CTableRow>
+                                    ))}
+                                </CTableBody>
+                            </CTable>
+                        </CCardBody>
+                    </CCard>
+                </CCol>
+            </CRow>
+        </>
     )
 }
+
 export default EmployeeDashboard

@@ -8,12 +8,12 @@ const Recruitment = () => {
     return (
         <>
             <CRow className='mb-2 ms-2'>
-                <CCard color='success' style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '3px', cursor: 'pointer' }}
+                <CCard color={step == 1 ? 'primary' : 'success'} style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '3px', cursor: 'pointer' }}
                     onClick={() => setStep(1)}
                 >
                     Step-1
                 </CCard>
-                <CCard color='success' style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '3px', cursor: 'pointer' }}
+                <CCard color={step == 2 ? 'primary' : 'success'} style={{ padding: '10px', color: '#ffffff', width: '100px', margin: '3px', cursor: 'pointer' }}
                     onClick={() => setStep(2)}
                 >
                     Step-2

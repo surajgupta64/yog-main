@@ -195,6 +195,12 @@ const SalesTarget = () => {
                                             <CTableHeaderCell scope="col">
                                                 Balance Collection
                                             </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                Incentive Target
+                                            </CTableHeaderCell>
+                                            <CTableHeaderCell scope="col">
+                                                100%
+                                            </CTableHeaderCell>
                                             <CTableHeaderCell scope="col">View</CTableHeaderCell>
                                             <CTableHeaderCell scope="col">Achived %</CTableHeaderCell>
                                         </CTableRow>
@@ -206,6 +212,8 @@ const SalesTarget = () => {
                                             <CTableDataCell>10000</CTableDataCell>
                                             <CTableDataCell>10000</CTableDataCell>
                                             <CTableDataCell>5000</CTableDataCell>
+                                            <CTableDataCell>2000</CTableDataCell>
+                                            <CTableDataCell>3000</CTableDataCell>
                                             <CTableDataCell>2000</CTableDataCell>
                                             <CTableDataCell>3000</CTableDataCell>
                                             <CTableDataCell>View</CTableDataCell>
