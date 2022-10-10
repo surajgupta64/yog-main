@@ -64,7 +64,7 @@ const EnquiryForm = () => {
         }).then(res => res.json()).then(json => setResult(json));
     }, []);
 
-    const saveEnquiry = () => {
+    const saveEnquiry = (e) => {
         let PersonalDetails = { Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession }
         let Scheduleenquiryfollowup = { StaffName, CenterName, CallStatus, Message }
         let EmergencyContact = { person_Name, Relation, CountryCode2, ContactNumber2 }
@@ -83,6 +83,33 @@ const EnquiryForm = () => {
             // console.warn("resp",resp);;
             resp.json().then(() => {
                 alert("successfully submitted")
+                e.preventDefault();
+                console.log("refresh prevented");
+                setFullName('')
+                setEmailAddress('')
+                setCountryCode('')
+                setContactNumber('')
+                setGander('')
+                setDateofBirth('')
+                setAddress('')
+                setArea('')
+                setCity('')
+                setProfession('')
+                setStaffName('')
+                setCenterName('')
+                setCallStatus('')
+                setMessage('')
+                setperson_Name('')
+                setRelation('')
+                setCountryCode2('')
+                setContactNumber2('')
+                setEnquiryDate('')
+                setServiceName('')
+                setCustomertype('')
+                setEnquirytype('')
+                setappointmentDate('')
+                setappointmentTime('')
+                setappointmentfor('')
             })
         })
     }
