@@ -29,14 +29,28 @@ import { useNavigate } from "react-router-dom";
 const PackageMaster = () => {
     const [action, setAction] = useState(false)
     const [Package_Name, setPackageName] = useState("");
+    const [day, setDay] = useState("");
+    const [month, setMonth] = useState("");
+    const [select, setSelect] = useState("");
     const [duration, setDuration] = useState("");
     const [fees, setFees] = useState("");
     const [status, setStatus] = useState(false);
 
+    const durationSet = (e) => {
+        if (e.target.id === 'day') {
+            setDay(e.target.value)
+        } else if (e.target.id === 'month') {
+            setMonth(e.target.value)
+        } else if (e.target.id === 'select') {
+            setSelect(e.target.value)
+        }
+        setDuration(day + " " + month + " " + select)
+    }
 
     const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
+    console.log(duration);
     const username = user.user.username;
     const token = user.token;
     const [result, setResult] = useState([]);
@@ -48,6 +62,8 @@ const PackageMaster = () => {
     }, []);
 
     const savePackage = () => {
+        setDuration(day + month + select)
+        console.log(duration);
         let data = { Package_Name, fees, duration, status }
         // console.warn(data);
         fetch("https://yoga-power-appv0.herokuapp.com/Package/create", {
@@ -115,20 +131,48 @@ const PackageMaster = () => {
                                 </CCol>
 
                                 <CCol lg={6} md={6} sm={12}>
-                                    <CInputGroup>
+                                    <CInputGroup
+                                        value={duration}
+                                        onChange={(e) => setDuration(day + month + select)}
+                                    >
                                         <CInputGroupText
                                             component="label"
                                             htmlFor="inputGroupSelect01"
                                         >
                                             Duration
                                         </CInputGroupText>
-                                        <CFormSelect id="inputGroupSelect01"
-                                            value={duration}
-                                            onChange={(e) => setDuration(e.target.value)}>
-                                            <option value='Weekly'>Weekly</option>
-                                            <option value="Monthly">Monthly</option>
-                                            <option value="Quarterly">Quarterly</option>
-                                            <option value="Half Year">Half Year</option>
+                                        <CFormSelect id="day"
+                                            value={day}
+                                            onChange={durationSet}>
+                                            <option value='1 Day per week'>1 Day per week</option>
+                                            <option value='2 Day per week'>2 Day per week</option>
+                                            <option value='3 Day per week'>3 Day per week</option>
+                                            <option value='4 Day per week'>4 Day per week</option>
+                                            <option value='5 Day per week'>5 Day per week</option>
+                                            <option value='6 Day per week'>6 Day per week</option>
+                                            <option value='7 Day per week'>7 Day per week</option>
+                                        </CFormSelect>
+                                        <CFormSelect id="month"
+                                            value={month}
+                                            onChange={durationSet}>
+                                            <option value='1'>1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </CFormSelect>
+                                        <CFormSelect id="select"
+                                            value={select}
+                                            onChange={durationSet}>
+                                            <option value='Week'>Week</option>
+                                            <option value="Month">Month</option>
                                             <option value="Year">Year</option>
                                         </CFormSelect>
                                     </CInputGroup>
