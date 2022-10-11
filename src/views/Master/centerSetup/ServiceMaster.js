@@ -397,7 +397,6 @@ const ServiceMaster = () => {
                                         label="Select Service"
                                         value={selected_service}
                                         onChange={(e) => setSelected_service(e.target.value)}>
-                                        <option>yoga</option>
                                         {result.map((item, index) => (
                                             <option key={index} value={item.ServiceName}>{item.ServiceName}</option>
                                         ))}

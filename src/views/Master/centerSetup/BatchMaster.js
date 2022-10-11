@@ -133,12 +133,13 @@ const BatchMaster = () => {
                                         onChange={(e) => setBatch_Duration(e.target.value)}
                                         options={[
                                             "Select Duration",
-                                            { label: "30 min", value: "1" },
-                                            { label: "1 hr 30 min", value: "2" },
-                                            { label: "2 hr", value: "2" },
-                                            { label: "2 hr 30 min", value: "2" },
-                                            { label: "3 hr", value: "2" },
-                                            { label: "3 hr 30 min", value: "2" },
+                                            { label: "30 min", value: "30 min" },
+                                            { label: "1 hr", value: "1 hr" },
+                                            { label: "1 hr 30 min", value: "1 hr 30 min" },
+                                            { label: "2 hr", value: "2 hr" },
+                                            { label: "2 hr 30 min", value: "2 hr 30 min" },
+                                            { label: "3 hr", value: "3 hr" },
+                                            { label: "3 hr 30 min", value: "3 hr 30 min" },
                                         ]}
                                     />
                                 </CCol>
