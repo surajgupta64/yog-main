@@ -34,10 +34,25 @@ const ServiceMaster = () => {
     const [ServiceName, setServiceName] = useState("");
     const [sub_Service_Name, setSub_Service_Name] = useState("");
     const [selected_service, setSelected_service] = useState("");
-    const [duration, setDuration] = useState("");
     const [fees, setFees] = useState("");
     const [status, setStatus] = useState(false);
     const [updateStatus, setUpdateStatus] = useState(false);
+    const [day, setDay] = useState("");
+    const [month, setMonth] = useState("");
+    const [select, setSelect] = useState("");
+    const [duration, setDuration] = useState("");
+
+    const durationSet = (e) => {
+        if (e.target.id === 'day') {
+            setDay(e.target.value)
+        } else if (e.target.id === 'month') {
+            setMonth(e.target.value)
+        } else if (e.target.id === 'select') {
+            setSelect(e.target.value)
+        }
+        setDuration(day + " " + month + " " + select)
+    }
+
 
 
 
@@ -168,6 +183,9 @@ const ServiceMaster = () => {
         setFees("")
         setDuration('')
         setStatus(false)
+        setDay('')
+        setMonth('')
+        setSelect('')
     }
     const subserviceClose = () => {
         setAction1(!action1)
@@ -178,6 +196,9 @@ const ServiceMaster = () => {
         setFees("")
         setDuration('')
         setStatus(false)
+        setDay('')
+        setMonth('')
+        setSelect('')
     }
 
     const header = [
@@ -229,23 +250,58 @@ const ServiceMaster = () => {
                                         onChange={(e) => setServiceName(e.target.value)}
                                         placeholder="Enter Service Name"
                                     />
-                                    <CInputGroup>
+                                    <CInputGroup
+                                        value={duration}
+                                        onChange={(e) => setDuration(day + month + select)}
+                                    >
                                         <CInputGroupText
                                             component="label"
                                             htmlFor="inputGroupSelect01"
                                         >
                                             Duration
                                         </CInputGroupText>
-                                        <CFormSelect id="inputGroupSelect01"
-                                            value={duration}
-                                            onChange={(e) => setDuration(e.target.value)}>
-                                            <option>Weekly Trail</option>
-                                            <option value="1">Monthly</option>
-                                            <option value="2">Quarterly</option>
-                                            <option value="3">Half Year</option>
-                                            <option value="3">Year</option>
-                                            <option value="3">None</option>
-
+                                        <CFormSelect id="day"
+                                            value={day}
+                                            onChange={durationSet}>
+                                            <option value="">Select</option>
+                                            <option value='1 Day per week'>1 Day per week</option>
+                                            <option value='2 Day per week'>2 Day per week</option>
+                                            <option value='3 Day per week'>3 Day per week</option>
+                                            <option value='4 Day per week'>4 Day per week</option>
+                                            <option value='5 Day per week'>5 Day per week</option>
+                                            <option value='6 Day per week'>6 Day per week</option>
+                                            <option value='7 Day per week'>7 Day per week</option>
+                                        </CFormSelect>
+                                        <CFormSelect id="month"
+                                            value={month}
+                                            onChange={durationSet}>
+                                            <option value="">Select</option>
+                                            <option value=' 1 '>1</option>
+                                            <option value=" 2 ">2</option>
+                                            <option value=" 3 ">3</option>
+                                            <option value=" 4 ">4</option>
+                                            <option value=" 5 ">5</option>
+                                            <option value=" 6 ">6</option>
+                                            <option value=" 7 ">7</option>
+                                            <option value=" 8 ">8</option>
+                                            <option value=" 9 ">9</option>
+                                            <option value=" 10 ">10</option>
+                                            <option value=" 11 ">11</option>
+                                            <option value=" 12 ">12</option>
+                                            <option value=" 13 ">13</option>
+                                            <option value=" 14 ">14</option>
+                                            <option value=" 15 ">15</option>
+                                            <option value=" 16 ">16</option>
+                                            <option value=" 17 ">17</option>
+                                            <option value=" 18 ">18</option>
+                                        </CFormSelect>
+                                        <CFormSelect id="select"
+                                            value={select}
+                                            onChange={durationSet}>
+                                            <option value="">Select</option>
+                                            <option value='Week'>Week</option>
+                                            <option value="Month">Month</option>
+                                            <option value="Year">Year</option>
                                         </CFormSelect>
                                     </CInputGroup>
                                     <CButton className="mt-2" onClick={saveService}>Save</CButton>
@@ -278,20 +334,57 @@ const ServiceMaster = () => {
                                         onChange={(e) => setSub_Service_Name(e.target.value)}
                                         placeholder="Enter Sub Service Name"
                                     />
-                                    <CInputGroup>
+                                    <CInputGroup
+                                        value={duration}
+                                        onChange={(e) => setDuration(day + month + select)}
+                                    >
                                         <CInputGroupText
                                             component="label"
                                             htmlFor="inputGroupSelect01"
                                         >
                                             Duration
                                         </CInputGroupText>
-                                        <CFormSelect id="inputGroupSelect01"
-                                            value={duration}
-                                            onChange={(e) => setDuration(e.target.value)}>
-                                            <option value='Weekly'>Weekly</option>
-                                            <option value='Monthly'>Monthly</option>
-                                            <option value="Quarterly">Quarterly</option>
-                                            <option value="Half Year">Half Year</option>
+                                        <CFormSelect id="day"
+                                            value={day}
+                                            onChange={durationSet}>
+                                            <option value="">Select</option>
+                                            <option value='1 Day per week'>1 Day per week</option>
+                                            <option value='2 Day per week'>2 Day per week</option>
+                                            <option value='3 Day per week'>3 Day per week</option>
+                                            <option value='4 Day per week'>4 Day per week</option>
+                                            <option value='5 Day per week'>5 Day per week</option>
+                                            <option value='6 Day per week'>6 Day per week</option>
+                                            <option value='7 Day per week'>7 Day per week</option>
+                                        </CFormSelect>
+                                        <CFormSelect id="month"
+                                            value={month}
+                                            onChange={durationSet}>
+                                            <option value="">Select</option>
+                                            <option value=' 1 '>1</option>
+                                            <option value=" 2 ">2</option>
+                                            <option value=" 3 ">3</option>
+                                            <option value=" 4 ">4</option>
+                                            <option value=" 5 ">5</option>
+                                            <option value=" 6 ">6</option>
+                                            <option value=" 7 ">7</option>
+                                            <option value=" 8 ">8</option>
+                                            <option value=" 9 ">9</option>
+                                            <option value=" 10 ">10</option>
+                                            <option value=" 11 ">11</option>
+                                            <option value=" 12 ">12</option>
+                                            <option value=" 13 ">13</option>
+                                            <option value=" 14 ">14</option>
+                                            <option value=" 15 ">15</option>
+                                            <option value=" 16 ">16</option>
+                                            <option value=" 17 ">17</option>
+                                            <option value=" 18 ">18</option>
+                                        </CFormSelect>
+                                        <CFormSelect id="select"
+                                            value={select}
+                                            onChange={durationSet}>
+                                            <option value="">Select</option>
+                                            <option value='Week'>Week</option>
+                                            <option value="Month">Month</option>
                                             <option value="Year">Year</option>
                                         </CFormSelect>
                                     </CInputGroup>
