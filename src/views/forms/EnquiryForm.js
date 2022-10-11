@@ -57,7 +57,7 @@ const EnquiryForm = () => {
     console.log(token);
     const [result, setResult] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5000/service/all', {
+        axios.get('https://yoga-power-appv0.herokuapp.com/service/all', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -73,12 +73,18 @@ const EnquiryForm = () => {
     console.log(result);
 
     const saveEnquiry = (e) => {
-        let PersonalDetails = { Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession }
-        let Scheduleenquiryfollowup = { StaffName, CenterName, CallStatus, Message }
-        let EmergencyContact = { person_Name, Relation, CountryCode2, ContactNumber2 }
-        let LeadInformation = { EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor }
-        let data = { PersonalDetails, Scheduleenquiryfollowup, EmergencyContact, LeadInformation }
-        // console.warn(data);
+        let data = {
+            PersonalDetails: {
+                Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession
+            }, Scheduleenquiryfollowup: {
+                StaffName, CenterName, CallStatus, Message
+            }, EmergencyContact: {
+                person_Name, Relation, CountryCode: CountryCode2, ContactNumber: ContactNumber2
+            }, LeadInformation: {
+                EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor
+            }
+        }
+
         fetch("https://yoga-power-appv0.herokuapp.com/enquiryForm/create", {
             method: "POST",
             headers: {
@@ -88,7 +94,6 @@ const EnquiryForm = () => {
             },
             body: JSON.stringify(data)
         }).then((resp) => {
-            // console.warn("resp",resp);;
             resp.json().then(() => {
                 alert("successfully submitted")
                 e.preventDefault();
@@ -437,7 +442,6 @@ const EnquiryForm = () => {
                                             value={appointmentDate}
                                             onChange={(e) => setappointmentDate(e.target.value)}
                                             id="exampleFormControlInput1"
-
                                         />
                                     </CInputGroup>
                                 </CCol>
@@ -461,7 +465,6 @@ const EnquiryForm = () => {
                                                 "Select",
                                                 { label: "Appointment", value: "1" },
                                                 { label: "Trial Session", value: "2" },
-
                                             ]}
                                         />
                                     </CInputGroup>
