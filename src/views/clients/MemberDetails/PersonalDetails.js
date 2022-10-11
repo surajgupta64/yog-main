@@ -17,6 +17,7 @@ import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import React from "react";
 
 const PersonalDetails = () => {
+
     return (
         <CForm>
             <CRow>

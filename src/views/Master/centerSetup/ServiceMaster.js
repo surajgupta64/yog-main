@@ -14,6 +14,8 @@ import {
     CInputGroupText,
     CRow,
     CTable,
+    CTableBody,
+    CTableDataCell,
     CTableHead,
     CTableHeaderCell,
     CTableRow,
@@ -44,7 +46,7 @@ const ServiceMaster = () => {
     const token = user.token;
     const [result, setResult] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:5000/service/all', {
+        axios.get('https://yoga-power-appv0.herokuapp.com/service/all', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -52,6 +54,23 @@ const ServiceMaster = () => {
             .then((res) => {
                 console.log(res.data)
                 setResult(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }, []);
+    console.log(result);
+
+    const [result1, setResult1] = useState([]);
+    useEffect(() => {
+        axios.get('https://yoga-power-appv0.herokuapp.com/subservice/all', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                console.log(res.data)
+                setResult1(res.data)
             })
             .catch((error) => {
                 console.error(error)
@@ -73,6 +92,7 @@ const ServiceMaster = () => {
             // console.warn("resp",resp);;
             resp.json().then(() => {
                 alert("successfully submitted")
+                setServiceName('')
                 setFees("")
                 setDuration('')
                 setStatus(false)
@@ -96,6 +116,11 @@ const ServiceMaster = () => {
             // console.warn("resp",resp);;
             resp.json().then(() => {
                 alert("successfully submitted")
+                setServiceName('')
+                setSelected_service('')
+                setFees("")
+                setDuration('')
+                setStatus(false)
             })
         })
     }
@@ -116,7 +141,7 @@ const ServiceMaster = () => {
                 alert("successfully submitted")
             })
         })
-    }
+    }/* 
     const updateUser = (e) => {
         let item = { name, mobile, email }
         console.warn("item", item)
@@ -133,15 +158,26 @@ const ServiceMaster = () => {
                 getUsers()
             })
         })
-    }
+    } */
 
     const serviceClose1 = () => {
         setAction(!action)
         setAction1(false)
+        setServiceName('')
+        setSelected_service('')
+        setFees("")
+        setDuration('')
+        setStatus(false)
     }
     const subserviceClose = () => {
         setAction1(!action1)
         setAction(false)
+        setSub_Service_Name('')
+        setServiceName('')
+        setSelected_service('')
+        setFees("")
+        setDuration('')
+        setStatus(false)
     }
 
     const header = [
@@ -252,14 +288,14 @@ const ServiceMaster = () => {
                                         <CFormSelect id="inputGroupSelect01"
                                             value={duration}
                                             onChange={(e) => setDuration(e.target.value)}>
-                                            <option>Weekly</option>
-                                            <option value="1">Monthly</option>
-                                            <option value="2">Quarterly</option>
-                                            <option value="3">Half Year</option>
-                                            <option value="3">Year</option>
+                                            <option value='Weekly'>Weekly</option>
+                                            <option value='Monthly'>Monthly</option>
+                                            <option value="Quarterly">Quarterly</option>
+                                            <option value="Half Year">Half Year</option>
+                                            <option value="Year">Year</option>
                                         </CFormSelect>
                                     </CInputGroup>
-                                    <CButton className="mt-2" onClick={() => setAction(false)}>Save</CButton>
+                                    <CButton className="mt-2" onClick={saveSubservice}>Save</CButton>
                                 </CCol>
                                 <CCol>
                                     <CFormSelect
@@ -268,9 +304,9 @@ const ServiceMaster = () => {
                                         label="Select Service"
                                         value={selected_service}
                                         onChange={(e) => setSelected_service(e.target.value)}>
-
+                                        <option>yoga</option>
                                         {result.map((item, index) => (
-                                            <option key={index}>{item.ServiceName}</option>
+                                            <option key={index} value={item.ServiceName}>{item.ServiceName}</option>
                                         ))}
                                     </CFormSelect>
                                     <CRow>
@@ -297,7 +333,7 @@ const ServiceMaster = () => {
 
                                         </CCol>
                                         <CCol>
-                                            <CFormSwitch size="xl" label="Status" value={status} onClick={() => setStatus(!status)} style={{ defaultChecked: 'false' }} />
+                                            <CFormSwitch size="xl" label="Status" value={status} onChange={() => setStatus(!status)} style={{ defaultChecked: 'false' }} />
                                         </CCol>
                                     </CRow>
                                 </CCol>
@@ -311,11 +347,27 @@ const ServiceMaster = () => {
                 <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                         <CTableRow >
-                            <CTableHeaderCell> </CTableHeaderCell>
+                            <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                            <CTableHeaderCell>Sub Service Name</CTableHeaderCell>
+                            <CTableHeaderCell>Service Name</CTableHeaderCell>
+                            <CTableHeaderCell>Duration</CTableHeaderCell>
+                            <CTableHeaderCell>Fees</CTableHeaderCell>
+                            <CTableHeaderCell>Status</CTableHeaderCell>
+                            <CTableHeaderCell>Action</CTableHeaderCell>
                         </CTableRow>
                     </CTableHead>
                     <CTableBody>
-
+                        {result1.map((item, index) => (
+                            <CTableRow key={index}>
+                                <CTableDataCell>{index + 1}</CTableDataCell>
+                                <CTableDataCell>{item.sub_Service_Name}</CTableDataCell>
+                                <CTableDataCell>{item.selected_service}</CTableDataCell>
+                                <CTableDataCell>{item.duration}</CTableDataCell>
+                                <CTableDataCell>{item.fees}</CTableDataCell>
+                                <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} value={item.status} checked={item.status} onChange={(e) => setUpdateStatus(!item.status)} /></CTableDataCell>
+                                <CTableDataCell> <FaEdit style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> </CTableDataCell>
+                            </CTableRow>
+                        ))}
                     </CTableBody>
                 </CTable>
             </CCardBody>

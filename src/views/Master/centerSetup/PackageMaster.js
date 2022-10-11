@@ -1,4 +1,3 @@
-import { cilInfo } from "@coreui/icons";
 import {
     CButton,
     CCard,
@@ -13,13 +12,19 @@ import {
     CInputGroup,
     CInputGroupText,
     CRow,
+    CTable,
+    CTableBody,
+    CTableDataCell,
+    CTableHead,
+    CTableHeaderCell,
+    CTableRow,
 } from "@coreui/react";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { FaBeer } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-import DataTable from "src/components/DataTable";
 
 const PackageMaster = () => {
     const [action, setAction] = useState(false)
@@ -34,7 +39,7 @@ const PackageMaster = () => {
     console.log(user);
     const username = user.user.username;
     const token = user.token;
-    const [result, setResult] = useState();
+    const [result, setResult] = useState([]);
     useEffect(() => {
         fetch('https://yoga-power-appv0.herokuapp.com/Package/all', {
             method: "get",
@@ -57,61 +62,14 @@ const PackageMaster = () => {
             // console.warn("resp",resp);;
             resp.json().then(() => {
                 alert("successfully submitted")
+                setPackageName('')
+                setFees('')
+                setDuration('')
+                setStatus('')
             })
         })
     }
 
-    const header = [
-
-        /* 
-        value: keyword for normal value passing
-        btn: keyword for button
-        btn1 to btn4: keyword for component passing
-        lebel: keyword for anchor tag
-        Note: please don't pass empty values or perameters
-        */
-
-        { heading: 'Sr. No', value: 'id' },
-        { heading: 'Service Name', value: 'service_name' },
-        { heading: 'Assign Date & Time', value: 'date_time' },
-        { heading: 'Member Name', value: 'member_name' },
-        { heading: 'Mobile', value: 'mobile' },
-        { heading: 'Service Name', value: 'service_name' },
-        { heading: 'Service Variation Name', value: 'variation_name' },
-        { heading: 'Expiry Date', value: 'expiry_date' },
-        { heading: 'Info', iconBtn: cilInfo },
-        { heading: 'Renew', btn: 'renew' },
-        { heading: 'Action', com: (<> <FaBeer size='20px' /></>) },
-    ]
-
-    const Users = [
-        {
-            id: 1,
-            date_time: "25-08-2022 03:00 PM",
-            member_name: "Nayana Nagrecha",
-            mobile: "9136123476",
-            service_name: "Yoga",
-            variation_name: "3 Months",
-            expiry_date: "31-08-2022",
-            sales_rep: "Sejal Ganatra",
-            pt_trainer: "-",
-            trainer: "Prabha Yadav",
-            staff_name: "Sejal Ganatra",
-        },
-        {
-            id: 2,
-            date_time: "25-08-2022 03:00 PM",
-            member_name: "Nayana Nagrecha",
-            mobile: "9136123476",
-            service_name: "Yoga",
-            variation_name: "3 Months",
-            expiry_date: "31-08-2022",
-            sales_rep: "Sejal Ganatra",
-            pt_trainer: "-",
-            trainer: "Prabha Yadav",
-            staff_name: "Sejal Ganatra",
-        },
-    ];
 
     return (
         <CCard className="mb-3 border-success">
@@ -125,7 +83,7 @@ const PackageMaster = () => {
                         <div>
                             <CRow>
                                 <CCol>
-                                    <CButton className="ms-1 mt-2" onClick={() => setAction(!action)}>Add New Package</CButton>
+                                    <CButton className="ms-1 mt-2" onClick={() => setAction(!action)}>{action ? 'close' : 'Add New Package'}</CButton>
                                 </CCol>
                             </CRow>
                         </div>
@@ -133,7 +91,7 @@ const PackageMaster = () => {
                     {action &&
                         <div>
                             <CRow className='mt-3'>
-                                <CCol>
+                                <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
                                         className="mb-1"
                                         type="text"
@@ -143,6 +101,20 @@ const PackageMaster = () => {
                                         onChange={(e) => setPackageName(e.target.value)}
                                         placeholder="Enter Package Name"
                                     />
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+                                    <CFormInput
+                                        className="mb-1"
+                                        type="number"
+                                        id="exampleFormControlInput1"
+                                        label="Fees"
+                                        value={fees}
+                                        onChange={(e) => setFees(e.target.value)}
+                                        placeholder="Enter Fees"
+                                    />
+                                </CCol>
+
+                                <CCol lg={6} md={6} sm={12}>
                                     <CInputGroup>
                                         <CInputGroupText
                                             component="label"
@@ -153,36 +125,55 @@ const PackageMaster = () => {
                                         <CFormSelect id="inputGroupSelect01"
                                             value={duration}
                                             onChange={(e) => setDuration(e.target.value)}>
-                                            <option>Weekly Trail</option>
-                                            <option value="1">Monthly</option>
-                                            <option value="2">Quarterly</option>
-                                            <option value="3">Half Year</option>
-                                            <option value="3">Year</option>
+                                            <option value='Weekly'>Weekly</option>
+                                            <option value="Monthly">Monthly</option>
+                                            <option value="Quarterly">Quarterly</option>
+                                            <option value="Half Year">Half Year</option>
+                                            <option value="Year">Year</option>
                                         </CFormSelect>
                                     </CInputGroup>
-                                    <CButton className="mt-2" onClick={savePackage}>Save</CButton>
                                 </CCol>
-                                <CCol>
-                                    <CFormInput
-                                        className="mb-1"
-                                        type="number"
-                                        id="exampleFormControlInput1"
-                                        label="Fees"
-                                        value={fees}
-                                        onChange={(e) => setFees(e.target.value)}
-                                        placeholder="Enter Fees"
-                                    />
+                                <CCol lg={6} md={6} sm={12}>
                                     <CFormSwitch size="xl" label="Status" style={{ defaultChecked: 'false' }}
                                         value={status}
                                         onChange={() => setStatus(!status)} />
                                 </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+                                    <CButton className="mt-2" onClick={savePackage}>Save</CButton>
+                                </CCol>
+
+
+
                             </CRow>
                         </div>
                     }
                 </CForm>
-                <DataTable className='mt-2' heading={header} data={Users} />
+                <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
+                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
+                        <CTableRow >
+                            <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                            <CTableHeaderCell>Package Name</CTableHeaderCell>
+                            <CTableHeaderCell>Duration</CTableHeaderCell>
+                            <CTableHeaderCell>Fees</CTableHeaderCell>
+                            <CTableHeaderCell>Status</CTableHeaderCell>
+                            <CTableHeaderCell>Action</CTableHeaderCell>
+                        </CTableRow>
+                    </CTableHead>
+                    <CTableBody>
+                        {result.map((item, index) => (
+                            <CTableRow key={index}>
+                                <CTableDataCell>{index + 1}</CTableDataCell>
+                                <CTableDataCell>{item.Package_Name}</CTableDataCell>
+                                <CTableDataCell>{item.duration}</CTableDataCell>
+                                <CTableDataCell>{item.fees}</CTableDataCell>
+                                <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} value={item.status} checked={item.status} onChange={(e) => setUpdateStatus(!item.status)} /></CTableDataCell>
+                                <CTableDataCell> <FaEdit style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> </CTableDataCell>
+                            </CTableRow>
+                        ))}
+                    </CTableBody>
+                </CTable>
             </CCardBody>
-        </CCard>
+        </CCard >
     );
 };
 

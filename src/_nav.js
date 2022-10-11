@@ -240,28 +240,28 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Marketing',
-    to: '/base',
+    to: '/Marketing',
     icon: <CIcon icon={cilChatBubble} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'E-Mail Marketing',
-        to: '/base/accordion',
+        to: '/Marketing/email-marketing',
       },
       {
         component: CNavItem,
         name: 'SMS Marketing',
-        to: '/base/breadcrumbs',
+        to: '/Marketing/sms-marketing',
       },
       {
         component: CNavItem,
         name: 'Push Marketing',
-        to: '/base/cards',
+        to: '/Marketing/push-marketing',
       },
       {
         component: CNavItem,
         name: 'Offers Master',
-        to: '/base/cards',
+        to: '/Marketing/offers-master',
       },
       {
         component: CNavItem,

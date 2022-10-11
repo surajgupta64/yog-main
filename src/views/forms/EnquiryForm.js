@@ -388,15 +388,12 @@ const EnquiryForm = () => {
                                         label="Service Name"
 
                                     >
-                                        <option>Yoga</option>
-                                        <option>Zumba</option>
-                                        <option>PT</option>
-                                        <option>Therapeutic Yoga</option>
+                                        <option>Select Service</option>
+                                        {result.map((item, index) => (
+                                            <option key={index} value={item.id}>{item.ServiceName}</option>
+                                        ))}
                                     </CFormSelect>
                                 </CCol>
-                                {/*{result.map((item, index) => (
-                                            <option key={index} value={item.id}>{item.ServiceName}</option>
-                                        ))} */}
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
                                         className="mb-1"

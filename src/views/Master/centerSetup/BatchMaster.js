@@ -1,4 +1,3 @@
-import { cilInfo } from "@coreui/icons";
 import {
     CButton,
     CCard,
@@ -11,12 +10,17 @@ import {
     CFormSelect,
     CFormSwitch,
     CRow,
+    CTable,
+    CTableBody,
+    CTableDataCell,
+    CTableHead,
+    CTableHeaderCell,
+    CTableRow,
 } from "@coreui/react";
 import React, { useEffect, useState } from "react";
-import { FaBeer } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
-import DataTable from "src/components/DataTable";
 
 const BatchMaster = () => {
     const [action, setAction] = useState(false)
@@ -26,12 +30,10 @@ const BatchMaster = () => {
     const [batch_timing, setBatch_timing] = useState('')
     const [status, setStatus] = useState('')
 
-    const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
-    const username = user.user.username;
     const token = user.token;
-    const [result, setResult] = useState();
+    const [result, setResult] = useState([]);
     useEffect(() => {
         fetch('https://yoga-power-appv0.herokuapp.com/Batch/all', {
             method: "get",
@@ -54,61 +56,14 @@ const BatchMaster = () => {
             // console.warn("resp",resp);;
             resp.json().then(() => {
                 alert("successfully submitted")
+                setServiceName('')
+                setService_variation('')
+                setBatch_Duration('')
+                setBatch_timing('')
+                setStatus(false)
             })
         })
     }
-
-    const header = [
-
-        /* 
-        value: keyword for normal value passing
-        btn: keyword for button
-        btn1 to btn4: keyword for component passing
-        lebel: keyword for anchor tag
-        Note: please don't pass empty values or perameters
-        */
-
-        { heading: 'Sr. No', value: 'id' },
-        { heading: 'Service Name', value: 'service_name' },
-        { heading: 'Assign Date & Time', value: 'date_time' },
-        { heading: 'Member Name', value: 'member_name' },
-        { heading: 'Mobile', value: 'mobile' },
-        { heading: 'Service Name', value: 'service_name' },
-        { heading: 'Service Variation Name', value: 'variation_name' },
-        { heading: 'Expiry Date', value: 'expiry_date' },
-        { heading: 'Info', iconBtn: cilInfo },
-        { heading: 'Renew', btn: 'renew' },
-        { heading: 'Action', com: (<> <FaBeer size='20px' /></>) },
-    ]
-
-    const Users = [
-        {
-            id: 1,
-            date_time: "25-08-2022 03:00 PM",
-            member_name: "Nayana Nagrecha",
-            mobile: "9136123476",
-            service_name: "Yoga",
-            variation_name: "3 Months",
-            expiry_date: "31-08-2022",
-            sales_rep: "Sejal Ganatra",
-            pt_trainer: "-",
-            trainer: "Prabha Yadav",
-            staff_name: "Sejal Ganatra",
-        },
-        {
-            id: 2,
-            date_time: "25-08-2022 03:00 PM",
-            member_name: "Nayana Nagrecha",
-            mobile: "9136123476",
-            service_name: "Yoga",
-            variation_name: "3 Months",
-            expiry_date: "31-08-2022",
-            sales_rep: "Sejal Ganatra",
-            pt_trainer: "-",
-            trainer: "Prabha Yadav",
-            staff_name: "Sejal Ganatra",
-        },
-    ];
 
     return (
         <CCard className="mb-3 border-success">
@@ -130,7 +85,7 @@ const BatchMaster = () => {
                     {action &&
                         <div>
                             <CRow className='mt-3'>
-                                <CCol>
+                                <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Service"
@@ -143,19 +98,8 @@ const BatchMaster = () => {
                                             { label: "TTC", value: "2" },
                                         ]}
                                     />
-                                    <CFormInput
-                                        className="mb-1"
-                                        type="time"
-                                        id="exampleFormControlInput1"
-                                        label="Batch Timing "
-                                        value={batch_timing}
-                                        onChange={(e) => setBatch_timing(e.target.value)}
-                                        placeholder="Enter Batch Timing"
-                                    />
-                                    <CFormSwitch size="xl" className="mt-2" value={status} onChange={() => setStatus(!status)} label="Status" style={{ defaultChecked: 'false' }} />
-                                    <CButton className="mt-2" onClick={saveBatch}>Save</CButton>
                                 </CCol>
-                                <CCol>
+                                <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Service"
@@ -168,6 +112,19 @@ const BatchMaster = () => {
                                             { label: "TTC", value: "2" },
                                         ]}
                                     />
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+                                    <CFormInput
+                                        className="mb-1"
+                                        type="time"
+                                        id="exampleFormControlInput1"
+                                        label="Batch Timing "
+                                        value={batch_timing}
+                                        onChange={(e) => setBatch_timing(e.target.value)}
+                                        placeholder="Enter Batch Timing"
+                                    />
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Service"
@@ -185,11 +142,41 @@ const BatchMaster = () => {
                                         ]}
                                     />
                                 </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+                                    <CFormSwitch size="xl" className="mt-2" value={status} onChange={() => setStatus(!status)} label="Status" style={{ defaultChecked: 'false' }} />
+                                    <CButton className="mt-2" onClick={saveBatch}>Save</CButton>
+                                </CCol>
+
                             </CRow>
                         </div>
                     }
                 </CForm>
-                <DataTable className='mt-2' heading={header} data={Users} />
+                <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
+                    <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
+                        <CTableRow >
+                            <CTableHeaderCell>Sr.No</CTableHeaderCell>
+                            <CTableHeaderCell>service_name</CTableHeaderCell>
+                            <CTableHeaderCell>service_variation</CTableHeaderCell>
+                            <CTableHeaderCell>Batch_Duration</CTableHeaderCell>
+                            <CTableHeaderCell>batch_timing</CTableHeaderCell>
+                            <CTableHeaderCell>Status</CTableHeaderCell>
+                            <CTableHeaderCell>Action</CTableHeaderCell>
+                        </CTableRow>
+                    </CTableHead>
+                    <CTableBody>
+                        {result.map((item, index) => (
+                            <CTableRow key={index}>
+                                <CTableDataCell>{index + 1}</CTableDataCell>
+                                <CTableDataCell>{item.service_name}</CTableDataCell>
+                                <CTableDataCell>{item.service_variation}</CTableDataCell>
+                                <CTableDataCell>{item.Batch_Duration}</CTableDataCell>
+                                <CTableDataCell>{item.batch_timing}</CTableDataCell>
+                                <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} value={item.status} checked={item.status} onChange={(e) => setUpdateStatus(!item.status)} /></CTableDataCell>
+                                <CTableDataCell> <FaEdit style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> </CTableDataCell>
+                            </CTableRow>
+                        ))}
+                    </CTableBody>
+                </CTable>
             </CCardBody>
         </CCard>
     );

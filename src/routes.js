@@ -25,6 +25,12 @@ const ServiceCall = React.lazy(() => import('./views/clients/serviceCall/Service
 const AllService = React.lazy(() => import('./views/clients/allService/AllService'))
 const MemberDetails = React.lazy(() => import('./views/clients/MemberDetails/MemberDetails'))
 
+//Marketing
+const EmailMarketing = React.lazy(() => import('./views/marketing/EmailMarketing'))
+const SMSMarketing = React.lazy(() => import('./views/marketing/SMSMarketing'))
+const PushMarketing = React.lazy(() => import('./views/marketing/PushMarketing'))
+const OfferMaster = React.lazy(() => import('./views/marketing/OfferMarketing'))
+
 // Inventory
 const AllCallList = React.lazy(() => import('./views/Inventory/AllCallList'))
 const ImpCallList = React.lazy(() => import('./views/Inventory/ImpCallList'))
@@ -172,6 +178,13 @@ const routes = [
   { path: '/clients/all-service', name: 'All Service', element: AllService },
   { path: '/clients/member-details', name: 'Member Details', element: MemberDetails },
 
+
+  //Marketing
+  { path: '/Marketing', name: 'Marketing', element: EmailMarketing, exact: true },
+  { path: '/Marketing/email-marketing', name: 'Email Marketing', element: EmailMarketing },
+  { path: '/Marketing/sms-marketing', name: 'SMS Marketing', element: SMSMarketing },
+  { path: '/Marketing/push-marketing', name: 'App Notification', element: PushMarketing },
+  { path: '/Marketing/offers-master', name: 'Offer Master', element: OfferMaster },
 
   //Inventory
   { path: '/inventory', name: 'Inventory', element: ImpCallList, exact: true },
