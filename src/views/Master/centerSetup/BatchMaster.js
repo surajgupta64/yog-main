@@ -40,6 +40,20 @@ const BatchMaster = () => {
             headers: { "Authorization": `Bearer ${token}` }
         }).then(res => res.json()).then(json => setResult(json));
     }, []);
+    const [result1, setResult1] = useState([]);
+    useEffect(() => {
+        fetch('https://yoga-power-appv0.herokuapp.com/service/all', {
+            method: "get",
+            headers: { "Authorization": `Bearer ${token}` }
+        }).then(res => res.json()).then(json => setResult1(json));
+    }, []);
+    const [result2, setResult2] = useState([]);
+    useEffect(() => {
+        fetch('https://yoga-power-appv0.herokuapp.com/subservice/all', {
+            method: "get",
+            headers: { "Authorization": `Bearer ${token}` }
+        }).then(res => res.json()).then(json => setResult2(json));
+    }, []);
 
     const saveBatch = () => {
         let data = { service_name, service_variation, Batch_Duration, batch_timing, status }
@@ -92,12 +106,11 @@ const BatchMaster = () => {
                                         label="Service Name"
                                         value={service_name}
                                         onChange={(e) => setServiceName(e.target.value)}
-                                        options={[
-                                            "Select Service",
-                                            { label: "Yoga", value: "1" },
-                                            { label: "TTC", value: "2" },
-                                        ]}
-                                    />
+                                    >
+                                        {result1.map((item, index) => (
+                                            <option key={index} value={item.ServiceName}>{item.ServiceName}</option>
+                                        ))}
+                                    </CFormSelect>
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormSelect
@@ -106,12 +119,12 @@ const BatchMaster = () => {
                                         label="Service Variation"
                                         value={service_variation}
                                         onChange={(e) => setService_variation(e.target.value)}
-                                        options={[
-                                            "None",
-                                            { label: "Power yoga", value: "1" },
-                                            { label: "TTC", value: "2" },
-                                        ]}
-                                    />
+                                    >
+                                        <option value='None'>None</option>
+                                        {result2.map((item, index) => (
+                                            <option key={index} value={item.sub_Service_Name}>{item.sub_Service_Name}</option>
+                                        ))}
+                                    </CFormSelect>
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
