@@ -394,7 +394,9 @@ const EnquiryForm = () => {
                                         <option>Select Service</option>
                                         {result.map((item, index) => (
                                             item.username === username && (
-                                                <option key={index} value={item.id}>{item.ServiceName}</option>
+                                                item.status === true && (
+                                                    <option key={index} value={item.id}>{item.ServiceName}</option>
+                                                )
                                             )
                                         ))}
                                     </CFormSelect>
