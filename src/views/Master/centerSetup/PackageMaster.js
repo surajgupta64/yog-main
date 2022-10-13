@@ -19,35 +19,21 @@ import {
     CTableHeaderCell,
     CTableRow,
 } from "@coreui/react";
+import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+const url = 'https://yoga-power-appv0.herokuapp.com'
 
 
 const PackageMaster = () => {
     const [action, setAction] = useState(false)
     const [Package_Name, setPackageName] = useState("");
     const [fees, setFees] = useState("");
+    const [packages, setPackages] = useState("")
     const [status, setStatus] = useState(false);
-    const [day, setDay] = useState("");
-    const [month, setMonth] = useState("");
-    const [select, setSelect] = useState("");
     const [duration, setDuration] = useState("");
 
-    const durationSet = (e) => {
-        if (e.target.id === 'day') {
-            setDay(e.target.value)
-        } else if (e.target.id === 'month') {
-            setMonth(e.target.value)
-        } else if (e.target.id === 'select') {
-            setSelect(e.target.value)
-        }
-        setDuration(day + " " + month + " " + select)
-    }
-
-    const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
     console.log(duration);
@@ -55,18 +41,59 @@ const PackageMaster = () => {
     const token = user.token;
     const [result, setResult] = useState([]);
     useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/Package/all', {
-            method: "get",
-            headers: { "Authorization": `Bearer ${token}` }
-        }).then(res => res.json()).then(json => setResult(json));
+        getPackage()
     }, []);
 
+    function getPackage() {
+        axios.get(`${url}/Package/all`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setResult(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+    const updateStatus = (id, status) => {
+        let item = { status: status }
+        fetch(`${url}/Package/update/${id}`, {
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        }).then((result) => {
+            result.json().then((resp) => {
+                getPackage()
+            })
+        })
+    }
+
+    function deletePackage(id) {
+        fetch(`${url}/Package/delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then((result) => {
+            result.json().then((resp) => {
+                console.warn(resp)
+                getPackage()
+            })
+        })
+    }
+
     const savePackage = () => {
-        setDuration(day + month + select)
-        console.log(duration);
-        let data = { Package_Name, fees, duration, status }
+        let data = { username: username, Package_Name, fees, packages, duration, status }
         // console.warn(data);
-        fetch("https://yoga-power-appv0.herokuapp.com/Package/create", {
+        fetch(`${url}/Package/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -80,6 +107,7 @@ const PackageMaster = () => {
                 alert("successfully submitted")
                 setPackageName('')
                 setFees('')
+                setPackages('')
                 setDuration('')
                 setStatus('')
             })
@@ -129,11 +157,30 @@ const PackageMaster = () => {
                                         placeholder="Enter Fees"
                                     />
                                 </CCol>
-
-                                <CCol lg={6} md={6} sm={12}>
+                                <CCol lg={6} md={6} sm={12} className="mt-2">
+                                    <CInputGroup>
+                                        <CInputGroupText
+                                            component="label"
+                                            htmlFor="inputGroupSelect01"
+                                        >
+                                            Package
+                                        </CInputGroupText>
+                                        <CFormSelect id="day"
+                                            value={packages}
+                                            onChange={(e) => setPackages(e.target.value)}>
+                                            <option value="">Select</option>
+                                            <option value='1 Day in week'>1 Day per week</option>
+                                            <option value='2 Day in week'>2 Day per week</option>
+                                            <option value='3 Day in week'>3 Day per week</option>
+                                            <option value='4 Day in week'>4 Day per week</option>
+                                            <option value='5 Day in week'>5 Day per week</option>
+                                            <option value='6 Day in week'>6 Day per week</option>
+                                            <option value='7 Day in week'>7 Day per week</option>
+                                        </CFormSelect>
+                                    </CInputGroup>
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12} className="mt-2">
                                     <CInputGroup
-                                        value={duration}
-                                        onChange={(e) => setDuration(day + month + select)}
                                     >
                                         <CInputGroupText
                                             component="label"
@@ -141,62 +188,45 @@ const PackageMaster = () => {
                                         >
                                             Duration
                                         </CInputGroupText>
-                                        <CFormSelect id="day"
-                                            value={day}
-                                            onChange={durationSet}>
-                                            <option value="">Select</option>
-                                            <option value='1 Day per week'>1 Day per week</option>
-                                            <option value='2 Day per week'>2 Day per week</option>
-                                            <option value='3 Day per week'>3 Day per week</option>
-                                            <option value='4 Day per week'>4 Day per week</option>
-                                            <option value='5 Day per week'>5 Day per week</option>
-                                            <option value='6 Day per week'>6 Day per week</option>
-                                            <option value='7 Day per week'>7 Day per week</option>
-                                        </CFormSelect>
                                         <CFormSelect id="month"
-                                            value={month}
-                                            onChange={durationSet}>
+                                            value={duration}
+                                            onChange={(e) => setDuration(e.target.value)}>
                                             <option value="">Select</option>
-                                            <option value=' 1 '>1</option>
-                                            <option value=" 2 ">2</option>
-                                            <option value=" 3 ">3</option>
-                                            <option value=" 4 ">4</option>
-                                            <option value=" 5 ">5</option>
-                                            <option value=" 6 ">6</option>
-                                            <option value=" 7 ">7</option>
-                                            <option value=" 8 ">8</option>
-                                            <option value=" 9 ">9</option>
-                                            <option value=" 10 ">10</option>
-                                            <option value=" 11 ">11</option>
-                                            <option value=" 12 ">12</option>
-                                            <option value=" 13 ">13</option>
-                                            <option value=" 14 ">14</option>
-                                            <option value=" 15 ">15</option>
-                                            <option value=" 16 ">16</option>
-                                            <option value=" 17 ">17</option>
-                                            <option value=" 18 ">18</option>
-                                        </CFormSelect>
-                                        <CFormSelect id="select"
-                                            value={select}
-                                            onChange={durationSet}>
-                                            <option value="">Select</option>
-                                            <option value='Week'>Week</option>
-                                            <option value="Month">Month</option>
-                                            <option value="Year">Year</option>
+                                            <option value=' 1 Week'>1 Week</option>
+                                            <option value=" 2 Week">2 Week</option>
+                                            <option value=" 3 Week">3 Week</option>
+                                            <option value=" 4 Week">4 Week</option>
+                                            <option value=" 5 Week">5 Week</option>
+                                            <option value=" 6 Week">6 Week</option>
+                                            <option value="1 Month">1 Month</option>
+                                            <option value="2 Month">2 Month</option>
+                                            <option value="3 Month">3 Month</option>
+                                            <option value="4 Month">4 Month</option>
+                                            <option value="5 Month">5 Month</option>
+                                            <option value="6 Month">6 Month</option>
+                                            <option value="7 Month">7 Month</option>
+                                            <option value="8 Month">8 Month</option>
+                                            <option value="9 Month">9 Month</option>
+                                            <option value="10 Month">10 Month</option>
+                                            <option value="11 Month">11 Month</option>
+                                            <option value="12 Month">12 Month</option>
+                                            <option value="13 Month">13 Month</option>
+                                            <option value="14 Month">14 Month</option>
+                                            <option value="15 Month">15 Month</option>
+                                            <option value="1 Year">1 Year</option>
+                                            <option value="2 Year">2 Year</option>
+                                            <option value="3 Year">3 Year</option>
+                                            <option value="4 Year">4 Year</option>
+                                            <option value="5 Year">5 Year</option>
                                         </CFormSelect>
                                     </CInputGroup>
                                 </CCol>
-                                <CCol lg={6} md={6} sm={12}>
+                                <CCol lg={6} md={6} sm={12} className='mt-1'>
                                     <CFormSwitch size="xl" label="Status" style={{ defaultChecked: 'false' }}
                                         value={status}
                                         onChange={() => setStatus(!status)} />
-                                </CCol>
-                                <CCol lg={6} md={6} sm={12}>
                                     <CButton className="mt-2" onClick={savePackage}>Save</CButton>
                                 </CCol>
-
-
-
                             </CRow>
                         </div>
                     }
@@ -214,14 +244,17 @@ const PackageMaster = () => {
                     </CTableHead>
                     <CTableBody>
                         {result.map((item, index) => (
-                            <CTableRow key={index}>
-                                <CTableDataCell>{index + 1}</CTableDataCell>
-                                <CTableDataCell>{item.Package_Name}</CTableDataCell>
-                                <CTableDataCell>{item.duration}</CTableDataCell>
-                                <CTableDataCell>{item.fees}</CTableDataCell>
-                                <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} value={item.status} checked={item.status} onChange={(e) => setUpdateStatus(!item.status)} /></CTableDataCell>
-                                <CTableDataCell> <FaEdit style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> </CTableDataCell>
-                            </CTableRow>
+                            item.username === username && (
+                                <CTableRow key={index}>
+                                    <CTableDataCell>{index + 1}</CTableDataCell>
+                                    <CTableDataCell>{item.Package_Name}</CTableDataCell>
+                                    <CTableDataCell>{item.packages}</CTableDataCell>
+                                    <CTableDataCell>{item.duration}</CTableDataCell>
+                                    <CTableDataCell>{item.fees}</CTableDataCell>
+                                    <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} id={item._id} value={item.status} checked={item.status} onChange={() => updateStatus(item._id, !item.status)} /></CTableDataCell>
+                                    <CTableDataCell> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deletePackage(item._id)} size='20px' /> </CTableDataCell>
+                                </CTableRow>
+                            )
                         ))}
                     </CTableBody>
                 </CTable>

@@ -16,8 +16,9 @@ import {
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { CountryList } from "src/components/CountryList";
+const url = 'https://yoga-power-appv0.herokuapp.com'
+
 
 const EnquiryForm = () => {
     const [Fullname, setFullName] = useState("");
@@ -54,10 +55,11 @@ const EnquiryForm = () => {
 
     let user = JSON.parse(localStorage.getItem('user-info'))
     const token = user.token;
+    const username = user.user.username;
     console.log(token);
     const [result, setResult] = useState([]);
     useEffect(() => {
-        axios.get('https://yoga-power-appv0.herokuapp.com/service/all', {
+        axios.get(`${url}/service/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -67,25 +69,21 @@ const EnquiryForm = () => {
                 setResult(res.data)
             })
             .catch((error) => {
-                console.log(error)
+                console.error(error)
             })
     }, []);
     console.log(result);
 
     const saveEnquiry = (e) => {
         let data = {
-            PersonalDetails: {
-                Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession
-            }, Scheduleenquiryfollowup: {
-                StaffName, CenterName, CallStatus, Message
-            }, EmergencyContact: {
-                person_Name, Relation, CountryCode: CountryCode2, ContactNumber: ContactNumber2
-            }, LeadInformation: {
-                EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor
-            }
+            username: username,
+            Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession,
+            StaffName, CenterName, CallStatus, Message,
+            person_Name, Relation, CountryCode2, ContactNumber2: ContactNumber2,
+            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry"
         }
 
-        fetch("https://yoga-power-appv0.herokuapp.com/enquiryForm/create", {
+        fetch(`${url}/enquiryForm/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -199,9 +197,9 @@ const EnquiryForm = () => {
                                         label="Gander"
                                         options={[
                                             "Select Gender",
-                                            { label: "Male", value: "1" },
-                                            { label: "Female", value: "2" },
-                                            { label: "Other", value: "2" },
+                                            { label: "Male", value: "Male" },
+                                            { label: "Female", value: "Female" },
+                                            { label: "Other", value: "Other" },
                                         ]}
                                     />
                                 </CCol>
@@ -302,9 +300,9 @@ const EnquiryForm = () => {
                                         label="Call Status"
                                         options={[
                                             "Select Call Status",
-                                            { label: "Cold", value: "1" },
-                                            { label: "Warm", value: "2" },
-                                            { label: "Hot", value: "3" },
+                                            { label: "Cold", value: "Cold" },
+                                            { label: "Warm", value: "Warm" },
+                                            { label: "Hot", value: "Hot" },
                                         ]}
                                     />
                                 </CCol>
@@ -395,7 +393,9 @@ const EnquiryForm = () => {
                                     >
                                         <option>Select Service</option>
                                         {result.map((item, index) => (
-                                            <option key={index} value={item.id}>{item.ServiceName}</option>
+                                            item.username === username && (
+                                                <option key={index} value={item.id}>{item.ServiceName}</option>
+                                            )
                                         ))}
                                     </CFormSelect>
                                 </CCol>
@@ -463,8 +463,8 @@ const EnquiryForm = () => {
                                             onChange={(e) => setappointmentfor(e.target.value)}
                                             options={[
                                                 "Select",
-                                                { label: "Appointment", value: "1" },
-                                                { label: "Trial Session", value: "2" },
+                                                { label: "Appointment", value: "Appointment" },
+                                                { label: "Trial Session", value: "Trial Session" },
                                             ]}
                                         />
                                     </CInputGroup>

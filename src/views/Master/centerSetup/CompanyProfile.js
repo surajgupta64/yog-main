@@ -53,7 +53,7 @@ const CompanyProfile = () => {
     }, []);
 
     const saveProfile = () => {
-        let data = { profileId, brandName, brandNumber, emailAddress, areaSequerFit, currency, businessCategory, brandFullAddress, city, state, openingTime, closingTime, workingDays, halfDay, holidays }
+        let data = { username: username, profileId, brandName, brandNumber, emailAddress, areaSequerFit, currency, businessCategory, brandFullAddress, city, state, openingTime, closingTime, workingDays, halfDay, holidays }
         // console.warn(data);
         fetch("https://yoga-power-appv0.herokuapp.com/Companyprofile/create", {
             method: "POST",

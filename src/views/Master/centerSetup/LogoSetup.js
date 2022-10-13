@@ -13,8 +13,8 @@ import {
 } from "@coreui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
+const url = 'http://localhost:5000'
 
 const LogoSetup = () => {
     const [logoImage, setImage] = useState()
@@ -22,7 +22,9 @@ const LogoSetup = () => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
     const token = user.token;
-    const [result, setResult] = useState();
+    const username = user.user.username;
+    console.log(username);
+    const [result, setResult] = useState(null);
     useEffect(() => {
         fetch('https://yoga-power-appv0.herokuapp.com/brandlogoupdate/all', {
             method: "get",
@@ -31,15 +33,11 @@ const LogoSetup = () => {
     }, []);
 
     const saveLogo = () => {
-        let data = { logoImage }
+        let data = { username, logoImage }
         // console.warn(data);
-        fetch("https://yoga-power-appv0.herokuapp.com/brandlogoupdate/create", {
+        fetch(`${url}/create`, {
             method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: { "Authorization": `Bearer ${token}` },
             body: JSON.stringify(data)
         }).then((resp) => {
             // console.warn("resp",resp);;

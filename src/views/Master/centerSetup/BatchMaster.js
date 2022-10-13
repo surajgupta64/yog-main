@@ -17,10 +17,10 @@ import {
     CTableHeaderCell,
     CTableRow,
 } from "@coreui/react";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-
+const url = 'https://yoga-power-appv0.herokuapp.com'
 
 const BatchMaster = () => {
     const [action, setAction] = useState(false)
@@ -33,32 +33,94 @@ const BatchMaster = () => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
     const token = user.token;
+    const username = user.user.username;
     const [result, setResult] = useState([]);
-    useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/Batch/all', {
-            method: "get",
-            headers: { "Authorization": `Bearer ${token}` }
-        }).then(res => res.json()).then(json => setResult(json));
-    }, []);
     const [result1, setResult1] = useState([]);
-    useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/service/all', {
-            method: "get",
-            headers: { "Authorization": `Bearer ${token}` }
-        }).then(res => res.json()).then(json => setResult1(json));
-    }, []);
     const [result2, setResult2] = useState([]);
     useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/subservice/all', {
-            method: "get",
-            headers: { "Authorization": `Bearer ${token}` }
-        }).then(res => res.json()).then(json => setResult2(json));
+        getBatch()
+        getService()
+        getSubService()
     }, []);
 
+    function getBatch() {
+        axios.get(`${url}/Batch/all`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setResult(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+
+    function getService() {
+        axios.get(`${url}/service/all`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                console.log(res.data)
+                setResult1(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+    function getSubService() {
+        axios.get(`${url}/subservice/all`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                setResult2(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+    const updateStatus = (id, status) => {
+        let item = { status: status }
+        fetch(`${url}/Batch/update/${id}`, {
+            method: 'POST',
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        }).then((result) => {
+            result.json().then((resp) => {
+                getBatch()
+            })
+        })
+    }
+
+    function deleteBatch(id) {
+        fetch(`${url}/Batch/delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then((result) => {
+            result.json().then((resp) => {
+                getBatch()
+            })
+        })
+    }
+
+
     const saveBatch = () => {
-        let data = { service_name, service_variation, Batch_Duration, batch_timing, status }
+        let data = { username: username, service_name: service_name, service_variation: service_variation, Batch_Duration, batch_timing, status }
         // console.warn(data);
-        fetch("https://yoga-power-appv0.herokuapp.com/Batch/create", {
+        fetch(`${url}/Batch/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -107,8 +169,13 @@ const BatchMaster = () => {
                                         value={service_name}
                                         onChange={(e) => setServiceName(e.target.value)}
                                     >
+                                        <option>Select</option>
                                         {result1.map((item, index) => (
-                                            <option key={index} value={item.ServiceName}>{item.ServiceName}</option>
+                                            item.username === username && (
+                                                item.status === true && (
+                                                    <option key={index}>{item.ServiceName}</option>
+                                                )
+                                            )
                                         ))}
                                     </CFormSelect>
                                 </CCol>
@@ -119,10 +186,14 @@ const BatchMaster = () => {
                                         label="Service Variation"
                                         value={service_variation}
                                         onChange={(e) => setService_variation(e.target.value)}
-                                    >
-                                        <option value='None'>None</option>
+                                    ><option>Select</option>
+                                        <option>None</option>
                                         {result2.map((item, index) => (
-                                            <option key={index} value={item.sub_Service_Name}>{item.sub_Service_Name}</option>
+                                            item.username === username && (
+                                                item.status === true && (
+                                                    <option key={index} >{item.sub_Service_Name}</option>
+                                                )
+                                            )
                                         ))}
                                     </CFormSelect>
                                 </CCol>
@@ -169,25 +240,27 @@ const BatchMaster = () => {
                     <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                         <CTableRow >
                             <CTableHeaderCell>Sr.No</CTableHeaderCell>
-                            <CTableHeaderCell>service_name</CTableHeaderCell>
-                            <CTableHeaderCell>service_variation</CTableHeaderCell>
-                            <CTableHeaderCell>Batch_Duration</CTableHeaderCell>
-                            <CTableHeaderCell>batch_timing</CTableHeaderCell>
+                            <CTableHeaderCell>Service Name</CTableHeaderCell>
+                            <CTableHeaderCell>Service Variation</CTableHeaderCell>
+                            <CTableHeaderCell>Batch Duration</CTableHeaderCell>
+                            <CTableHeaderCell>Batch Timing</CTableHeaderCell>
                             <CTableHeaderCell>Status</CTableHeaderCell>
                             <CTableHeaderCell>Action</CTableHeaderCell>
                         </CTableRow>
                     </CTableHead>
                     <CTableBody>
                         {result.map((item, index) => (
-                            <CTableRow key={index}>
-                                <CTableDataCell>{index + 1}</CTableDataCell>
-                                <CTableDataCell>{item.service_name}</CTableDataCell>
-                                <CTableDataCell>{item.service_variation}</CTableDataCell>
-                                <CTableDataCell>{item.Batch_Duration}</CTableDataCell>
-                                <CTableDataCell>{item.batch_timing}</CTableDataCell>
-                                <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} value={item.status} checked={item.status} onChange={(e) => setUpdateStatus(!item.status)} /></CTableDataCell>
-                                <CTableDataCell> <FaEdit style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> </CTableDataCell>
-                            </CTableRow>
+                            item.username === username && (
+                                <CTableRow key={index}>
+                                    <CTableDataCell>{index + 1}</CTableDataCell>
+                                    <CTableDataCell>{item.service_name}</CTableDataCell>
+                                    <CTableDataCell>{item.service_variation}</CTableDataCell>
+                                    <CTableDataCell>{item.Batch_Duration}</CTableDataCell>
+                                    <CTableDataCell>{item.batch_timing}</CTableDataCell>
+                                    <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} id={item._id} value={item.status} checked={item.status} onChange={() => updateStatus(item._id, !item.status)} /></CTableDataCell>
+                                    <CTableDataCell> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteBatch(item._id)} size='20px' /> </CTableDataCell>
+                                </CTableRow>
+                            )
                         ))}
                     </CTableBody>
                 </CTable>
