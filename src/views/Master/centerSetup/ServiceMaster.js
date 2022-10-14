@@ -143,7 +143,7 @@ const ServiceMaster = () => {
     const saveService = () => {
         let data = { username: username, ServiceName, fees, packages, duration, status }
         // console.warn(data);
-        fetch("http://localhost:5000/service/create", {
+        fetch(`${url}/service/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -166,7 +166,7 @@ const ServiceMaster = () => {
     const saveSubservice = () => {
         let data = { username: username, sub_Service_Name, selected_service: selected_service, fees, packages, duration, status }
         // console.warn(data);
-        fetch("http://localhost:5000/subservice/create", {
+        fetch(`${url}/subservice/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -195,7 +195,7 @@ const ServiceMaster = () => {
         setFees("")
         setDuration('')
         setStatus(false)
-        setDay('')
+
         setMonth('')
         setSelect('')
     }
@@ -208,7 +208,7 @@ const ServiceMaster = () => {
         setFees("")
         setDuration('')
         setStatus(false)
-        setDay('')
+
         setMonth('')
         setSelect('')
     }
