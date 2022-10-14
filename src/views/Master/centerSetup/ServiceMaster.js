@@ -196,8 +196,6 @@ const ServiceMaster = () => {
         setDuration('')
         setStatus(false)
 
-        setMonth('')
-        setSelect('')
     }
     const subserviceClose = () => {
         setAction1(!action1)
@@ -208,9 +206,6 @@ const ServiceMaster = () => {
         setFees("")
         setDuration('')
         setStatus(false)
-
-        setMonth('')
-        setSelect('')
     }
 
 
