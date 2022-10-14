@@ -213,30 +213,6 @@ const _nav = [
       },
     ],
   },
-
-  {
-    component: CNavGroup,
-    name: 'Courses',
-    to: '/base',
-    icon: <CIcon icon={cilBook} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Batches',
-        to: '/base/accordion',
-      },
-      {
-        component: CNavItem,
-        name: 'PT',
-        to: '/base/breadcrumbs',
-      },
-      {
-        component: CNavItem,
-        name: 'Classes',
-        to: '/base/cards',
-      },
-    ],
-  },
   {
     component: CNavGroup,
     name: 'Marketing',
@@ -545,6 +521,29 @@ const _nav = [
       {
         component: CNavItem,
         name: 'View Staff Substitution',
+        to: '/base/cards',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Courses',
+    to: '/base',
+    icon: <CIcon icon={cilBook} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Batches',
+        to: '/base/accordion',
+      },
+      {
+        component: CNavItem,
+        name: 'PT',
+        to: '/base/breadcrumbs',
+      },
+      {
+        component: CNavItem,
+        name: 'Classes',
         to: '/base/cards',
       },
     ],

@@ -110,6 +110,7 @@ const PackageMaster = () => {
                 setPackages('')
                 setDuration('')
                 setStatus('')
+                getPackage()
             })
         })
     }

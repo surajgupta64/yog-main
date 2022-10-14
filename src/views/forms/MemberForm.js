@@ -92,11 +92,11 @@ const MemberForm = () => {
     const username = user.user.username;
     const [result, setResult] = useState([]);
     const [result1, setResult1] = useState([]);
-    const [partner, setPartner] = useState([]);
+    const [mem, setMem] = useState([]);
     useEffect(() => {
         getBatch()
+        getMem()
         getSubService()
-        getPertner()
     }, []);
     function getSubService() {
         axios.get(`${url}/subservice/all`, {
@@ -111,22 +111,21 @@ const MemberForm = () => {
                 console.error(error)
             })
     }
-    function getBatch() {
-        axios.get(`${url}/Batch/all`, {
+    function getMem() {
+        axios.get(`${url}/memberForm/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         })
             .then((res) => {
-                console.log(res.data)
-                setResult(res.data)
+                setMem(res.data)
             })
             .catch((error) => {
                 console.error(error)
             })
     }
-    function getPertner() {
-        axios.get(`${url}/signup/all`, {
+    function getBatch() {
+        axios.get(`${url}/Batch/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -596,15 +595,17 @@ const MemberForm = () => {
                                             <CRow>
                                                 <CCardTitle>IDs</CCardTitle>
                                                 <CCol xs={6}>
-                                                    <CFormInput
+                                                    <CFormSelect
                                                         className="mb-1"
                                                         type="text"
                                                         id="exampleFormControlInput1"
                                                         value={AttendanceID}
                                                         onChange={(e) => setAttendanceID(e.target.value)}
                                                         label="Attendance ID"
-                                                        placeholder="Enter Attendance ID"
-                                                    />
+                                                    >
+                                                        <option>Select Attendance ID</option>
+                                                        <option>CLIENT{mem.length}</option>
+                                                    </CFormSelect>
                                                 </CCol>
                                                 <CCol xs={6}>
                                                     <CFormSelect

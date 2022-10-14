@@ -137,6 +137,7 @@ const BatchMaster = () => {
                 setBatch_Duration('')
                 setBatch_timing('')
                 setStatus(false)
+                getBatch()
             })
         })
     }
