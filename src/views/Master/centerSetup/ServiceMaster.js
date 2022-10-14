@@ -164,7 +164,7 @@ const ServiceMaster = () => {
     }
 
     const saveSubservice = () => {
-        let data = { username: username, sub_Service_Name, selected_service, fees, packages, duration, status }
+        let data = { username: username, sub_Service_Name, selected_service: selected_service, fees, packages, duration, status }
         // console.warn(data);
         fetch("http://localhost:5000/subservice/create", {
             method: "POST",
@@ -348,6 +348,7 @@ const ServiceMaster = () => {
                                         label="Select Service"
                                         value={selected_service}
                                         onChange={(e) => setSelected_service(e.target.value)}>
+                                        <option>Select</option>
                                         {result.map((item, index) => (
                                             item.username === username && (
                                                 item.status && (

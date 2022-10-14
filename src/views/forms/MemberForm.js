@@ -21,11 +21,11 @@ import {
     CTabContent,
     CTabPane,
 } from "@coreui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CountryList } from "src/components/CountryList";
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import axios from "axios";
-const url = 'http://localhost:5000'
+const url = 'https://yoga-power-appv0.herokuapp.com'
 
 const MemberForm = () => {
     const [activeKey, setActiveKey] = useState(1)
@@ -610,35 +610,55 @@ const MemberForm = () => {
                                                         onChange={(e) => setAsthmaCOPD(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Back Pain" />
+                                                    <CFormCheck label="Back Pain"
+                                                        checked={BackPain}
+                                                        onChange={(e) => setBackPain(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Bone Fracture" />
+                                                    <CFormCheck label="Bone Fracture"
+                                                        checked={BoneFracture}
+                                                        onChange={(e) => setBoneFracture(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Carpal Tunnel" />
+                                                    <CFormCheck label="Carpal Tunnel"
+                                                        checked={CarpalTunnel}
+                                                        onChange={(e) => setCarpalTunnel(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Diabetes" />
+                                                    <CFormCheck label="Diabetes"
+                                                        checked={Diabetes}
+                                                        onChange={(e) => setDiabetes(e.target.value)}
+                                                    />
                                                 </CListGroupItem>
                                             </CListGroup>
                                         </CCol>
                                         <CCol>
                                             <CListGroup>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Digestive Disorder" />
+                                                    <CFormCheck label="Digestive Disorder"
+                                                        checked={DigestiveDisorder}
+                                                        onChange={(e) => setDigestiveDisorder(e.target.value)}
+                                                    />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Shoulder Pain" />
+                                                    <CFormCheck label="Shoulder Pain"
+                                                        checked={Epilepsy}
+                                                        onChange={(e) => setEpilepsy(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Foot Pain" />
+                                                    <CFormCheck label="Foot Pain"
+                                                        checked={FootPain}
+                                                        onChange={(e) => setFootPain(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Knee Replacement" />
+                                                    <CFormCheck label="Knee Replacement"
+                                                        checked={Glaucoma}
+                                                        onChange={(e) => setGlaucoma(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="High Cholestrol" />
+                                                    <CFormCheck label="High Cholestrol"
+                                                        checked={Glaucoma}
+                                                        onChange={(e) => setGlaucoma(e.target.value)} />
                                                 </CListGroupItem>
                                             </CListGroup>
                                         </CCol>
@@ -655,10 +675,14 @@ const MemberForm = () => {
                                                     <CFormCheck label="Surgery" />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="High Blood Pressure" />
+                                                    <CFormCheck label="High Blood Pressure"
+                                                        checked={HighBloodPressure}
+                                                        onChange={(e) => setHighBloodPressure(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Other" />
+                                                    <CFormCheck label="Other"
+                                                        checked={Other}
+                                                        onChange={(e) => setOther(e.target.value)} />
                                                 </CListGroupItem>
                                             </CListGroup>
                                         </CCol>

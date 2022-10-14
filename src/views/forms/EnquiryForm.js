@@ -80,7 +80,7 @@ const EnquiryForm = () => {
             Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession,
             StaffName, CenterName, CallStatus, Message,
             person_Name, Relation, CountryCode2, ContactNumber2: ContactNumber2,
-            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry"
+            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry",
         }
 
         fetch(`${url}/enquiryForm/create`, {
@@ -437,7 +437,7 @@ const EnquiryForm = () => {
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CInputGroup className="mt-2">
-                                        <CInputGroupText className="mb-1">Date</CInputGroupText>
+                                        <CInputGroupText className="mb-1">Appointment Date</CInputGroupText>
                                         <CFormInput
                                             className="mb-1"
                                             type="date"
@@ -449,7 +449,7 @@ const EnquiryForm = () => {
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
                                     <CInputGroup className="mt-2">
-                                        <CInputGroupText className="mb-1">Time</CInputGroupText>
+                                        <CInputGroupText className="mb-1">Appointment Time</CInputGroupText>
                                         <CFormInput
                                             className="mb-1"
                                             type="time"
@@ -458,6 +458,11 @@ const EnquiryForm = () => {
                                             onChange={(e) => setappointmentTime(e.target.value)}
 
                                         />
+                                    </CInputGroup>
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+                                    <CInputGroup className="mt-2">
+                                        <CInputGroupText className="mb-1">Enquiry For</CInputGroupText>
                                         <CFormSelect
                                             className="mb-1"
                                             aria-label="Select"
