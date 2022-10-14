@@ -35,6 +35,7 @@ const MemberForm = () => {
     const [WhatsappNumber, setWhatsappNumber] = useState('')
     const [Email, setEmail] = useState('')
     const [Gender, setGender] = useState('')
+    const [Anniversarydate, setAnniversarydate] = useState('')
     const [DateofBirth, setDateofBirth] = useState('')
     const [Address, setAddress] = useState('')
     const [Area, setArea] = useState('')
@@ -89,10 +90,8 @@ const MemberForm = () => {
     const username = user.user.username;
     const [result, setResult] = useState([]);
     const [result1, setResult1] = useState([]);
-    const [result2, setResult2] = useState([]);
     useEffect(() => {
         getBatch()
-        getService()
         getSubService()
     }, []);
     function getSubService() {
@@ -102,20 +101,6 @@ const MemberForm = () => {
             }
         })
             .then((res) => {
-                setResult2(res.data)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
-    function getService() {
-        axios.get(`${url}/service/all`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-            .then((res) => {
-                console.log(res.data)
                 setResult1(res.data)
             })
             .catch((error) => {
@@ -136,6 +121,58 @@ const MemberForm = () => {
                 console.error(error)
             })
     }
+
+    const saveMember = (e) => {
+        let data = {
+            username: username,
+            Fullname, CountryCode, ContactNumber, WhatsappNumber, Email, Gender, DateofBirth, Anniversarydate, Address, Area, city, pincode, state, BloodGroup,
+            FacebookID, sms, mail, pushnotification,
+            Name, CountryCode1, ContactNumber1, Relationship,
+            ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry",
+        }
+
+        fetch(`${url}/enquiryForm/create`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        }).then((resp) => {
+            resp.json().then(() => {
+                alert("successfully submitted")
+                e.preventDefault();
+                console.log("refresh prevented");
+                setFullName('')
+                setEmailAddress('')
+                setCountryCode('')
+                setContactNumber('')
+                setGander('')
+                setDateofBirth('')
+                setAddress('')
+                setArea('')
+                setCity('')
+                setProfession('')
+                setStaffName('')
+                setCenterName('')
+                setCallStatus('')
+                setMessage('')
+                setperson_Name('')
+                setRelation('')
+                setCountryCode2('')
+                setContactNumber2('')
+                setEnquiryDate('')
+                setServiceName('')
+                setCustomertype('')
+                setEnquirytype('')
+                setappointmentDate('')
+                setappointmentTime('')
+                setappointmentfor('')
+            })
+        })
+    }
+
     return (
         <CCard>
             <CCardHeader>Member Form</CCardHeader>
@@ -176,14 +213,13 @@ const MemberForm = () => {
                                                 <CCol xs={4} className='mt-2 mb-1' >
                                                     <CImage className="mb-1" style={{ borderRadius: "50px" }} width={'200px'} src={ProfileIcon} />
                                                 </CCol>
-                                                <CCol xs={8} className='mt-5'>
+                                                <CCol xs={7} className='mt-5'>
                                                     <CRow>
                                                         <CFormInput
                                                             className="mb-1 ms-2 mr-3"
                                                             type="file"
-
-                                                        /></CRow>
-
+                                                        />
+                                                    </CRow>
                                                 </CCol>
                                                 <CCol xs={6}>
                                                     <CFormInput
@@ -260,6 +296,17 @@ const MemberForm = () => {
                                                 </CCol>
                                             </CRow>
                                             <CRow>
+                                                <CCol>
+                                                    <CFormInput
+                                                        className="mb-1"
+                                                        type="date"
+                                                        id="exampleFormControlInput1"
+                                                        value={Anniversarydate}
+                                                        onChange={(e) => setAnniversarydate(e.target.value)}
+                                                        label='Anniversary Date'
+                                                        placeholder="Enter Anniversary Date"
+                                                    />
+                                                </CCol>
                                                 <CCol>
                                                     <CFormSelect
                                                         className="mb-1"
@@ -370,17 +417,17 @@ const MemberForm = () => {
                                                 <CCol xs={4}>
                                                     <CFormSwitch size="xl" label="SMS"
                                                         checked={sms}
-                                                        onChange={(e) => setsms(e.target.value)} />
+                                                        onChange={() => setsms(!sms)} />
                                                 </CCol>
                                                 <CCol xs={4}>
                                                     <CFormSwitch size="xl" label="Mail"
                                                         checked={mail}
-                                                        onChange={(e) => setmail(e.target.value)} />
+                                                        onChange={() => setmail(!mail)} />
                                                 </CCol>
                                                 <CCol xs={4}>
                                                     <CFormSwitch size="xl" label="Push Notification"
                                                         checked={pushnotification}
-                                                        onChange={(e) => setpushnotification(e.target.value)} />
+                                                        onChange={() => setpushnotification(!pushnotification)} />
                                                 </CCol>
                                             </CRow>
                                         </CCol>
@@ -445,9 +492,9 @@ const MemberForm = () => {
                                                         label="Service Name"
                                                     >
                                                         <option>Select Service</option>
-                                                        {result.map((item, index) => (
+                                                        {result1.map((item, index) => (
                                                             item.username === username && (
-                                                                <option key={index}>{item.ServiceName}</option>
+                                                                <option key={index}>{item.selected_service} {item.sub_Service_Name}</option>
                                                             )
                                                         ))}</CFormSelect>
                                                 </CCol>
@@ -605,29 +652,24 @@ const MemberForm = () => {
                                         <CCol>
                                             <CListGroup>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Asthma/COPD"
-                                                        checked={AsthmaCOPD}
-                                                        onChange={(e) => setAsthmaCOPD(e.target.value)} />
-                                                </CListGroupItem>
-                                                <CListGroupItem>
                                                     <CFormCheck label="Back Pain"
                                                         checked={BackPain}
-                                                        onChange={(e) => setBackPain(e.target.value)} />
+                                                        onChange={() => setBackPain(!BackPain)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="Bone Fracture"
                                                         checked={BoneFracture}
-                                                        onChange={(e) => setBoneFracture(e.target.value)} />
+                                                        onChange={() => setBoneFracture(!BoneFracture)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="Carpal Tunnel"
                                                         checked={CarpalTunnel}
-                                                        onChange={(e) => setCarpalTunnel(e.target.value)} />
+                                                        onChange={() => setCarpalTunnel(!CarpalTunnel)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="Diabetes"
                                                         checked={Diabetes}
-                                                        onChange={(e) => setDiabetes(e.target.value)}
+                                                        onChange={() => setDiabetes(!Diabetes)}
                                                     />
                                                 </CListGroupItem>
                                             </CListGroup>
@@ -635,30 +677,24 @@ const MemberForm = () => {
                                         <CCol>
                                             <CListGroup>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Digestive Disorder"
-                                                        checked={DigestiveDisorder}
-                                                        onChange={(e) => setDigestiveDisorder(e.target.value)}
-                                                    />
+                                                    <CFormCheck label="Pregnancy"
+                                                        checked={HeartDiseaseCondition}
+                                                        onChange={() => setHeartDiseaseCondition(!HeartDiseaseCondition)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="Shoulder Pain"
                                                         checked={Epilepsy}
-                                                        onChange={(e) => setEpilepsy(e.target.value)} />
+                                                        onChange={() => setEpilepsy(!Epilepsy)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="Foot Pain"
                                                         checked={FootPain}
-                                                        onChange={(e) => setFootPain(e.target.value)} />
+                                                        onChange={() => setFootPain(!FootPain)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="Knee Replacement"
                                                         checked={Glaucoma}
-                                                        onChange={(e) => setGlaucoma(e.target.value)} />
-                                                </CListGroupItem>
-                                                <CListGroupItem>
-                                                    <CFormCheck label="High Cholestrol"
-                                                        checked={HeartDiseaseCondition}
-                                                        onChange={(e) => setHeartDiseaseCondition(e.target.value)} />
+                                                        onChange={() => setGlaucoma(!Glaucoma)} />
                                                 </CListGroupItem>
                                             </CListGroup>
                                         </CCol>
@@ -666,36 +702,39 @@ const MemberForm = () => {
                                         <CCol>
                                             <CListGroup>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Joint Pain" />
-                                                </CListGroupItem>
-                                                <CListGroupItem>
-                                                    <CFormCheck label="Pregnancy" />
+                                                    <CFormCheck label="Joint Pain"
+                                                        checked={AsthmaCOPD}
+                                                        onChange={() => setAsthmaCOPD(!AsthmaCOPD)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="Surgery"
                                                         checked={HerniaDiastasisRecti}
-                                                        onChange={(e) => setHerniaDiastasisRecti(e.target.value)} />
+                                                        onChange={() => setHerniaDiastasisRecti(!HerniaDiastasisRecti)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="High Blood Pressure"
                                                         checked={HighBloodPressure}
-                                                        onChange={(e) => setHighBloodPressure(e.target.value)} />
+                                                        onChange={() => setHighBloodPressure(!HighBloodPressure)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="Other"
                                                         checked={Other}
-                                                        onChange={(e) => setOther(e.target.value)} />
+                                                        onChange={() => setOther(!Other)} />
                                                 </CListGroupItem>
                                             </CListGroup>
                                         </CCol>
                                         {Other && (
-                                            <CFormInput
-                                                className="mb-1"
-                                                type="text"
-                                                id="exampleFormControlInput1"
-                                                label="Other Reason"
-                                                placeholder="Enter Other Reason"
-                                            />
+                                            <CCol lg={12}>
+                                                <CFormInput
+                                                    className="mb-1"
+                                                    type="text"
+                                                    id="exampleFormControlInput1"
+                                                    value={OtherText}
+                                                    onChange={(e) => setOtherText(e.target.value)}
+                                                    label="Other Reason"
+                                                    placeholder="Enter Other Reason"
+                                                />
+                                            </CCol>
                                         )}
                                     </CRow>
                                     <CButton className="mt-2" onClick={() => setActiveKey(2)}>Save</CButton>
@@ -709,6 +748,8 @@ const MemberForm = () => {
                                                 className="mb-1"
                                                 type="text"
                                                 id="exampleFormControlInput1"
+                                                value={Height}
+                                                onChange={(e) => setHeight(e.target.value)}
                                                 label="Height"
                                                 placeholder="Enter height"
                                             />
@@ -718,6 +759,8 @@ const MemberForm = () => {
                                                 className="mb-1"
                                                 type="text"
                                                 id="exampleFormControlInput1"
+                                                value={Weight}
+                                                onChange={(e) => setWeight(e.target.value)}
                                                 label="Weight"
                                                 placeholder="Enter Weight"
                                             />
@@ -728,6 +771,8 @@ const MemberForm = () => {
                                             <CFormSelect
                                                 className="mb-1"
                                                 aria-label="Select Currency"
+                                                value={fitnessLevel}
+                                                onChange={(e) => setfitnessLevel(e.target.value)}
                                                 label="Fitness Level"
                                                 options={[
                                                     "Select Fitness Level",
@@ -741,6 +786,8 @@ const MemberForm = () => {
                                         <CCol xs={3}>
                                             <CFormSelect
                                                 className="mb-1"
+                                                value={fitnessGoal}
+                                                onChange={(e) => setfitnessGoal(e.target.value)}
                                                 aria-label="Select Currency"
                                                 label="Fitness Goal"
                                                 options={[
@@ -755,6 +802,8 @@ const MemberForm = () => {
                                         <CCol xs={3}>
                                             <CFormInput
                                                 className="mb-1"
+                                                value={idealWeight}
+                                                onChange={(e) => setidealWeight(e.target.value)}
                                                 type="text"
                                                 id="exampleFormControlInput1"
                                                 label="Ideal Weight"
@@ -764,6 +813,8 @@ const MemberForm = () => {
                                         <CCol>
                                             <CFormTextarea
                                                 id="exampleFormControlTextarea1"
+                                                value={suggestion}
+                                                onChange={(e) => setsuggestion(e.target.value)}
                                                 label="Suggestion"
                                                 rows="2"
                                                 text="Must be 8-20 words long."
@@ -773,6 +824,8 @@ const MemberForm = () => {
 
                                             <CFormTextarea
                                                 id="exampleFormControlTextarea1"
+                                                value={comments}
+                                                onChange={(e) => setcomments(e.target.value)}
                                                 label="Comments"
                                                 rows="2"
                                                 text="Must be 8-20 words long."

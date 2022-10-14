@@ -59,7 +59,7 @@ const EnquiryForm = () => {
     console.log(token);
     const [result, setResult] = useState([]);
     useEffect(() => {
-        axios.get(`${url}/service/all`, {
+        axios.get(`${url}/subservice/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -395,7 +395,7 @@ const EnquiryForm = () => {
                                         {result.map((item, index) => (
                                             item.username === username && (
                                                 item.status === true && (
-                                                    <option key={index} value={item.id}>{item.ServiceName}</option>
+                                                    <option key={index} value={item.id}>{item.selected_service} {item.sub_Service_Name}</option>
                                                 )
                                             )
                                         ))}
