@@ -165,7 +165,7 @@ const BatchMaster = () => {
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Service"
-                                        label="Service Variation"
+                                        label="Service"
                                         value={service_variation}
                                         onChange={(e) => setService_variation(e.target.value)}
                                     ><option>Select</option>
@@ -223,7 +223,6 @@ const BatchMaster = () => {
                         <CTableRow >
                             <CTableHeaderCell>Sr.No</CTableHeaderCell>
                             <CTableHeaderCell>Service Name</CTableHeaderCell>
-                            <CTableHeaderCell>Service Variation</CTableHeaderCell>
                             <CTableHeaderCell>Batch Duration</CTableHeaderCell>
                             <CTableHeaderCell>Batch Timing</CTableHeaderCell>
                             <CTableHeaderCell>Status</CTableHeaderCell>
@@ -235,7 +234,6 @@ const BatchMaster = () => {
                             item.username === username && (
                                 <CTableRow key={index}>
                                     <CTableDataCell>{index + 1}</CTableDataCell>
-                                    <CTableDataCell>{item.service_name}</CTableDataCell>
                                     <CTableDataCell>{item.service_variation}</CTableDataCell>
                                     <CTableDataCell>{item.Batch_Duration}</CTableDataCell>
                                     <CTableDataCell>{item.batch_timing}</CTableDataCell>
