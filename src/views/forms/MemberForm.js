@@ -657,8 +657,8 @@ const MemberForm = () => {
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="High Cholestrol"
-                                                        checked={Glaucoma}
-                                                        onChange={(e) => setGlaucoma(e.target.value)} />
+                                                        checked={HeartDiseaseCondition}
+                                                        onChange={(e) => setHeartDiseaseCondition(e.target.value)} />
                                                 </CListGroupItem>
                                             </CListGroup>
                                         </CCol>
@@ -672,7 +672,9 @@ const MemberForm = () => {
                                                     <CFormCheck label="Pregnancy" />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
-                                                    <CFormCheck label="Surgery" />
+                                                    <CFormCheck label="Surgery"
+                                                        checked={HerniaDiastasisRecti}
+                                                        onChange={(e) => setHerniaDiastasisRecti(e.target.value)} />
                                                 </CListGroupItem>
                                                 <CListGroupItem>
                                                     <CFormCheck label="High Blood Pressure"
@@ -686,6 +688,15 @@ const MemberForm = () => {
                                                 </CListGroupItem>
                                             </CListGroup>
                                         </CCol>
+                                        {Other && (
+                                            <CFormInput
+                                                className="mb-1"
+                                                type="text"
+                                                id="exampleFormControlInput1"
+                                                label="Other Reason"
+                                                placeholder="Enter Other Reason"
+                                            />
+                                        )}
                                     </CRow>
                                     <CButton className="mt-2" onClick={() => setActiveKey(2)}>Save</CButton>
                                 </CForm>
