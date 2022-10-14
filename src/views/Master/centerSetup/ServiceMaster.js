@@ -22,6 +22,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 const url = 'https://yoga-power-appv0.herokuapp.com'
 
 const ServiceMaster = () => {
@@ -33,6 +34,7 @@ const ServiceMaster = () => {
     const [packages, setPackages] = useState("")
     const [duration, setDuration] = useState("")
 
+    const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
     const token = user.token;
     const username = user.user.username;
@@ -102,10 +104,7 @@ const ServiceMaster = () => {
         }).then((resp) => {
             // console.warn("resp",resp);;
             resp.json().then(() => {
-                setSelected_service('')
-                setFees("")
-                setDuration('')
-                setStatus(false)
+                navigate('/master/center-setup/service-master')
                 alert("successfully submitted")
             })
         })

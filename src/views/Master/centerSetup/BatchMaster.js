@@ -161,25 +161,7 @@ const BatchMaster = () => {
                     {action &&
                         <div>
                             <CRow className='mt-3'>
-                                <CCol lg={6} md={6} sm={12}>
-                                    <CFormSelect
-                                        className="mb-1"
-                                        aria-label="Select Service"
-                                        label="Service Name"
-                                        value={service_name}
-                                        onChange={(e) => setServiceName(e.target.value)}
-                                    >
-                                        <option>Select</option>
-                                        {result1.map((item, index) => (
-                                            item.username === username && (
-                                                item.status === true && (
-                                                    <option key={index}>{item.ServiceName}</option>
-                                                )
-                                            )
-                                        ))}
-                                    </CFormSelect>
-                                </CCol>
-                                <CCol lg={6} md={6} sm={12}>
+                                <CCol lg={4} md={6} sm={12}>
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Service"
@@ -191,13 +173,13 @@ const BatchMaster = () => {
                                         {result2.map((item, index) => (
                                             item.username === username && (
                                                 item.status === true && (
-                                                    <option key={index} >{item.sub_Service_Name}</option>
+                                                    <option key={index} >{item.selected_service} {item.sub_Service_Name}</option>
                                                 )
                                             )
                                         ))}
                                     </CFormSelect>
                                 </CCol>
-                                <CCol lg={6} md={6} sm={12}>
+                                <CCol lg={4} md={6} sm={12}>
                                     <CFormInput
                                         className="mb-1"
                                         type="time"
@@ -208,7 +190,7 @@ const BatchMaster = () => {
                                         placeholder="Enter Batch Timing"
                                     />
                                 </CCol>
-                                <CCol lg={6} md={6} sm={12}>
+                                <CCol lg={4} md={6} sm={12}>
                                     <CFormSelect
                                         className="mb-1"
                                         aria-label="Select Service"

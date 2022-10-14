@@ -25,6 +25,7 @@ import React, { useEffect, useState } from "react";
 import { CountryList } from "src/components/CountryList";
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const url = 'https://yoga-power-appv0.herokuapp.com'
 
 const MemberForm = () => {
@@ -84,15 +85,18 @@ const MemberForm = () => {
     const [suggestion, setsuggestion] = useState('')
     const [comments, setcomments] = useState('')
 
+    const navigate = useNavigate()
     let user = JSON.parse(localStorage.getItem('user-info'))
     console.log(user);
     const token = user.token;
     const username = user.user.username;
     const [result, setResult] = useState([]);
     const [result1, setResult1] = useState([]);
+    const [partner, setPartner] = useState([]);
     useEffect(() => {
         getBatch()
         getSubService()
+        getPertner()
     }, []);
     function getSubService() {
         axios.get(`${url}/subservice/all`, {
@@ -121,6 +125,20 @@ const MemberForm = () => {
                 console.error(error)
             })
     }
+    function getPertner() {
+        axios.get(`${url}/signup/all`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+            .then((res) => {
+                console.log(res.data)
+                setResult(res.data)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
 
     const saveMember = (e) => {
         let data = {
@@ -128,10 +146,12 @@ const MemberForm = () => {
             Fullname, CountryCode, ContactNumber, WhatsappNumber, Email, Gender, DateofBirth, Anniversarydate, Address, Area, city, pincode, state, BloodGroup,
             FacebookID, sms, mail, pushnotification,
             Name, CountryCode1, ContactNumber1, Relationship,
-            ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry",
+            serviceName, Customertype, EnquiryType, AssignStaff, MemberManager, Batch, GeneralTrainer, AttendanceID, CenterID, LockerKeyNo, PAN,
+            BackPain, BoneFracture, CarpalTunnel, AsthmaCOPD, DigestiveDisorder, Diabetes, Epilepsy, FootPain, Glaucoma, HeartDiseaseCondition, HerniaDiastasisRecti,
+            HighBloodPressure, Other: OtherText, Weight, Height, fitnessLevel, fitnessGoal, idealWeight, suggestion, comments, status: 'active',
         }
 
-        fetch(`${url}/enquiryForm/create`, {
+        fetch(`${url}/memberForm/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -144,31 +164,7 @@ const MemberForm = () => {
                 alert("successfully submitted")
                 e.preventDefault();
                 console.log("refresh prevented");
-                setFullName('')
-                setEmailAddress('')
-                setCountryCode('')
-                setContactNumber('')
-                setGander('')
-                setDateofBirth('')
-                setAddress('')
-                setArea('')
-                setCity('')
-                setProfession('')
-                setStaffName('')
-                setCenterName('')
-                setCallStatus('')
-                setMessage('')
-                setperson_Name('')
-                setRelation('')
-                setCountryCode2('')
-                setContactNumber2('')
-                setEnquiryDate('')
-                setServiceName('')
-                setCustomertype('')
-                setEnquirytype('')
-                setappointmentDate('')
-                setappointmentTime('')
-                setappointmentfor('')
+                navigate('/forms/member-form')
             })
         })
     }
@@ -341,7 +337,7 @@ const MemberForm = () => {
                                                         type="text"
                                                         id="exampleFormControlInput1"
                                                         value={Area}
-                                                        onChange={(e) => setGender(e.target.value)}
+                                                        onChange={(e) => setArea(e.target.value)}
                                                         label="Area"
                                                         placeholder="Enter Locality"
                                                     />
@@ -611,15 +607,16 @@ const MemberForm = () => {
                                                     />
                                                 </CCol>
                                                 <CCol xs={6}>
-                                                    <CFormInput
+                                                    <CFormSelect
                                                         className="mb-1"
                                                         type="text"
                                                         id="exampleFormControlInput1"
                                                         value={CenterID}
                                                         onChange={(e) => setCenterID(e.target.value)}
-                                                        label="Center ID"
-                                                        placeholder="Enter Club ID"
-                                                    />
+                                                        label="Center ID">
+                                                        <option>Select Center ID</option>
+                                                        <option>{username}</option>
+                                                    </CFormSelect>
                                                 </CCol>
                                                 <CCol xs={6}>
                                                     <CFormInput
@@ -832,7 +829,7 @@ const MemberForm = () => {
                                             ></CFormTextarea>
                                         </CCol>
                                     </CRow>
-                                    <CButton className='mt-2'>Save</CButton>
+                                    <CButton className='mt-2' onClick={() => saveMember()}>Save</CButton>
                                 </CForm>
                             </CTabPane>
                         </CTabContent>
