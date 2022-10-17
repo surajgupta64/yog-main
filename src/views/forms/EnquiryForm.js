@@ -17,7 +17,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { CountryList } from "src/components/CountryList";
-const url = 'https://yoga-power-appv0.herokuapp.com'
+const url = 'https://yoga-power-node-api.herokuapp.com'
 
 
 const EnquiryForm = () => {

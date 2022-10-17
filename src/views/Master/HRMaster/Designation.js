@@ -101,6 +101,9 @@ const ServiceMaster = () => {
             // console.warn("resp",resp);;
             resp.json().then(() => {
                 setStatus(false)
+                setJobDesignation('')
+                setDepartment('')
+                setVacancy('')
                 alert("successfully submitted")
             })
         })

@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import { storage } from "src/firebase";
 import { v4 } from "uuid";
-const url = 'https://yoga-power-appv0.herokuapp.com'
+const url = 'https://yoga-power-node-api.herokuapp.com'
 
 const LogoSetup = () => {
     const [image, setImage] = useState()
@@ -31,7 +31,7 @@ const LogoSetup = () => {
     const [result, setResult] = useState(null);
     const [imageList, setImageList] = useState(null);
     useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/brandlogoupdate/all', {
+        fetch(`${url}/brandlogoupdate/all`, {
             method: "get",
             headers: { "Authorization": `Bearer ${token}` }
         }).then(res => res.json()).then(json => setResult(json));

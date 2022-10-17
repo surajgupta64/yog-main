@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CountryList } from "src/components/CountryList";
+const url = 'https://yoga-power-node-api.herokuapp.com'
 
 const CompanyProfile = () => {
     const [profileId, setProfileId] = useState("")
@@ -45,7 +46,7 @@ const CompanyProfile = () => {
     const token = user.token;
     const [result, setResult] = useState();
     useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/Companyprofile/all', {
+        fetch(`${url}/Companyprofile/all`, {
             method: "get",
             headers: { "Authorization": `Bearer ${token}` }
         }).then(res => res.json()).then(json => setResult(json));
@@ -55,7 +56,7 @@ const CompanyProfile = () => {
     const saveProfile = () => {
         let data = { username: username, profileId, brandName, brandNumber, emailAddress, areaSequerFit, currency, businessCategory, brandFullAddress, city, state, openingTime, closingTime, workingDays, halfDay, holidays }
         // console.warn(data);
-        fetch("https://yoga-power-appv0.herokuapp.com/Companyprofile/create", {
+        fetch(`${url}/Companyprofile/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,

@@ -20,7 +20,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
-const url = 'https://yoga-power-appv0.herokuapp.com'
+const url = 'https://yoga-power-node-api.herokuapp.com'
 
 const BatchMaster = () => {
     const [action, setAction] = useState(false)
