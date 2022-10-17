@@ -26,115 +26,120 @@ const AllEnquires = () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">All Enquires</strong>
+                        <strong className="mt-2">All Enquires <span className='float-end'>Total Member : 0</span></strong>
                     </CCardHeader>
                     <CCardBody>
-                        <div className='d-flex justify-content-between mb-2'>
-                            <CInputGroup style={{ width: "200px" }}>
-                                <CFormSelect
-                                    id="inputGroupSelect04"
-                                    aria-label="Example select with button addon"
-                                >
-                                    <option>Today</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </CFormSelect>
-                                <CButton type="button" color="primary">
-                                    Go
-                                </CButton>
-                            </CInputGroup>
-                            <CCard>
-                                <CCardBody style={{ padding: "5px" }}>
-                                    Total Member : 0
-                                </CCardBody>
-                            </CCard>
-                            <CButtonGroup>
-                                <CButton color="primary">
-                                    <CIcon icon={cilArrowCircleBottom} />
-                                    {' '}Import
-                                </CButton>
-                                <CButton color="primary">
-                                    <CIcon icon={cilArrowCircleTop} />
-                                    {' '}Export
-                                </CButton>
-                            </CButtonGroup>
-                        </div>
-                        <div className='d-flex justify-content-between mb-2'>
-                            <CCard>
-                                <CCardHeader className='d-flex justify-content-center'>
-                                    Enquiries
-                                </CCardHeader>
-                                <CCardBody className='d-flex justify-content-around'>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Enquiries: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Converted: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Archived/Lost: 0
-                                        </CCardBody>
-                                    </CCard>
-                                </CCardBody>
-                            </CCard>
-                            <CCard>
-                                <CCardHeader className='d-flex justify-content-center'>
-                                    Follow Up
-                                </CCardHeader>
-                                <CCardBody className='d-flex justify-content-around'>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            FollowUps: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Trails: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Post Trails: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Sales: 0
-                                        </CCardBody>
-                                    </CCard>
-                                </CCardBody>
-                            </CCard>
-                            <CCard>
-                                <CCardHeader className='d-flex justify-content-center'>
-                                    Trials
-                                </CCardHeader>
-                                <CCardBody className='d-flex justify-content-around'>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Trial Scheduled: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Trial Completed: 0
-                                        </CCardBody>
-                                    </CCard>
-                                    <CCard style={{ margin: "2px" }}>
-                                        <CCardBody style={{ padding: "5px" }}>
-                                            Converted: 0
-                                        </CCardBody>
-                                    </CCard>
-                                </CCardBody>
-                            </CCard>
-                        </div>
+                        <CRow className='d-flex justify-content-between'>
+                            <CCol lg={4} sm={6} md={6}>
+                                <CInputGroup className='mb-2'>
+                                    <CFormSelect
+                                        id="inputGroupSelect04"
+                                        aria-label="Example select with button addon"
+                                    >
+                                        <option>Today</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </CFormSelect>
+                                    <CButton type="button" color="primary">
+                                        Go
+                                    </CButton>
+                                </CInputGroup>
+                            </CCol>
+                            <CCol lg={6} sm={6} md={6}>
+                                <CButtonGroup className=' mb-2 float-end'>
+                                    <CButton color="primary">
+                                        <CIcon icon={cilArrowCircleBottom} />
+                                        {' '}Import
+                                    </CButton>
+                                    <CButton color="primary">
+                                        <CIcon icon={cilArrowCircleTop} />
+                                        {' '}Export
+                                    </CButton>
+                                </CButtonGroup>
+                            </CCol>
+                        </CRow>
+                        <CRow className='d-flex justify-content-between mb-2'>
+                            <CCol lg={4} sm={12} md={12} className='mb-2'>
+                                <CCard>
+                                    <CCardHeader className='d-flex justify-content-center'>
+                                        Enquiries
+                                    </CCardHeader>
+                                    <CCardBody className='d-flex justify-content-around'>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Enquiries: 0
+                                            </CCardBody>
+                                        </CCard>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Converted: 0
+                                            </CCardBody>
+                                        </CCard>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Archived/Lost: 0
+                                            </CCardBody>
+                                        </CCard>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol lg={4} sm={12} md={12} className='mb-2'>
+                                <CCard>
+                                    <CCardHeader className='d-flex justify-content-center'>
+                                        Follow Up
+                                    </CCardHeader>
+                                    <CCardBody className='d-flex justify-content-around'>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                FollowUps: 0
+                                            </CCardBody>
+                                        </CCard>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Trails: 0
+                                            </CCardBody>
+                                        </CCard>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Post Trails: 0
+                                            </CCardBody>
+                                        </CCard>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Sales: 0
+                                            </CCardBody>
+                                        </CCard>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                            <CCol lg={4} sm={12} md={12} className='mb-2'>
+                                <CCard>
+                                    <CCardHeader className='d-flex justify-content-center'>
+                                        Trials
+                                    </CCardHeader>
+                                    <CCardBody className='d-flex justify-content-around'>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Trial Scheduled: 0
+                                            </CCardBody>
+                                        </CCard>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Trial Completed: 0
+                                            </CCardBody>
+                                        </CCard>
+                                        <CCard style={{ margin: "2px" }}>
+                                            <CCardBody style={{ padding: "5px" }}>
+                                                Converted: 0
+                                            </CCardBody>
+                                        </CCard>
+                                    </CCardBody>
+                                </CCard>
+                            </CCol>
+                        </CRow>
                         <CRow className='mb-3'>
-                            <CCol xs={2}>
+                            <CCol lg={2} md={6} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
                                         component="label"
@@ -150,7 +155,7 @@ const AllEnquires = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol xs={3}>
+                            <CCol lg={3} md={6} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
                                         component="label"
@@ -166,7 +171,7 @@ const AllEnquires = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol xs={3}>
+                            <CCol lg={3} md={6} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
                                         component="label"
@@ -182,7 +187,7 @@ const AllEnquires = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol xs={3}>
+                            <CCol lg={3} md={6} sm={6} className='mb-2'>
                                 <CInputGroup>
                                     <CInputGroupText
                                         component="label"

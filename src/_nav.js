@@ -661,13 +661,13 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'HR',
-    to: '/base',
+    to: '/master/hr',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Employee Designation',
-        to: '/base/accordion',
+        to: '/master/hr/designation',
       },
       {
         component: CNavItem,

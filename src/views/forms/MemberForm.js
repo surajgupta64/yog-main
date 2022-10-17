@@ -21,15 +21,20 @@ import {
     CTabContent,
     CTabPane,
 } from "@coreui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CountryList } from "src/components/CountryList";
 import ProfileIcon from 'src/assets/images/avatars/profile_icon.png'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const url = 'https://yoga-power-appv0.herokuapp.com'
+import { listAll, ref, uploadBytes } from "firebase/storage";
+import { storage } from "src/firebase";
+import { v4 } from "uuid";
+const url = 'https://yoga-power-node-api.herokuapp.com'
 
 const MemberForm = () => {
     const [activeKey, setActiveKey] = useState(1)
+    const [image, setImage] = useState(null)
+    const [imageUrl, setImageUrl] = useState(null)
     const [Fullname, setFullname] = useState('')
     const [CountryCode, setCountryCode] = useState('')
     const [ContactNumber, setContactNumber] = useState('')
@@ -97,7 +102,14 @@ const MemberForm = () => {
         getBatch()
         getMem()
         getSubService()
+        getImage()
     }, []);
+
+    function getImage() {
+        listAll(imagesListRef).then((response) => {
+            console.log(response);
+        })
+    }
     function getSubService() {
         axios.get(`${url}/subservice/all`, {
             headers: {
@@ -142,6 +154,7 @@ const MemberForm = () => {
     const saveMember = (e) => {
         let data = {
             username: username,
+            image: imageUrl,
             Fullname, CountryCode, ContactNumber, WhatsappNumber, Email, Gender, DateofBirth, Anniversarydate, Address, Area, city, pincode, state, BloodGroup,
             FacebookID, sms, mail, pushnotification,
             Name, CountryCode1, ContactNumber1, Relationship,
@@ -168,6 +181,33 @@ const MemberForm = () => {
         })
     }
 
+    const imgRef = useRef(null)
+    const handleImage = (e) => {
+        setImage(e.target.files[0])
+        const file = e.target.files[0]
+        if (!file.type.startsWith('image/')) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imgRef.current.src = e.target.result
+        }
+        reader.readAsDataURL(file)
+        console.log(file, image);
+    }
+
+
+    const imagesListRef = ref(storage, "images/");
+    const UploadImage = () => {
+        if (image == null) return;
+        const imageRef = ref(storage, `images/${image.name + v4()}`)
+        console.log(imageRef.fullPath);
+        setImageUrl(imageRef.fullPath)
+
+        uploadBytes(imageRef, image).then(() => {
+            alert('image uploaded')
+        })
+    }
+    console.log(imageUrl);
     return (
         <CCard>
             <CCardHeader>Member Form</CCardHeader>
@@ -206,15 +246,18 @@ const MemberForm = () => {
                                             <CCardTitle>Personal Details</CCardTitle>
                                             <CRow>
                                                 <CCol xs={4} className='mt-2 mb-1' >
-                                                    <CImage className="mb-1" style={{ borderRadius: "50px" }} width={'200px'} src={ProfileIcon} />
+                                                    <CImage ref={imgRef} className="mb-1" style={{ borderRadius: "50px" }} width={'160px'} src={ProfileIcon} />
                                                 </CCol>
-                                                <CCol xs={7} className='mt-5'>
-                                                    <CRow>
-                                                        <CFormInput
-                                                            className="mb-1 ms-2 mr-3"
-                                                            type="file"
-                                                        />
-                                                    </CRow>
+                                                <CCol xs={7} className='mt-3'>
+
+                                                    <CFormInput
+                                                        className="mb-1 mr-3"
+                                                        type="file"
+                                                        onChange={handleImage}
+                                                        accept="image/*"
+                                                    />
+                                                    <CButton onClick={UploadImage}>Upload Image</CButton>
+
                                                 </CCol>
                                                 <CCol xs={6}>
                                                     <CFormInput
@@ -489,7 +532,9 @@ const MemberForm = () => {
                                                         <option>Select Service</option>
                                                         {result1.map((item, index) => (
                                                             item.username === username && (
-                                                                <option key={index}>{item.selected_service} {item.sub_Service_Name}</option>
+                                                                item.status === true && (
+                                                                    <option key={index}>{item.selected_service} {item.sub_Service_Name}</option>
+                                                                )
                                                             )
                                                         ))}</CFormSelect>
                                                 </CCol>
@@ -604,7 +649,7 @@ const MemberForm = () => {
                                                         label="Attendance ID"
                                                     >
                                                         <option>Select Attendance ID</option>
-                                                        <option>CLIENT{mem.length}</option>
+                                                        <option>CLIENT{mem.length + 1}</option>
                                                     </CFormSelect>
                                                 </CCol>
                                                 <CCol xs={6}>

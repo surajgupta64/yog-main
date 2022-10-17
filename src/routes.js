@@ -51,6 +51,7 @@ const ServiceMaster = React.lazy(() => import('./views/Master/centerSetup/Servic
 const PackageMaster = React.lazy(() => import('./views/Master/centerSetup/PackageMaster'))
 const BatchMaster = React.lazy(() => import('./views/Master/centerSetup/BatchMaster'))
 const FormMaster = React.lazy(() => import('./views/Master/centerSetup/FormMaster'))
+const Designation = React.lazy(() => import('./views/Master/HRMaster/Designation'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -209,6 +210,10 @@ const routes = [
   { path: '/master/center-setup/package-master', name: 'Package Master', element: PackageMaster, exact: true },
   { path: '/master/center-setup/batch-master', name: 'Batch Master', element: BatchMaster, exact: true },
   { path: '/master/center-setup/form-master', name: 'Form Master', element: FormMaster, exact: true },
+
+
+  { path: '/master/hr', name: 'HR Master', element: Designation, exact: true },
+  { path: '/master/hr/designation', name: 'Employee Designation', element: Designation, exact: true },
 
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },

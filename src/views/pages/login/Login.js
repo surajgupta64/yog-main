@@ -36,7 +36,7 @@ const Login = () => {
       console.log(email, password);
       let item = { email, password }
 
-      let result = await fetch("https://yoga-power-appv0.herokuapp.com/login", {
+      let result = await fetch("https://yoga-power-node-api.herokuapp.com/login", {
         method: "POST",
         headers: {
           'Accept': 'application/json',
