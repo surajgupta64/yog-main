@@ -33,8 +33,10 @@ const AllEnquires = () => {
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
+    console.log(user);
     const token = user.token;
     const username = user.user.username;
+    const centerCode = user.user.centerCode;
     const [result1, setResult1] = useState([]);
     useEffect(() => {
         getEnquiry()
@@ -300,9 +302,11 @@ const AllEnquires = () => {
                                     <CTableHeaderCell>Enquiry stage</CTableHeaderCell>
                                     <CTableHeaderCell>Call Status</CTableHeaderCell>
                                     <CTableHeaderCell>Last Call</CTableHeaderCell>
-                                    <CTableHeaderCell>Invoice</CTableHeaderCell>
+                                    <CTableHeaderCell>Addmission</CTableHeaderCell>
                                     <CTableHeaderCell>Assigned by</CTableHeaderCell>
+                                    <CTableHeaderCell>Counseller</CTableHeaderCell>
                                     <CTableHeaderCell>Action</CTableHeaderCell>
+                                    <CTableHeaderCell>Edit</CTableHeaderCell>
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
@@ -310,7 +314,7 @@ const AllEnquires = () => {
                                     item.username === username && (
                                         <CTableRow key={index}>
                                             <CTableDataCell>{index + 1}</CTableDataCell>
-                                            <CTableDataCell>{item._id}</CTableDataCell>
+                                            <CTableDataCell>{centerCode}ENQ{index + 10}</CTableDataCell>
                                             <CTableDataCell>{item.appointmentDate}</CTableDataCell>
                                             <CTableDataCell>{item.appointmentTime}</CTableDataCell>
                                             <CTableDataCell>{item.Fullname}</CTableDataCell>
@@ -322,7 +326,9 @@ const AllEnquires = () => {
                                             <CTableDataCell>{item.Message}</CTableDataCell>
                                             <CTableDataCell>-</CTableDataCell>
                                             <CTableDataCell>{item.StaffName}</CTableDataCell>
-                                            <CTableDataCell><a href={`https://www.ujtrs.com/${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><MdEdit style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => <EnquiryForm id={item._id} />} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' />  </CTableDataCell>
+                                            <CTableDataCell>-</CTableDataCell>
+                                            <CTableDataCell><a href={`https://www.ujtrs.com/${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' />  </CTableDataCell>
+                                            <CTableDataCell><MdEdit style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => <EnquiryForm id={item._id} />} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
                                         </CTableRow>
                                     )
                                 ))}
