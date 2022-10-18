@@ -155,7 +155,7 @@ const TrialEnquires = () => {
                             <CTableBody>
                                 {result1.map((item, index) => (
                                     item.username === username && (
-                                        item.appointmentfor === 'Appointment' && (
+                                        item.appointmentfor === 'Trial Session' && (
                                             <CTableRow key={index}>
                                                 <CTableDataCell>{index + 1}</CTableDataCell>
                                                 <CTableDataCell>{item._id}</CTableDataCell>

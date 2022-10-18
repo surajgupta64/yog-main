@@ -20,7 +20,8 @@ import {
     CTableRow,
 } from '@coreui/react'
 import axios from 'axios';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdEdit, MdMail } from 'react-icons/md';
+import { BsWhatsapp } from 'react-icons/bs';
 const url = 'https://yoga-power-node-api.herokuapp.com'
 
 const EnquireAppoitment = () => {
@@ -172,7 +173,7 @@ const EnquireAppoitment = () => {
                                                 <CTableDataCell>{item.StaffName}</CTableDataCell>
 
                                                 <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} id={item._id} value={item.status} checked={item.status} onChange={() => updateStatus2(item._id, !item.status)} /></CTableDataCell>
-                                                <CTableDataCell> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquirys(item._id)} size='20px' /> </CTableDataCell>
+                                                <CTableDataCell><MdEdit style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' />  </CTableDataCell>
                                             </CTableRow>
                                         )
                                     )

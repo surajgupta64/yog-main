@@ -26,6 +26,11 @@ import {
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
+
+let user = JSON.parse(localStorage.getItem('user-info'))
+const token = user.token;
+const access = user.user.dashboardAccess;
+
 const _nav = [
   {
     component: CNavItem,

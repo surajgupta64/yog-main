@@ -20,7 +20,7 @@ import { CountryList } from "src/components/CountryList";
 const url = 'https://yoga-power-node-api.herokuapp.com'
 
 
-const EnquiryForm = () => {
+const EnquiryForm = (props) => {
     const [Fullname, setFullName] = useState("");
     const [Emailaddress, setEmailAddress] = useState("");
     const [CountryCode, setCountryCode] = useState("");
@@ -373,6 +373,7 @@ const EnquiryForm = () => {
                                 <CCol lg={6} md={6} sm={12}>
                                     <CFormInput
                                         className="mb-1"
+                                        name="enquiry_date"
                                         type="date"
                                         id="exampleFormControlInput1"
                                         value={EnquiryDate}

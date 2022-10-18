@@ -22,7 +22,10 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 import axios from 'axios'
-import { MdDelete } from 'react-icons/md'
+import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md'
+import { BsPhone, BsWhatsapp } from 'react-icons/bs'
+import EnquiryForm from '../forms/EnquiryForm'
+import { useNavigate } from 'react-router-dom'
 const url = 'https://yoga-power-node-api.herokuapp.com'
 
 const AllEnquires = () => {
@@ -73,7 +76,7 @@ const AllEnquires = () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">All Enquires <span className='float-end'>Total Member : 0</span></strong>
+                        <strong className="mt-2">All Enquires <span className='float-end'>Total Member : {result1.length}</span></strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-between'>
@@ -298,8 +301,7 @@ const AllEnquires = () => {
                                     <CTableHeaderCell>Call Status</CTableHeaderCell>
                                     <CTableHeaderCell>Last Call</CTableHeaderCell>
                                     <CTableHeaderCell>Invoice</CTableHeaderCell>
-                                    <CTableHeaderCell>Assiened by</CTableHeaderCell>
-                                    <CTableHeaderCell>Counseller</CTableHeaderCell>
+                                    <CTableHeaderCell>Assigned by</CTableHeaderCell>
                                     <CTableHeaderCell>Action</CTableHeaderCell>
                                 </CTableRow>
                             </CTableHead>
@@ -317,12 +319,10 @@ const AllEnquires = () => {
                                             <CTableDataCell>{item.enquirytype}</CTableDataCell>
                                             <CTableDataCell>{item.appointmentfor}</CTableDataCell>
                                             <CTableDataCell>{item.CallStatus}</CTableDataCell>
-                                            <CTableDataCell>-</CTableDataCell>
+                                            <CTableDataCell>{item.Message}</CTableDataCell>
                                             <CTableDataCell>-</CTableDataCell>
                                             <CTableDataCell>{item.StaffName}</CTableDataCell>
-
-                                            <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} id={item._id} value={item.status} checked={item.status} onChange={() => updateStatus2(item._id, !item.status)} /></CTableDataCell>
-                                            <CTableDataCell> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /> </CTableDataCell>
+                                            <CTableDataCell><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /><MdEdit style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => <EnquiryForm id={item._id} />} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' />  </CTableDataCell>
                                         </CTableRow>
                                     )
                                 ))}
