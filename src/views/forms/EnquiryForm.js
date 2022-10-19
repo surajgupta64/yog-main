@@ -73,7 +73,8 @@ const EnquiryForm = (props) => {
             })
     }, []);
     console.log(result);
-
+    console.log(DateofBirth);
+    console.log(EnquiryDate);
     const saveEnquiry = (e) => {
         let data = {
             username: username,
@@ -207,6 +208,7 @@ const EnquiryForm = (props) => {
                                     <CFormInput
                                         className="mb-1"
                                         type="date"
+                                        format="MM-dd-yyyy"
                                         value={DateofBirth}
                                         onChange={(e) => setDateofBirth(e.target.value)}
                                         id="exampleFormControlInput1"

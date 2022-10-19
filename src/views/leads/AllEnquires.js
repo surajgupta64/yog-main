@@ -23,13 +23,15 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 import axios from 'axios'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md'
-import { BsPhone, BsWhatsapp } from 'react-icons/bs'
+import { BsPhone, BsPlus, BsPlusCircle, BsWhatsapp } from 'react-icons/bs'
 import EnquiryForm from '../forms/EnquiryForm'
 import { useNavigate } from 'react-router-dom'
+import moment from 'moment/moment'
 const url = 'https://yoga-power-node-api.herokuapp.com'
 
 const AllEnquires = () => {
     const [select, setSelect] = useState()
+    const [followForm, setFollowForm] = useState()
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -312,24 +314,33 @@ const AllEnquires = () => {
                             <CTableBody>
                                 {result1.map((item, index) => (
                                     item.username === username && (
-                                        <CTableRow key={index}>
-                                            <CTableDataCell>{index + 1}</CTableDataCell>
-                                            <CTableDataCell>{centerCode}ENQ{index + 10}</CTableDataCell>
-                                            <CTableDataCell>{item.appointmentDate}</CTableDataCell>
-                                            <CTableDataCell>{item.appointmentTime}</CTableDataCell>
-                                            <CTableDataCell>{item.Fullname}</CTableDataCell>
-                                            <CTableDataCell>{item.ContactNumber}</CTableDataCell>
-                                            <CTableDataCell>{item.ServiceName}</CTableDataCell>
-                                            <CTableDataCell>{item.enquirytype}</CTableDataCell>
-                                            <CTableDataCell>{item.appointmentfor}</CTableDataCell>
-                                            <CTableDataCell>{item.CallStatus}</CTableDataCell>
-                                            <CTableDataCell>{item.Message}</CTableDataCell>
-                                            <CTableDataCell>-</CTableDataCell>
-                                            <CTableDataCell>{item.StaffName}</CTableDataCell>
-                                            <CTableDataCell>-</CTableDataCell>
-                                            <CTableDataCell><a href={`https://www.ujtrs.com/${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' />  </CTableDataCell>
-                                            <CTableDataCell><MdEdit style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => <EnquiryForm id={item._id} />} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
-                                        </CTableRow>
+                                        <>
+                                            <CTableRow key={index}>
+                                                <CTableDataCell>{index + 1}</CTableDataCell>
+                                                <CTableDataCell>{centerCode}ENQ{index + 10}</CTableDataCell>
+                                                <CTableDataCell className='text-center'>{moment(item.appointmentDate).format("LL")}</CTableDataCell>
+                                                <CTableDataCell>{moment(item.appointmentTime, "HH:mm").format("hh:mm A")}</CTableDataCell>
+                                                <CTableDataCell>{item.Fullname}</CTableDataCell>
+                                                <CTableDataCell>{item.ContactNumber}</CTableDataCell>
+                                                <CTableDataCell>{item.ServiceName}</CTableDataCell>
+                                                <CTableDataCell>{item.enquirytype}</CTableDataCell>
+                                                <CTableDataCell>{item.appointmentfor}</CTableDataCell>
+                                                <CTableDataCell>{item.CallStatus}</CTableDataCell>
+                                                <CTableDataCell>{item.Message}</CTableDataCell>
+                                                <CTableDataCell>-</CTableDataCell>
+                                                <CTableDataCell>{item.StaffName}</CTableDataCell>
+                                                <CTableDataCell>-</CTableDataCell>
+                                                <CTableDataCell><a href={`tel:+91${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`}> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></a> <BsPlusCircle style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => setFollowForm(index)} /></CTableDataCell>
+                                                <CTableDataCell><MdEdit style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => <EnquiryForm id={item._id} />} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
+                                            </CTableRow>
+                                            {followForm === index &&
+                                                <CCard>
+                                                    <CCardBody>
+                                                        hello
+                                                    </CCardBody>
+                                                </CCard>
+                                            }
+                                        </>
                                     )
                                 ))}
                             </CTableBody>
