@@ -10,10 +10,14 @@ import {
     CForm,
     CFormInput,
     CFormSelect,
-    CFormSwitch,
     CFormTextarea,
     CInputGroup,
     CInputGroupText,
+    CModal,
+    CModalBody,
+    CModalFooter,
+    CModalHeader,
+    CModalTitle,
     CRow,
     CTable,
     CTableBody,
@@ -26,9 +30,7 @@ import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 import axios from 'axios'
 import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md'
-import { BsPhone, BsPlus, BsPlusCircle, BsWhatsapp } from 'react-icons/bs'
-import EnquiryForm from '../forms/EnquiryForm'
-import { useNavigate } from 'react-router-dom'
+import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs'
 import moment from 'moment/moment'
 const url = 'https://yoga-power-node-api.herokuapp.com'
 import { CountryList } from "src/components/CountryList";
@@ -37,6 +39,8 @@ const AllEnquires = () => {
     const [select, setSelect] = useState()
     const [followForm, setFollowForm] = useState()
     const [edit, setEdit] = useState()
+    const [visible, setVisible] = useState(false)
+    const [visible1, setVisible1] = useState(false)
 
     const [Fullname, setFullName] = useState("");
     const [Emailaddress, setEmailAddress] = useState("");
@@ -128,6 +132,15 @@ const AllEnquires = () => {
         })
     }
 
+    const handleFollowup = (e) => {
+        setFollowForm(e.target.id)
+        setVisible(true)
+    }
+
+    const handleEnquiry = (e) => {
+        setEdit(e.target.id)
+        setVisible1(true)
+    }
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -343,6 +356,395 @@ const AllEnquires = () => {
                                 </CInputGroup>
                             </CCol>
                         </CRow>
+                        <CModal visible={visible} onClose={() => setVisible(false)}>
+                            <CModalHeader>
+                                <CModalTitle>Prospect Form</CModalTitle>
+                            </CModalHeader>
+                            <CModalBody>
+                                {followForm}
+
+                            </CModalBody>
+                            <CModalFooter>
+                                <CButton color="secondary" onClick={() => setVisible(false)}>
+                                    Close
+                                </CButton>
+                                <CButton color="primary">Save changes</CButton>
+                            </CModalFooter>
+                        </CModal>
+
+                        <CModal size="xl" visible={visible1} onClose={() => setVisible1(false)}>
+                            <CModalHeader>
+                                <CModalTitle>Prospect Form</CModalTitle>
+                            </CModalHeader>
+                            <CModalBody>
+                                <CCard className="mb-3 border-success">
+                                    <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
+                                        <CCardTitle>Enquiry Form <CButton className='float-end' onClick={() => setEdit(null)}>Close</CButton></CCardTitle>
+                                    </CCardHeader>
+                                    <CCardBody>
+                                        <CForm onSubmit={saveEnquiry}>
+                                            <CRow>
+                                                <CCol lg={6} sm={12}>
+                                                    <CCardTitle>Personal Details</CCardTitle>
+                                                    <CRow>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="text"
+                                                                id="exampleFormControlInput1"
+                                                                label="Full name"
+                                                                value={Fullname}
+                                                                onChange={(e) => setFullName(e.target.value)}
+                                                                placeholder="Enter Name"
+                                                            />
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="email"
+                                                                id="exampleFormControlInput1"
+                                                                label="Email address"
+                                                                value={Emailaddress}
+                                                                onChange={(e) => setEmailAddress(e.target.value)}
+                                                                placeholder="name@example.com"
+                                                                text="Must be 8-20 characters long."
+                                                                aria-describedby="exampleFormControlInputHelpInline"
+                                                            />
+                                                        </CCol>
+                                                    </CRow>
+                                                    <CRow>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Currency"
+                                                                label="Country Code"
+                                                                value={CountryCode}
+                                                                onChange={(e) => setCountryCode(e.target.value)}
+
+                                                            >{CountryList.map((item, index) => (
+                                                                <option key={index} value={item.dial_code}>{item.name} {item.dial_code}</option>
+                                                            ))}
+                                                            </CFormSelect>
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="number"
+                                                                value={ContactNumber}
+                                                                onChange={(e) => setContactNumber(e.target.value)}
+                                                                id="exampleFormControlInput1"
+                                                                label="Contact Number"
+                                                                placeholder="Enter Number"
+                                                            />
+                                                        </CCol>
+                                                    </CRow>
+                                                    <CRow>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Currency"
+                                                                value={Gander}
+                                                                onChange={(e) => setGander(e.target.value)}
+                                                                label="Gander"
+                                                                options={[
+                                                                    "Select Gender",
+                                                                    { label: "Male", value: "Male" },
+                                                                    { label: "Female", value: "Female" },
+                                                                    { label: "Other", value: "Other" },
+                                                                ]}
+                                                            />
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="date"
+                                                                format="MM-dd-yyyy"
+                                                                value={DateofBirth}
+                                                                onChange={(e) => setDateofBirth(e.target.value)}
+                                                                id="exampleFormControlInput1"
+                                                                label="Date of Birth"
+                                                                placeholder="Enter Date"
+                                                            />
+                                                        </CCol>
+                                                    </CRow>
+
+                                                    <CFormTextarea
+                                                        id="exampleFormControlTextarea1"
+                                                        label="Address"
+                                                        value={address}
+                                                        onChange={(e) => setAddress(e.target.value)}
+                                                        rows="2"
+                                                        text="Must be 8-20 words long."
+                                                    ></CFormTextarea>
+                                                    <CRow>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="text"
+                                                                value={Area}
+                                                                onChange={(e) => setArea(e.target.value)}
+                                                                id="exampleFormControlInput1"
+                                                                label="Area"
+                                                                placeholder="Enter Locality"
+                                                            />
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="text"
+                                                                value={city}
+                                                                onChange={(e) => setCity(e.target.value)}
+                                                                id="exampleFormControlInput1"
+                                                                label="City"
+                                                                placeholder="Enter City"
+                                                            />
+                                                        </CCol>
+                                                    </CRow>
+
+                                                    <CFormInput
+                                                        className="mb-1"
+                                                        type="text"
+                                                        value={Profession}
+                                                        onChange={(e) => setProfession(e.target.value)}
+                                                        id="exampleFormControlInput1"
+                                                        label="Profession"
+                                                        placeholder="Enter Profession"
+                                                    />
+
+                                                    <CCardTitle>Schedule enquiry follow-up</CCardTitle>
+                                                    <CRow>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Staff Name"
+                                                                label="Staff Name"
+                                                                value={StaffName}
+                                                                onChange={(e) => setStaffName(e.target.value)}
+                                                                options={[
+                                                                    "Select Staff Name",
+                                                                    { label: "prabha", value: "prabha" },
+                                                                    { label: "sejal", value: "sejal" },
+                                                                    { label: "sonali", value: "sonali" },
+                                                                    { label: "None", value: "None" },
+                                                                ]}
+                                                            />
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Staff Name"
+                                                                value={CenterName}
+                                                                onChange={(e) => setCenterName(e.target.value)}
+                                                                label="Center Name"
+                                                                options={[
+                                                                    "Select Center",
+                                                                    { label: "V-mall Thakur Complex", value: "V-mall Thakur Complex" },
+                                                                    { label: "Station Kandivali East", value: "Station Kandivali East" },
+                                                                ]}
+                                                            />
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Call Status"
+                                                                value={CallStatus}
+                                                                onChange={(e) => setCallStatus(e.target.value)}
+                                                                label="Call Status"
+                                                                options={[
+                                                                    "Select Call Status",
+                                                                    { label: "Cold", value: "Cold" },
+                                                                    { label: "Warm", value: "Warm" },
+                                                                    { label: "Hot", value: "Hot" },
+                                                                ]}
+                                                            />
+                                                        </CCol>
+                                                    </CRow>
+                                                    <CFormTextarea
+                                                        id="exampleFormControlTextarea1"
+                                                        label="Message"
+                                                        value={Message}
+                                                        onChange={(e) => setMessage(e.target.value)}
+                                                        rows="2"
+                                                        text="Must be 8-20 words long."
+                                                    ></CFormTextarea>
+                                                </CCol>
+
+                                                <CCol lg={6} sm={12}>
+                                                    <CRow>
+                                                        <CCardTitle>Emergency contact</CCardTitle>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="text"
+                                                                id="exampleFormControlInput1"
+                                                                label="Name"
+                                                                value={person_Name}
+                                                                onChange={(e) => setperson_Name(e.target.value)}
+                                                                placeholder="Enter Name"
+                                                            />
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="text"
+                                                                id="exampleFormControlInput1"
+                                                                label="Relationship"
+                                                                value={Relation}
+                                                                onChange={(e) => setRelation(e.target.value)}
+                                                                placeholder="Enter Relationship"
+                                                            />
+                                                        </CCol>
+
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Working Days"
+                                                                value={CountryCode2}
+                                                                onChange={(e) => setCountryCode2(e.target.value)}
+                                                                label="Country Code"
+                                                            >{CountryList.map((item, index) => (
+                                                                <option key={index} value={item.dial_code}>{item.name} {item.dial_code}</option>
+                                                            ))}
+                                                            </CFormSelect>
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                type="number"
+                                                                value={ContactNumber2}
+                                                                onChange={(e) => setContactNumber2(e.target.value)}
+                                                                id="exampleFormControlInput1"
+                                                                label="Contact Number"
+                                                                placeholder="Enter Number"
+                                                            />
+                                                        </CCol>
+                                                    </CRow>
+                                                    <CRow>
+                                                        <CCardTitle>Lead Information</CCardTitle>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormInput
+                                                                className="mb-1"
+                                                                name="enquiry_date"
+                                                                type="date"
+                                                                id="exampleFormControlInput1"
+                                                                value={EnquiryDate}
+                                                                onChange={(e) => setEnquiryDate(e.target.value)}
+                                                                label="Enquiry Date"
+                                                                placeholder="Enter date"
+                                                            />
+                                                        </CCol>
+
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Service Name"
+                                                                value={ServiceName}
+                                                                onChange={(e) => setServiceName(e.target.value)}
+                                                                label="Service Name"
+
+                                                            >
+                                                                <option>Select Service</option>
+                                                                {result.map((item, index) => (
+                                                                    item.username === username && (
+                                                                        item.status === true && (
+                                                                            <option key={index} value={item.id}>{item.selected_service} {item.sub_Service_Name}</option>
+                                                                        )
+                                                                    )
+                                                                ))}
+                                                            </CFormSelect>
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Customer type"
+                                                                value={Customertype}
+                                                                onChange={(e) => setCustomertype(e.target.value)}
+                                                                label="Customer type"
+                                                                options={[
+                                                                    "Select Customer type",
+                                                                    { label: "Self", value: "Self" },
+                                                                    { label: "Group", value: "Group" },
+                                                                    { label: "Couple", value: "Couple" },
+                                                                    { label: "Youth", value: "Touth" },
+                                                                    { label: "Kids", value: "Kids" },
+                                                                ]}
+                                                            />
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CFormSelect
+                                                                className="mb-1"
+                                                                aria-label="Select Enquiry Type"
+                                                                value={enquirytype}
+                                                                onChange={(e) => setEnquirytype(e.target.value)}
+                                                                label="Enquiry Type"
+                                                                options={[
+                                                                    "Select Enquiry Type",
+                                                                    { label: "Walk-In", value: "Walk-In" },
+                                                                    { label: "E-mail", value: "E-mail" },
+                                                                    { label: "Social Media", value: "Social Media" },
+                                                                    { label: "Website", value: "Website" },
+                                                                    { label: "Call Enquiry", value: "Call Enquiry" },
+                                                                ]}
+                                                            />
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CInputGroup className="mt-2">
+                                                                <CInputGroupText className="mb-1">Appointment Date</CInputGroupText>
+                                                                <CFormInput
+                                                                    className="mb-1"
+                                                                    type="date"
+                                                                    value={appointmentDate}
+                                                                    onChange={(e) => setappointmentDate(e.target.value)}
+                                                                    id="exampleFormControlInput1"
+                                                                />
+                                                            </CInputGroup>
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CInputGroup className="mt-2">
+                                                                <CInputGroupText className="mb-1">Appointment Time</CInputGroupText>
+                                                                <CFormInput
+                                                                    className="mb-1"
+                                                                    type="time"
+                                                                    id="exampleFormControlInput1"
+                                                                    value={appointmentTime}
+                                                                    onChange={(e) => setappointmentTime(e.target.value)}
+
+                                                                />
+                                                            </CInputGroup>
+                                                        </CCol>
+                                                        <CCol lg={6} md={6} sm={12}>
+                                                            <CInputGroup className="mt-2">
+                                                                <CInputGroupText className="mb-1">Enquiry For</CInputGroupText>
+                                                                <CFormSelect
+                                                                    className="mb-1"
+                                                                    aria-label="Select"
+                                                                    value={appointmentfor}
+                                                                    onChange={(e) => setappointmentfor(e.target.value)}
+                                                                    options={[
+                                                                        "Select",
+                                                                        { label: "Appointment", value: "Appointment" },
+                                                                        { label: "Trial Session", value: "Trial Session" },
+                                                                    ]}
+                                                                />
+                                                            </CInputGroup>
+                                                        </CCol>
+                                                    </CRow>
+                                                </CCol>
+                                            </CRow>
+                                            <CButton className="mt-2" type="submit">Save</CButton>
+                                        </CForm>
+                                    </CCardBody>
+                                </CCard>
+
+                            </CModalBody>
+                            <CModalFooter>
+                                <CButton color="secondary" onClick={() => setVisible1(false)}>
+                                    Close
+                                </CButton>
+                                <CButton color="primary">Save changes</CButton>
+                            </CModalFooter>
+                        </CModal>
                         <CTable className='mt-3' align="middle" bordered style={{ borderColor: "#0B5345" }} hover responsive>
                             <CTableHead style={{ backgroundColor: "#0B5345", color: "white" }} >
                                 <CTableRow >
@@ -383,390 +785,9 @@ const AllEnquires = () => {
                                                 <CTableDataCell>-</CTableDataCell>
                                                 <CTableDataCell>{item.StaffName}</CTableDataCell>
                                                 <CTableDataCell>-</CTableDataCell>
-                                                <CTableDataCell><a href={`tel:+91${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`}> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></a> <BsPlusCircle style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => setFollowForm(index)} /></CTableDataCell>
-                                                <CTableDataCell><MdEdit style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => setEdit(index)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
+                                                <CTableDataCell><a href={`tel:${item.CountryCode}${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`}> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} onClick={handleFollowup} /></CTableDataCell>
+                                                <CTableDataCell><MdEdit id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} onClick={handleEnquiry} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
                                             </CTableRow>
-                                            {followForm === index &&
-
-                                                <CTableRow>
-                                                    <CTableDataCell colSpan={16}>
-                                                        <CCard style={{ width: "100%" }}>
-                                                            <CCardBody>
-                                                                <CRow>
-                                                                    <CCol><CButton className='float-end' onClick={() => setFollowForm(null)}>Close</CButton></CCol>
-                                                                </CRow>
-                                                            </CCardBody>
-                                                        </CCard>
-                                                    </CTableDataCell>
-                                                </CTableRow>
-                                            }
-                                            {edit === index &&
-
-                                                <CTableRow>
-                                                    <CTableDataCell colSpan={16}>
-                                                        <CCard className="mb-3 border-success">
-                                                            <CCardHeader style={{ backgroundColor: '#0B5345', color: 'white' }}>
-                                                                <CCardTitle>Enquiry Form <CButton className='float-end' onClick={() => setEdit(null)}>Close</CButton></CCardTitle>
-                                                            </CCardHeader>
-                                                            <CCardBody>
-                                                                <CForm onSubmit={saveEnquiry}>
-                                                                    <CRow>
-                                                                        <CCol lg={6} sm={12}>
-                                                                            <CCardTitle>Personal Details</CCardTitle>
-                                                                            <CRow>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="text"
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="Full name"
-                                                                                        value={Fullname}
-                                                                                        onChange={(e) => setFullName(e.target.value)}
-                                                                                        placeholder="Enter Name"
-                                                                                    />
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="email"
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="Email address"
-                                                                                        value={Emailaddress}
-                                                                                        onChange={(e) => setEmailAddress(e.target.value)}
-                                                                                        placeholder="name@example.com"
-                                                                                        text="Must be 8-20 characters long."
-                                                                                        aria-describedby="exampleFormControlInputHelpInline"
-                                                                                    />
-                                                                                </CCol>
-                                                                            </CRow>
-                                                                            <CRow>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Currency"
-                                                                                        label="Country Code"
-                                                                                        value={CountryCode}
-                                                                                        onChange={(e) => setCountryCode(e.target.value)}
-
-                                                                                    >{CountryList.map((item, index) => (
-                                                                                        <option key={index} value={item.dial_code}>{item.name} {item.dial_code}</option>
-                                                                                    ))}
-                                                                                    </CFormSelect>
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="number"
-                                                                                        value={ContactNumber}
-                                                                                        onChange={(e) => setContactNumber(e.target.value)}
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="Contact Number"
-                                                                                        placeholder="Enter Number"
-                                                                                    />
-                                                                                </CCol>
-                                                                            </CRow>
-                                                                            <CRow>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Currency"
-                                                                                        value={Gander}
-                                                                                        onChange={(e) => setGander(e.target.value)}
-                                                                                        label="Gander"
-                                                                                        options={[
-                                                                                            "Select Gender",
-                                                                                            { label: "Male", value: "Male" },
-                                                                                            { label: "Female", value: "Female" },
-                                                                                            { label: "Other", value: "Other" },
-                                                                                        ]}
-                                                                                    />
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="date"
-                                                                                        format="MM-dd-yyyy"
-                                                                                        value={DateofBirth}
-                                                                                        onChange={(e) => setDateofBirth(e.target.value)}
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="Date of Birth"
-                                                                                        placeholder="Enter Date"
-                                                                                    />
-                                                                                </CCol>
-                                                                            </CRow>
-
-                                                                            <CFormTextarea
-                                                                                id="exampleFormControlTextarea1"
-                                                                                label="Address"
-                                                                                value={address}
-                                                                                onChange={(e) => setAddress(e.target.value)}
-                                                                                rows="2"
-                                                                                text="Must be 8-20 words long."
-                                                                            ></CFormTextarea>
-                                                                            <CRow>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="text"
-                                                                                        value={Area}
-                                                                                        onChange={(e) => setArea(e.target.value)}
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="Area"
-                                                                                        placeholder="Enter Locality"
-                                                                                    />
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="text"
-                                                                                        value={city}
-                                                                                        onChange={(e) => setCity(e.target.value)}
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="City"
-                                                                                        placeholder="Enter City"
-                                                                                    />
-                                                                                </CCol>
-                                                                            </CRow>
-
-                                                                            <CFormInput
-                                                                                className="mb-1"
-                                                                                type="text"
-                                                                                value={Profession}
-                                                                                onChange={(e) => setProfession(e.target.value)}
-                                                                                id="exampleFormControlInput1"
-                                                                                label="Profession"
-                                                                                placeholder="Enter Profession"
-                                                                            />
-
-                                                                            <CCardTitle>Schedule enquiry follow-up</CCardTitle>
-                                                                            <CRow>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Staff Name"
-                                                                                        label="Staff Name"
-                                                                                        value={StaffName}
-                                                                                        onChange={(e) => setStaffName(e.target.value)}
-                                                                                        options={[
-                                                                                            "Select Staff Name",
-                                                                                            { label: "prabha", value: "prabha" },
-                                                                                            { label: "sejal", value: "sejal" },
-                                                                                            { label: "sonali", value: "sonali" },
-                                                                                            { label: "None", value: "None" },
-                                                                                        ]}
-                                                                                    />
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Staff Name"
-                                                                                        value={CenterName}
-                                                                                        onChange={(e) => setCenterName(e.target.value)}
-                                                                                        label="Center Name"
-                                                                                        options={[
-                                                                                            "Select Center",
-                                                                                            { label: "V-mall Thakur Complex", value: "V-mall Thakur Complex" },
-                                                                                            { label: "Station Kandivali East", value: "Station Kandivali East" },
-                                                                                        ]}
-                                                                                    />
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Call Status"
-                                                                                        value={CallStatus}
-                                                                                        onChange={(e) => setCallStatus(e.target.value)}
-                                                                                        label="Call Status"
-                                                                                        options={[
-                                                                                            "Select Call Status",
-                                                                                            { label: "Cold", value: "Cold" },
-                                                                                            { label: "Warm", value: "Warm" },
-                                                                                            { label: "Hot", value: "Hot" },
-                                                                                        ]}
-                                                                                    />
-                                                                                </CCol>
-                                                                            </CRow>
-                                                                            <CFormTextarea
-                                                                                id="exampleFormControlTextarea1"
-                                                                                label="Message"
-                                                                                value={Message}
-                                                                                onChange={(e) => setMessage(e.target.value)}
-                                                                                rows="2"
-                                                                                text="Must be 8-20 words long."
-                                                                            ></CFormTextarea>
-                                                                        </CCol>
-
-                                                                        <CCol lg={6} sm={12}>
-                                                                            <CRow>
-                                                                                <CCardTitle>Emergency contact</CCardTitle>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="text"
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="Name"
-                                                                                        value={person_Name}
-                                                                                        onChange={(e) => setperson_Name(e.target.value)}
-                                                                                        placeholder="Enter Name"
-                                                                                    />
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="text"
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="Relationship"
-                                                                                        value={Relation}
-                                                                                        onChange={(e) => setRelation(e.target.value)}
-                                                                                        placeholder="Enter Relationship"
-                                                                                    />
-                                                                                </CCol>
-
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Working Days"
-                                                                                        value={CountryCode2}
-                                                                                        onChange={(e) => setCountryCode2(e.target.value)}
-                                                                                        label="Country Code"
-                                                                                    >{CountryList.map((item, index) => (
-                                                                                        <option key={index} value={item.dial_code}>{item.name} {item.dial_code}</option>
-                                                                                    ))}
-                                                                                    </CFormSelect>
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        type="number"
-                                                                                        value={ContactNumber2}
-                                                                                        onChange={(e) => setContactNumber2(e.target.value)}
-                                                                                        id="exampleFormControlInput1"
-                                                                                        label="Contact Number"
-                                                                                        placeholder="Enter Number"
-                                                                                    />
-                                                                                </CCol>
-                                                                            </CRow>
-                                                                            <CRow>
-                                                                                <CCardTitle>Lead Information</CCardTitle>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormInput
-                                                                                        className="mb-1"
-                                                                                        name="enquiry_date"
-                                                                                        type="date"
-                                                                                        id="exampleFormControlInput1"
-                                                                                        value={EnquiryDate}
-                                                                                        onChange={(e) => setEnquiryDate(e.target.value)}
-                                                                                        label="Enquiry Date"
-                                                                                        placeholder="Enter date"
-                                                                                    />
-                                                                                </CCol>
-
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Service Name"
-                                                                                        value={ServiceName}
-                                                                                        onChange={(e) => setServiceName(e.target.value)}
-                                                                                        label="Service Name"
-
-                                                                                    >
-                                                                                        <option>Select Service</option>
-                                                                                        {result.map((item, index) => (
-                                                                                            item.username === username && (
-                                                                                                item.status === true && (
-                                                                                                    <option key={index} value={item.id}>{item.selected_service} {item.sub_Service_Name}</option>
-                                                                                                )
-                                                                                            )
-                                                                                        ))}
-                                                                                    </CFormSelect>
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Customer type"
-                                                                                        value={Customertype}
-                                                                                        onChange={(e) => setCustomertype(e.target.value)}
-                                                                                        label="Customer type"
-                                                                                        options={[
-                                                                                            "Select Customer type",
-                                                                                            { label: "Self", value: "Self" },
-                                                                                            { label: "Group", value: "Group" },
-                                                                                            { label: "Couple", value: "Couple" },
-                                                                                            { label: "Youth", value: "Touth" },
-                                                                                            { label: "Kids", value: "Kids" },
-                                                                                        ]}
-                                                                                    />
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CFormSelect
-                                                                                        className="mb-1"
-                                                                                        aria-label="Select Enquiry Type"
-                                                                                        value={enquirytype}
-                                                                                        onChange={(e) => setEnquirytype(e.target.value)}
-                                                                                        label="Enquiry Type"
-                                                                                        options={[
-                                                                                            "Select Enquiry Type",
-                                                                                            { label: "Walk-In", value: "Walk-In" },
-                                                                                            { label: "E-mail", value: "E-mail" },
-                                                                                            { label: "Social Media", value: "Social Media" },
-                                                                                            { label: "Website", value: "Website" },
-                                                                                            { label: "Call Enquiry", value: "Call Enquiry" },
-                                                                                        ]}
-                                                                                    />
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CInputGroup className="mt-2">
-                                                                                        <CInputGroupText className="mb-1">Appointment Date</CInputGroupText>
-                                                                                        <CFormInput
-                                                                                            className="mb-1"
-                                                                                            type="date"
-                                                                                            value={appointmentDate}
-                                                                                            onChange={(e) => setappointmentDate(e.target.value)}
-                                                                                            id="exampleFormControlInput1"
-                                                                                        />
-                                                                                    </CInputGroup>
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CInputGroup className="mt-2">
-                                                                                        <CInputGroupText className="mb-1">Appointment Time</CInputGroupText>
-                                                                                        <CFormInput
-                                                                                            className="mb-1"
-                                                                                            type="time"
-                                                                                            id="exampleFormControlInput1"
-                                                                                            value={appointmentTime}
-                                                                                            onChange={(e) => setappointmentTime(e.target.value)}
-
-                                                                                        />
-                                                                                    </CInputGroup>
-                                                                                </CCol>
-                                                                                <CCol lg={6} md={6} sm={12}>
-                                                                                    <CInputGroup className="mt-2">
-                                                                                        <CInputGroupText className="mb-1">Enquiry For</CInputGroupText>
-                                                                                        <CFormSelect
-                                                                                            className="mb-1"
-                                                                                            aria-label="Select"
-                                                                                            value={appointmentfor}
-                                                                                            onChange={(e) => setappointmentfor(e.target.value)}
-                                                                                            options={[
-                                                                                                "Select",
-                                                                                                { label: "Appointment", value: "Appointment" },
-                                                                                                { label: "Trial Session", value: "Trial Session" },
-                                                                                            ]}
-                                                                                        />
-                                                                                    </CInputGroup>
-                                                                                </CCol>
-                                                                            </CRow>
-                                                                        </CCol>
-                                                                    </CRow>
-                                                                    <CButton className="mt-2" type="submit">Save</CButton>
-                                                                </CForm>
-                                                            </CCardBody>
-                                                        </CCard>
-
-                                                    </CTableDataCell>
-                                                </CTableRow>
-                                            }
                                         </>
                                     )
                                 ))}
