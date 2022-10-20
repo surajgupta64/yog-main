@@ -188,24 +188,6 @@ const AllEnquires = () => {
                 setVisible(false)
             })
         })
-
-        let data1 = {
-            Counseller: Counseller,
-        }
-        fetch(`${url}/enquiryForm/update/${followForm}`, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data1)
-        }).then((resp) => {
-            resp.json().then(() => {
-                alert("successfully submitted")
-                setVisible(false)
-            })
-        })
     }
     function getEnquiry() {
         axios.get(`${url}/enquiryForm/all`, {
@@ -525,7 +507,7 @@ const AllEnquires = () => {
                                 <CModalTitle>Prospect Form</CModalTitle>
                             </CModalHeader>
                             <CModalBody>
-                                <CForm onSubmit={saveEnquiry}>
+                                <CForm >
                                     <CRow>
                                         <CCol lg={4} md={6} sm={12}>
                                             <CFormInput
@@ -646,7 +628,7 @@ const AllEnquires = () => {
                                 <CButton color="secondary" onClick={() => setVisible(false)}>
                                     Close
                                 </CButton>
-                                <CButton color="primary" onClick={() => saveProspect}>Save Prospect</CButton>
+                                <CButton type='submit' color="primary" onClick={() => saveProspect()}>Save Prospect</CButton>
                             </CModalFooter>
                         </CModal>
 
