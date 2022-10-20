@@ -40,8 +40,16 @@ const AllEnquires = () => {
     const [edit, setEdit] = useState()
     const [visible, setVisible] = useState(false)
     const [visible1, setVisible1] = useState(false)
-    const [SearchName, setSearchName] = useState('')
-    const [SearchEmail, setSearchEmail] = useState('')
+    const [Search1, setSearch1] = useState('')
+    const [Search2, setSearch2] = useState('')
+    const [Search3, setSearch3] = useState('')
+    const [Search4, setSearch4] = useState('')
+    const [Search5, setSearch5] = useState('')
+    const [Search6, setSearch6] = useState('')
+    const [Search7, setSearch7] = useState('')
+    const [Search8, setSearch8] = useState('')
+    const [Search9, setSearch9] = useState('')
+    const [Search10, setSearch10] = useState('')
 
     const [Name, setName] = useState("");
     const [Contact, setContact] = useState("");
@@ -132,31 +140,6 @@ const AllEnquires = () => {
         }).then((resp) => {
             resp.json().then(() => {
                 alert("successfully submitted")
-                setFullName('')
-                setEmailAddress('')
-                setCountryCode('')
-                setContactNumber('')
-                setGander('')
-                setDateofBirth('')
-                setAddress('')
-                setArea('')
-                setCity('')
-                setProfession('')
-                setStaffName('')
-                setCenterName('')
-                setCallStatus('')
-                setMessage('')
-                setperson_Name('')
-                setRelation('')
-                setCountryCode2('')
-                setContactNumber2('')
-                setEnquiryDate('')
-                setServiceName('')
-                setCustomertype('')
-                setEnquirytype('')
-                setappointmentDate('')
-                setappointmentTime('')
-                setappointmentfor('')
                 setVisible1(false)
             })
         })
@@ -182,6 +165,21 @@ const AllEnquires = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
+        }).then((resp) => {
+            resp.json().then(() => {
+                setVisible(false)
+            })
+        })
+        const data1 = { Counseller }
+
+        fetch(`${url}/enquiryForm/update/${followForm}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data1)
         }).then((resp) => {
             resp.json().then(() => {
                 alert("successfully submitted")
@@ -989,8 +987,168 @@ const AllEnquires = () => {
                                 </CTableRow>
                             </CTableHead>
                             <CTableBody>
+                                <CTableRow>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "60px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "120px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "120px" }}
+                                            disabled
+                                            value={Search1}
+                                            onChange={(e) => setSearch1(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "90px" }}
+                                            disabled
+                                            value={Search2}
+                                            onChange={(e) => setSearch2(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "120px" }}
+                                            value={Search3}
+                                            onChange={(e) => setSearch3(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "120px" }}
+                                            value={Search4}
+                                            disabled
+                                            onChange={(e) => setSearch4(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            value={Search5}
+                                            onChange={(e) => setSearch5(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "80px" }}
+                                            value={Search6}
+                                            onChange={(e) => setSearch6(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "100px" }}
+                                            value={Search7}
+                                            onChange={(e) => setSearch7(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "100px" }}
+                                            value={Search8}
+                                            onChange={(e) => setSearch8(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "100px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "100px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            style={{ minWidth: "100px" }}
+                                            value={Search9}
+                                            onChange={(e) => setSearch9(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            type="text"
+                                            value={Search10}
+                                            style={{ minWidth: "100px" }}
+                                            onChange={(e) => setSearch10(e.target.value)}
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "100px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                    <CTableDataCell>
+                                        <CFormInput
+                                            className="mb-1"
+                                            style={{ minWidth: "100px" }}
+                                            type="text"
+                                            disabled
+                                            aria-describedby="exampleFormControlInputHelpInline"
+                                        />
+                                    </CTableDataCell>
+                                </CTableRow>
                                 {result1.filter((list) =>
-                                    list.username === username
+                                    list.username === username && list.appointmentDate.includes(Search1) && list.appointmentTime.includes(Search2) && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) &&
+                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.appointmentfor.toLowerCase().includes(Search7.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
+                                    && list.StaffName.toLowerCase().includes(Search9.toLowerCase())
                                 ).map((item, index) => (
                                     item.username === username && (
                                         <CTableRow key={index}>
@@ -1007,9 +1165,9 @@ const AllEnquires = () => {
                                             <CTableDataCell>{item.Message}</CTableDataCell>
                                             <CTableDataCell>-</CTableDataCell>
                                             <CTableDataCell>{item.StaffName}</CTableDataCell>
-                                            <CTableDataCell>-</CTableDataCell>
-                                            <CTableDataCell><a href={`tel:${item.CountryCode}${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`}> <MdMail style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>
-                                            <CTableDataCell><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleEnquiry(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
+                                            <CTableDataCell>{item.Counseller}</CTableDataCell>
+                                            <CTableDataCell className='text-center'><a href={`tel:+${item.CountryCode}${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`}> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>
+                                            <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleEnquiry(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
                                         </CTableRow>
 
                                     )

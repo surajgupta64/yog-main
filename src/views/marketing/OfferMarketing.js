@@ -20,6 +20,7 @@ import {
     CTableRow,
 } from "@coreui/react";
 import axios from "axios";
+import moment from "moment";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
@@ -38,6 +39,7 @@ const OfferMarketing = () => {
     const [Discount, setDiscount] = useState("");
     const [NetFees, setNetFees] = useState("");
     const [status, setStatus] = useState(false);
+    const url = 'https://yoga-power-node-api.herokuapp.com'
 
 
     let user = JSON.parse(localStorage.getItem('user-info'))
@@ -46,7 +48,7 @@ const OfferMarketing = () => {
     const token = user.token;
     const [result, setResult] = useState([]);
     useEffect(() => {
-        fetch('https://yoga-power-appv0.herokuapp.com/Package/all', {
+        fetch(`${url}/offer/all`, {
             method: "get",
             headers: { "Authorization": `Bearer ${token}` }
         }).then(res => res.json()).then(json => setResult(json));
@@ -55,7 +57,7 @@ const OfferMarketing = () => {
 
     const [result1, setResult1] = useState([]);
     useEffect(() => {
-        axios.get('https://yoga-power-appv0.herokuapp.com/service/all', {
+        axios.get(`${url}/service/all`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -73,7 +75,7 @@ const OfferMarketing = () => {
     const savePackage = () => {
         let data = { ServiceName, ServiceDuration, ServiceFees, DealName, StartDate, EndDate, Discount, NetFees, status }
         // console.warn(data);
-        fetch("https://yoga-power-appv0.herokuapp.com/Package/create", {
+        fetch(`${url}/offer/create`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -98,6 +100,25 @@ const OfferMarketing = () => {
         })
     }
 
+    const getUpdate = (id) => {
+        axios.get(`${url}/offer/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(json => {
+            setServiceName(json.data.ServiceName)
+            setServiceDuration(json.data.duration)
+            setServiceFees(json.data.fees)
+            setDealName(json.data.dealName)
+            setStartDate(moment(json.data.startDate).utc().format('YYYY-MM-DD'))
+            setEndDate(moment(json.data.endDate).utc().format('YYYY-MM-DD'))
+            setDiscount(json.data.discount)
+            setNetFees(json.data.netfees)
+        })
+            .catch((error) => {
+                console.error(error)
+            });
+    }
 
     return (
         <CCard className="mb-3 border-success">
@@ -273,7 +294,7 @@ const OfferMarketing = () => {
                                 <CTableDataCell>{item.duration}</CTableDataCell>
                                 <CTableDataCell>{item.fees}</CTableDataCell>
                                 <CTableDataCell><CFormSwitch size="xl" style={{ cursor: 'pointer' }} value={item.status} checked={item.status} onChange={(e) => setUpdateStatus(!item.status)} /></CTableDataCell>
-                                <CTableDataCell> <FaEdit style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> </CTableDataCell>
+                                <CTableDataCell> <FaEdit style={{ cursor: 'pointer', markerStart: '10px' }} onClick={() => getUpdate(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /> </CTableDataCell>
                             </CTableRow>
                         ))}
                     </CTableBody>

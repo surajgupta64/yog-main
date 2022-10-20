@@ -52,6 +52,7 @@ const EnquiryForm = (props) => {
     const [appointmentDate, setappointmentDate] = useState("");
     const [appointmentTime, setappointmentTime] = useState("");
     const [appointmentfor, setappointmentfor] = useState("");
+    const [counseller, setCounseller] = useState("");
 
     let user = JSON.parse(localStorage.getItem('user-info'))
     const token = user.token;
@@ -81,7 +82,7 @@ const EnquiryForm = (props) => {
             Fullname, Emailaddress, CountryCode, ContactNumber, Gander, DateofBirth, address, Area, city, Profession,
             StaffName, CenterName, CallStatus, Message,
             person_Name, Relation, CountryCode2, ContactNumber2: ContactNumber2,
-            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, status: "all_enquiry",
+            EnquiryDate, ServiceName, Customertype, enquirytype, appointmentDate, appointmentTime, appointmentfor: appointmentfor, Counseller: counseller, status: "all_enquiry",
         }
 
         fetch(`${url}/enquiryForm/create`, {
@@ -439,45 +440,50 @@ const EnquiryForm = (props) => {
                                     />
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
-                                    <CInputGroup className="mt-2">
-                                        <CInputGroupText className="mb-1">Appointment Date</CInputGroupText>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="date"
-                                            value={appointmentDate}
-                                            onChange={(e) => setappointmentDate(e.target.value)}
-                                            id="exampleFormControlInput1"
-                                        />
-                                    </CInputGroup>
+                                    <CFormInput
+                                        className="mb-1"
+                                        label='Appointment Date'
+                                        type="date"
+                                        value={appointmentDate}
+                                        onChange={(e) => setappointmentDate(e.target.value)}
+                                        id="exampleFormControlInput1"
+                                    />
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
-                                    <CInputGroup className="mt-2">
-                                        <CInputGroupText className="mb-1">Appointment Time</CInputGroupText>
-                                        <CFormInput
-                                            className="mb-1"
-                                            type="time"
-                                            id="exampleFormControlInput1"
-                                            value={appointmentTime}
-                                            onChange={(e) => setappointmentTime(e.target.value)}
+                                    <CFormInput
+                                        className="mb-1"
+                                        label='Appointment Time'
+                                        type="time"
+                                        id="exampleFormControlInput1"
+                                        value={appointmentTime}
+                                        onChange={(e) => setappointmentTime(e.target.value)}
 
-                                        />
-                                    </CInputGroup>
+                                    />
                                 </CCol>
                                 <CCol lg={6} md={6} sm={12}>
-                                    <CInputGroup className="mt-2">
-                                        <CInputGroupText className="mb-1">Enquiry For</CInputGroupText>
-                                        <CFormSelect
-                                            className="mb-1"
-                                            aria-label="Select"
-                                            value={appointmentfor}
-                                            onChange={(e) => setappointmentfor(e.target.value)}
-                                            options={[
-                                                "Select",
-                                                { label: "Appointment", value: "Appointment" },
-                                                { label: "Trial Session", value: "Trial Session" },
-                                            ]}
-                                        />
-                                    </CInputGroup>
+                                    <CFormSelect
+                                        className="mb-1"
+                                        label='Enquiry For'
+                                        aria-label="Select"
+                                        value={appointmentfor}
+                                        onChange={(e) => setappointmentfor(e.target.value)}
+                                        options={[
+                                            "Select",
+                                            { label: "Appointment", value: "Appointment" },
+                                            { label: "Trial Session", value: "Trial Session" },
+                                        ]}
+                                    />
+                                </CCol>
+                                <CCol lg={6} md={6} sm={12}>
+                                    <CFormInput
+                                        type="text"
+                                        className="mb-1"
+                                        label='Counseller'
+                                        aria-label="Select"
+                                        value={counseller}
+                                        onChange={(e) => setCounseller(e.target.value)}
+
+                                    />
                                 </CCol>
                             </CRow>
                         </CCol>
