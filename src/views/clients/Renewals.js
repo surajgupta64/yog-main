@@ -21,13 +21,13 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 
-const ActiveClients = () => {
+const Renewals = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Active Clients</strong>
+                        <strong className="mt-2">Renewals Clients</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
@@ -204,4 +204,4 @@ const ActiveClients = () => {
     )
 }
 
-export default ActiveClients
+export default Renewals

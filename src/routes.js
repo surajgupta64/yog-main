@@ -10,6 +10,7 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const PTTarget = React.lazy(() => import('./views/dashboard/PTTarget'))
 const SalesTarget = React.lazy(() => import('./views/dashboard/SalesTarget'))
 const CorporateTarget = React.lazy(() => import('./views/dashboard/CorporateTarget'))
+const AllRight = React.lazy(() => import('./views/Master/AllRight'))
 //Leads
 const AllEnquires = React.lazy(() => import('./views/leads/AllEnquires'))
 const EnquireAppoitment = React.lazy(() => import('./views/leads/EnquireAppointment'))
@@ -38,6 +39,10 @@ const AllSuppilerList = React.lazy(() => import('./views/Inventory/AllSuppilerLi
 const GuestList = React.lazy(() => import('./views/Inventory/GuestList'))
 const StockListing = React.lazy(() => import('./views/Inventory/StockListing'))
 const StockReport = React.lazy(() => import('./views/Inventory/StockReport'))
+
+//finance
+const TotalInvoices = React.lazy(() => import('./views/finance/TotalInvoice'))
+const RevenueDetails = React.lazy(() => import('./views/finance/RevenueDetails'))
 
 // Hr
 const AllEmpProfile = React.lazy(() => import('./views/hr/AllEmpProfile'))
@@ -150,6 +155,7 @@ const routes = [
 
   { path: '/employee', name: 'Employee', element: Tables, exact: true },
   { path: '/employee/pt', name: 'PT Target', element: PTTarget },
+  { path: '/employee/all-right', name: 'All Right', element: AllRight },
   {
     path: '/employee/sales-target',
     name: 'Sales Target',
@@ -195,6 +201,11 @@ const routes = [
   { path: '/inventory/guest-list', name: 'Guest List', element: GuestList },
   { path: '/inventory/stock-listing', name: 'Stock Listing', element: StockListing },
   { path: '/inventory/stock-report', name: 'Stock Report', element: StockReport },
+
+  //Finance
+  { path: '/finance', name: 'Finance', element: TotalInvoices, exact: true },
+  { path: '/finance/total-invoice', name: 'Total Invoice', element: TotalInvoices },
+  { path: '/finance/revenue-details', name: 'Revenue details', element: RevenueDetails },
 
   //HR
   { path: '/hr', name: 'HR Management', element: AllEmpProfile, exact: true },

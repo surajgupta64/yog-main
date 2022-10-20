@@ -19,19 +19,19 @@ import {
     CTableRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
+import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
 
-const ActiveClients = () => {
+const TotalInvoice = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Active Clients</strong>
+                        <strong className="mt-2">Total Invoice</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
-                            <CCol lg={5} sm={12} className='mb-2'>
+                            <CCol lg={5} className='mb-2'>
                                 <CInputGroup>
                                     <CFormSelect
                                         id="inputGroupSelect04"
@@ -52,17 +52,7 @@ const ActiveClients = () => {
                                     </CButton>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={7} sm={12}>
-                                <div className='d-flex justify-content-center'>
-                                    <CButtonGroup role="group" aria-label="Basic example">
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Total Clients: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Active Clients:0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Current Renewal: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Renewed Clients: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Left Clients: 0</CButton>
-                                    </CButtonGroup>
-                                </div>
-                            </CCol>
+                            <CCol></CCol>
                         </CRow>
                         <CRow >
                             <CCol lg={2} sm={6} className='mb-2'>
@@ -81,16 +71,10 @@ const ActiveClients = () => {
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={3} sm={6} className='mb-2'>
+                            <CCol lg={2} sm={6} className='mb-2'>
                                 <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Service Category
-                                    </CInputGroupText>
                                     <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
+                                        <option>Invoice Type</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -99,14 +83,8 @@ const ActiveClients = () => {
                             </CCol>
                             <CCol lg={2} sm={6} className='mb-2'>
                                 <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Sub-Filter
-                                    </CInputGroupText>
                                     <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
+                                        <option>Service</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -115,32 +93,29 @@ const ActiveClients = () => {
                             </CCol>
                             <CCol lg={2} sm={6} className='mb-2'>
                                 <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Marketing
-                                    </CInputGroupText>
                                     <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
+                                        <option>Sales Rep</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={3} sm={6} className='mb-2' >
-
-                                <CButtonGroup>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleBottom} />
-                                        {' '}Import
-                                    </CButton>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleTop} />
-                                        {' '}Export
-                                    </CButton>
-                                </CButtonGroup>
+                            <CCol lg={2} sm={6} className='mb-2'>
+                                <CInputGroup>
+                                    <CFormSelect id="inputGroupSelect01">
+                                        <option>Select Trainer</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </CFormSelect>
+                                </CInputGroup>
+                            </CCol>
+                            <CCol lg={2} sm={6} className='mb-2' >
+                                <CButton color="primary" className='float-end '>
+                                    <CIcon icon={cilPlus} />
+                                    {' '}New Invoice
+                                </CButton>
                             </CCol>
                         </CRow>
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
@@ -204,4 +179,4 @@ const ActiveClients = () => {
     )
 }
 
-export default ActiveClients
+export default TotalInvoice

@@ -13,7 +13,7 @@ import {
   CRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+import { cilAddressBook, cilCode, cilLockLocked, cilUser } from '@coreui/icons'
 import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
@@ -94,7 +94,7 @@ const Register = () => {
 
                     />
                   </CInputGroup>
-                  <CInputGroup className="mb-4">
+                  <CInputGroup className="mb-2">
                     <CInputGroupText>
                       <CIcon icon={cilLockLocked} />
                     </CInputGroupText>
@@ -109,6 +109,32 @@ const Register = () => {
                       <option>Trainer</option>
                       <option>Employee</option>
                     </CFormSelect>
+                  </CInputGroup>
+                  <CInputGroup className="mb-2">
+                    <CInputGroupText>
+                      <CIcon icon={cilAddressBook} />
+                    </CInputGroupText>
+                    <CFormInput
+                      type="text"
+                      value={repeatPassword}
+                      onChange={(e) => setRepeatPassword(e.target.value)}
+                      placeholder="Location"
+                      autoComplete="new-password"
+
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-2">
+                    <CInputGroupText>
+                      <CIcon icon={cilCode} />
+                    </CInputGroupText>
+                    <CFormInput
+                      type="text"
+                      value={repeatPassword}
+                      onChange={(e) => setRepeatPassword(e.target.value)}
+                      placeholder="Center Code"
+                      autoComplete="new-password"
+
+                    />
                   </CInputGroup>
                   <div className="d-grid">
                     <CButton color="success" type='submit' >Create Account</CButton>

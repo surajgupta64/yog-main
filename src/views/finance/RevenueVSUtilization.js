@@ -19,50 +19,58 @@ import {
     CTableRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
+import { cilArrowCircleBottom, cilArrowCircleTop, cilPlus } from '@coreui/icons'
 
-const ActiveClients = () => {
+const RevenueVSUtilization = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">Active Clients</strong>
+                        <strong className="mt-2">Revenue VS Utilization</strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-center mb-2'>
-                            <CCol lg={5} sm={12} className='mb-2'>
-                                <CInputGroup>
-                                    <CFormSelect
-                                        id="inputGroupSelect04"
-                                        aria-label="Example select with button addon"
+                            <CCol lg={3} sm={6} className='mb-2'>
+                                <CInputGroup
+                                    className='mb-2'
+                                >
+                                    <CInputGroupText
+                                        component="label"
+                                        htmlFor="inputGroupSelect01"
                                     >
-                                        <option>Name</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
+                                        From
+                                    </CInputGroupText>
                                     <CFormInput
+                                        type='date'
                                         placeholder="Search"
                                         aria-label="Recipient's username"
                                         aria-describedby="button-addon2"
                                     />
-                                    <CButton type="button" color="primary">
-                                        Search
-                                    </CButton>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={7} sm={12}>
-                                <div className='d-flex justify-content-center'>
-                                    <CButtonGroup role="group" aria-label="Basic example">
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Total Clients: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Active Clients:0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Current Renewal: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Renewed Clients: 0</CButton>
-                                        <CButton color="dark" variant="outline" style={{ fontSize: '13px' }}>Left Clients: 0</CButton>
-                                    </CButtonGroup>
-                                </div>
+                            <CCol lg={3} sm={6} className='mb-2'>
+                                <CInputGroup className='mb-2'>
+                                    <CInputGroupText
+                                        component="label"
+                                        htmlFor="inputGroupSelect01"
+                                    >
+                                        To
+                                    </CInputGroupText>
+                                    <CFormInput
+                                        type='date'
+                                        placeholder="Search"
+                                        aria-label="Recipient's username"
+                                        aria-describedby="button-addon2"
+                                    />
+                                </CInputGroup>
                             </CCol>
+                            <CCol lg={5} className='mb-2'>
+                                <CButton type="button" color="primary">
+                                    Search
+                                </CButton>
+                            </CCol>
+                            <CCol></CCol>
                         </CRow>
                         <CRow >
                             <CCol lg={2} sm={6} className='mb-2'>
@@ -74,7 +82,7 @@ const ActiveClients = () => {
                                         All
                                     </CInputGroupText>
                                     <CFormSelect id="inputGroupSelect01">
-                                        <option>Sep</option>
+                                        <option>Select</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
@@ -83,64 +91,29 @@ const ActiveClients = () => {
                             </CCol>
                             <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Service Category
-                                    </CInputGroupText>
                                     <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
+                                        <option>Service Receipt</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={2} sm={6} className='mb-2'>
+                            <CCol lg={3} sm={6} className='mb-2'>
                                 <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Sub-Filter
-                                    </CInputGroupText>
                                     <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
+                                        <option>Select Service</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
                                         <option value="3">Three</option>
                                     </CFormSelect>
                                 </CInputGroup>
                             </CCol>
-                            <CCol lg={2} sm={6} className='mb-2'>
-                                <CInputGroup>
-                                    <CInputGroupText
-                                        component="label"
-                                        htmlFor="inputGroupSelect01"
-                                    >
-                                        Marketing
-                                    </CInputGroupText>
-                                    <CFormSelect id="inputGroupSelect01">
-                                        <option>2022</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </CFormSelect>
-                                </CInputGroup>
-                            </CCol>
-                            <CCol lg={3} sm={6} className='mb-2' >
-
-                                <CButtonGroup>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleBottom} />
-                                        {' '}Import
-                                    </CButton>
-                                    <CButton color="primary">
-                                        <CIcon icon={cilArrowCircleTop} />
-                                        {' '}Export
-                                    </CButton>
-                                </CButtonGroup>
+                            <CCol lg={4} sm={6} className='mb-2' >
+                                <CButton color="primary" className='float-end '>
+                                    <CIcon icon={cilPlus} />
+                                    {' '}New Invoice
+                                </CButton>
                             </CCol>
                         </CRow>
                         <CTable bordered style={{ borderColor: "#106103" }} responsive>
@@ -204,4 +177,4 @@ const ActiveClients = () => {
     )
 }
 
-export default ActiveClients
+export default RevenueVSUtilization

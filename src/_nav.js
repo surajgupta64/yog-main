@@ -75,6 +75,11 @@ const _nav = [
             name: 'Calls Report',
             to: '/base/cards',
           },
+          {
+            component: CNavItem,
+            name: 'All Rights',
+            to: '/employee/all-right',
+          },
         ],
       },
       {
@@ -82,6 +87,7 @@ const _nav = [
         name: 'Employee Proformance',
         to: '/employee/pt',
       },
+
     ],
   },
   {
@@ -357,83 +363,121 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Finance',
-    to: '/base',
+    to: '/finance',
     icon: <CIcon icon={cilCash} customClassName="nav-icon" />,
     items: [
       {
-        component: CNavItem,
-        name: 'Total Invoices',
-        to: '/base/accordion',
+        component: CNavGroup,
+        name: 'Invoices',
+        to: '/inventory',
+        items: [
+          {
+            component: CNavItem,
+            name: 'Total Invoices',
+            to: '/finance/total-invoice',
+          },
+          {
+            component: CNavItem,
+            name: 'Paid Invoices',
+            to: '/base/breadcrumbs',
+          },
+          {
+            component: CNavItem,
+            name: 'Receipts',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Cancelled Invioces',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Written Off Invoices',
+            to: '/base/cards',
+          },
+        ],
       },
       {
-        component: CNavItem,
-        name: 'Paid Invoices',
-        to: '/base/breadcrumbs',
+        component: CNavGroup,
+        name: 'Revenues',
+        to: '/inventory',
+        items: [
+          {
+            component: CNavItem,
+            name: 'Revenue Details',
+            to: '/finance/revenue-details',
+          },
+          {
+            component: CNavItem,
+            name: 'Membership Utilization',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Revenue VS Utilization',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Postpaid Revenue Realisation',
+            to: '/base/cards',
+          },
+        ],
       },
       {
-        component: CNavItem,
-        name: 'Receipts',
-        to: '/base/cards',
+        component: CNavGroup,
+        name: 'Payments Report',
+        to: '/inventory',
+        items: [
+          {
+            component: CNavItem,
+            name: 'Collection Report',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Payment Mode',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Refund Report',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Subscription Balance Payment',
+            to: '/base/cards',
+          },
+        ],
       },
       {
-        component: CNavItem,
-        name: 'Cancelled Invioces',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Written Off Invoices',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Refund Report',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Revenue Report',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Revenue Realization',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Revenue Realization (Sale)',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Revenue Realization (FY)',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Revenue VS Utilization',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Postpaid Revenue Realisation',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Collection Report',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Payment Mode',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Subscription Balance Payment',
-        to: '/base/cards',
+        component: CNavGroup,
+        name: 'Center Expenses',
+        to: '/inventory',
+        items: [
+          {
+            component: CNavItem,
+            name: 'Center Budget Summary',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Consolidated Expense ',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Approval Status',
+            to: '/base/cards',
+          },
+          {
+            component: CNavItem,
+            name: 'Reimbursement ',
+            to: '/base/cards',
+          },
+        ],
       },
     ],
   },
@@ -470,57 +514,32 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'Job Profile',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: ' EMP Of Documents ',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Emp Indictaion',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'Staff Payrol Setup',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
-        name: 'HR Policy',
-        to: '/base/cards',
-      },
-      {
-        component: CNavItem,
         name: 'Holidays List',
         to: '/base/cards',
       },
       {
         component: CNavItem,
-        name: 'Class - Trainner Report',
+        name: 'Emp Of Documents ',
         to: '/base/cards',
       },
       {
         component: CNavItem,
-        name: 'Class utilisation',
+        name: 'Emp Payroll Setup',
         to: '/base/cards',
       },
       {
         component: CNavItem,
-        name: 'Trial Report',
+        name: 'Attendance Report',
         to: '/base/cards',
       },
       {
         component: CNavItem,
-        name: 'Class No Show Report',
+        name: 'All Classess Register',
         to: '/base/cards',
       },
       {
         component: CNavItem,
-        name: 'View Staff Substitution',
+        name: 'Trainner Deatils',
         to: '/base/cards',
       },
     ],

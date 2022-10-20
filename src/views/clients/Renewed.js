@@ -21,7 +21,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilArrowCircleBottom, cilArrowCircleTop } from '@coreui/icons'
 
-const ActiveClients = () => {
+const Renewed = () => {
     return (
         <CRow>
             <CCol lg={12} sm={12}>
@@ -204,4 +204,4 @@ const ActiveClients = () => {
     )
 }
 
-export default ActiveClients
+export default Renewed
