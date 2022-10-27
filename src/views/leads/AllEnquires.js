@@ -195,6 +195,7 @@ const AllEnquires = () => {
         })
             .then((res) => {
                 setResult1(res.data)
+                console.log(res.data);
             })
             .catch((error) => {
                 console.error(error)
@@ -290,7 +291,7 @@ const AllEnquires = () => {
             <CCol lg={12} sm={12}>
                 <CCard className='mb-3 border-top-success border-top-3'>
                     <CCardHeader>
-                        <strong className="mt-2">All Enquires <span className='float-end'>Total Member : {result1.length}</span></strong>
+                        <strong className="mt-2">All Enquires <span className='float-end'>Total Member : {result1.filter((list) => list.username === username).length}</span></strong>
                     </CCardHeader>
                     <CCardBody>
                         <CRow className='d-flex justify-content-between'>

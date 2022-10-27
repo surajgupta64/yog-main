@@ -27,7 +27,9 @@ import {
     CTableRow,
 } from '@coreui/react'
 import axios from 'axios';
-import { MdDelete } from 'react-icons/md';
+import { MdCall, MdDelete, MdEdit, MdMail } from 'react-icons/md';
+import { BsPlusCircle, BsWhatsapp } from 'react-icons/bs';
+import moment from 'moment';
 const url = 'https://yoga-power-node-api.herokuapp.com'
 
 const FollowupScheduling = () => {
@@ -58,6 +60,7 @@ const FollowupScheduling = () => {
     let user = JSON.parse(localStorage.getItem('user-info'))
     const token = user.token;
     const username = user.user.username;
+    const centerCode = user.user.centerCode;
     const [result, setResult] = useState([]);
     const [result1, setResult1] = useState([]);
     useEffect(() => {
@@ -111,6 +114,7 @@ const FollowupScheduling = () => {
             }
         })
             .then((res) => {
+                console.log(res.data)
                 setResult1(res.data)
             })
             .catch((error) => {
@@ -118,6 +122,7 @@ const FollowupScheduling = () => {
             })
     }
 
+    console.log(result1);
     function getProspect(id) {
         axios.get(`${url}/prospect/${id}`, {
             headers: {
@@ -527,42 +532,25 @@ const FollowupScheduling = () => {
                                             aria-describedby="exampleFormControlInputHelpInline"
                                         />
                                     </CTableDataCell>
-                                    <CTableDataCell>
-                                        <CFormInput
-                                            className="mb-1"
-                                            style={{ minWidth: "100px" }}
-                                            type="text"
-                                            disabled
-                                            aria-describedby="exampleFormControlInputHelpInline"
-                                        />
-                                    </CTableDataCell>
                                 </CTableRow>
-                                {result1.filter((list) =>
-                                    list.username === username
-                                    /* && list.appointmentDate.includes(Search1) && list.appointmentTime.includes(Search2) && list.Fullname.toLowerCase().includes(Search3.toLowerCase()) &&
-                                    list.ServiceName.toLowerCase().includes(Search5.toLowerCase()) && list.enquirytype.toLowerCase().includes(Search6.toLowerCase()) && list.appointmentfor.toLowerCase().includes(Search7.toLowerCase()) && list.CallStatus.toLowerCase().includes(Search8.toLowerCase())
-                                    && list.StaffName.toLowerCase().includes(Search9.toLowerCase())
-                                     */
-                                ).map((item, index) => (
-                                    item.username === username && (
-                                        <CTableRow key={index}>
-                                            <CTableDataCell>{index + 1}</CTableDataCell>
-                                            <CTableDataCell>{centerCode}ENQ{index + 10}</CTableDataCell>
-                                            <CTableDataCell className='text-center'>{moment(item.CallDate).format("LL")}</CTableDataCell>
-                                            <CTableDataCell>{moment(item.Time, "HH:mm").format("hh:mm A")}</CTableDataCell>
-                                            <CTableDataCell>{item.Name}</CTableDataCell>
-                                            <CTableDataCell>{item.Email}</CTableDataCell>
-                                            <CTableDataCell>{item.Contact}</CTableDataCell>
-                                            <CTableDataCell>{item.ServiceName}</CTableDataCell>
-                                            <CTableDataCell>{item.CallStatus}</CTableDataCell>
-                                            <CTableDataCell>{item.FollowupDate}</CTableDataCell>
-                                            <CTableDataCell>{item.TimeFollowp}</CTableDataCell>
-                                            <CTableDataCell>{item.Discussion}</CTableDataCell>
-                                            <CTableDataCell>{item.Counseller}</CTableDataCell>
-                                            <CTableDataCell className='text-center'><a href={`tel:+${item.CountryCode}${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`}> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>
-                                            <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleEnquiry(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
-                                        </CTableRow>
-                                    )
+                                {result1.map((item, index) => (
+                                    <CTableRow key={index}>
+                                        <CTableDataCell>{index + 1}</CTableDataCell>
+                                        <CTableDataCell>{centerCode}ENQ{index + 10}</CTableDataCell>
+                                        <CTableDataCell className='text-center'>{moment(item.CallDate).format("LL")}</CTableDataCell>
+                                        <CTableDataCell>{moment(item.Time, "HH:mm").format("hh:mm A")}</CTableDataCell>
+                                        <CTableDataCell>{item.Name}</CTableDataCell>
+                                        <CTableDataCell>{item.Email}</CTableDataCell>
+                                        <CTableDataCell>{item.Contact}</CTableDataCell>
+                                        <CTableDataCell>{item.ServiceName}</CTableDataCell>
+                                        <CTableDataCell>{item.CallStatus}</CTableDataCell>
+                                        <CTableDataCell>{item.FollowupDate && moment(item.FollowupDate).format("LL")}</CTableDataCell>
+                                        <CTableDataCell>{item.TimeFollowp && moment(item.TimeFollowp, "HH:mm").format("hh:mm A")}</CTableDataCell>
+                                        <CTableDataCell>{item.Discussion}</CTableDataCell>
+                                        <CTableDataCell>{item.Counseller}</CTableDataCell>
+                                        <CTableDataCell className='text-center'><a href={`tel:+${item.CountryCode}${item.ContactNumber}`}><MdCall style={{ cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`https://wa.me/${item.ContactNumber}`}><BsWhatsapp style={{ marginLeft: "4px", cursor: 'pointer', markerStart: '10px' }} size='20px' /></a><a href={`mailto: ${item.Emailaddress}`}> <MdMail style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} size='20px' /></a> <BsPlusCircle id={item._id} style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "4px" }} onClick={() => handleFollowup(item._id)} /></CTableDataCell>
+                                        <CTableDataCell className='text-center'><MdEdit id={item._id} style={{ fontSize: '35px', cursor: 'pointer', markerStart: '10px' }} onClick={() => handleEnquiry(item._id)} size='20px' /> <MdDelete style={{ cursor: 'pointer', markerStart: '10px', marginLeft: "5px" }} onClick={() => deleteEnquiry(item._id)} size='20px' /></CTableDataCell>
+                                    </CTableRow>
                                 ))}
                             </CTableBody>
                         </CTable>
